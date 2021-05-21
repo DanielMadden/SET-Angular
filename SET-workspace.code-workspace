@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "./SET-client",
+      "name": "client"
+    },
+    {
+      "path": "./SET-server",
+      "name": "server"
+    },
+    {
+      "path": "./SET-notes",
+      "name": "notes"
+    }
+  ],
+  "settings": {}
+}
