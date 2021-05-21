@@ -8,69 +8,38 @@ import { CardMatchCheck } from '../models/card-match-check';
 export class MatchService {
   constructor() {}
 
-  private cardProperties: string[] = ['count', 'color', 'shape', 'pattern'];
+  private cardProperties: string[] = ['count', 'color', 'shape', 'shade'];
 
-  checkMatch(cards: Card[]) {
+  checkMatches(cards: Card[]): CardMatchCheck {
     let matches!: CardMatchCheck;
-    if (
-      cards[0].count === cards[1].count &&
-      cards[1].count === cards[2].count
-    ) {
-      matches.count = true;
-    } else if (
-      cards[0].count !== cards[1].count &&
-      cards[1].count !== cards[2].count &&
-      cards[2].count !== cards[0].count
-    ) {
-      matches.count = true;
-    } else matches.count = false;
 
-    if (
-      cards[0].color === cards[1].color &&
-      cards[1].color === cards[2].color
-    ) {
-      matches.color = true;
-    } else if (
-      cards[0].color !== cards[1].color &&
-      cards[1].color !== cards[2].color &&
-      cards[2].color !== cards[0].color
-    ) {
-      matches.color = true;
-    } else matches.color = false;
+    this.cardProperties.forEach((prop) => {
+      let match = true;
+      for (let i = 0; i < 2; i++) {
+        if (cards[i][prop] === cards[i + 1][prop]) match = !match;
+      }
+      matches[prop] = match;
+    });
 
-    if (
-      cards[0].shape === cards[1].shape &&
-      cards[1].shape === cards[2].shape
-    ) {
-      matches.shape = true;
-    } else if (
-      cards[0].shape !== cards[1].shape &&
-      cards[1].shape !== cards[2].shape &&
-      cards[2].shape !== cards[0].shape
-    ) {
-      matches.shape = true;
-    } else matches.shape = false;
-
-    if (
-      cards[0].shade === cards[1].shade &&
-      cards[1].shade === cards[2].shade
-    ) {
-      matches.shade = true;
-    } else if (
-      cards[0].shade !== cards[1].shade &&
-      cards[1].shade !== cards[2].shade &&
-      cards[2].shade !== cards[0].shade
-    ) {
-      matches.shade = true;
-    } else matches.shade = false;
-
-    if (
-      matches.count === true &&
-      matches.color === true &&
-      matches.shape === true &&
-      matches.shade === true
-    )
-      console.log("It's a match!");
-    else console.log('No match: ' + matches);
+    return matches;
   }
 }
+
+/**
+ * checkMatch logic
+ *
+ * All different:
+ * Start with true. Second value is different, swap the value.
+ * Now false. Third value is different, swap the value.
+ * Now true.
+ *
+ * All true:
+ * Start with true. Second value is same, keep value.
+ * Still true. Third value is same, keep value.
+ * Still true.
+ *
+ * Two same:
+ * Start with true. Second value is same, keep value.
+ * Still true. Third value is different, swap value.
+ * Now false.
+ */
