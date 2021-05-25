@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Card } from 'src/app/models/card';
 import { DeckService } from 'src/app/services/deck.service';
+import { MatchService } from 'src/app/services/match.service';
 
 @Component({
   selector: 'app-page-practice',
@@ -9,7 +10,10 @@ import { DeckService } from 'src/app/services/deck.service';
   styleUrls: ['./page-practice.component.scss'],
 })
 export class PagePracticeComponent implements OnInit {
-  constructor(private deckService: DeckService) {}
+  constructor(
+    private deckService: DeckService,
+    private matchService: MatchService
+  ) {}
 
   deck!: Observable<Card[]>;
 
@@ -23,5 +27,28 @@ export class PagePracticeComponent implements OnInit {
     this.deckService.createDeck();
     this.deckService.shuffleDeck();
     this.deckService.resetDeck();
+
+    console.log(
+      this.matchService.checkMatches([
+        {
+          color: 1,
+          count: 1,
+          shade: 'solid',
+          shape: 'diamond',
+        },
+        {
+          color: 1,
+          count: 1,
+          shade: 'hollow',
+          shape: 'diamond',
+        },
+        {
+          color: 1,
+          count: 1,
+          shade: 'striped',
+          shape: 'diamond',
+        },
+      ])
+    );
   }
 }
