@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Card } from '../models/card';
 import { cardValues } from '../models/card-values';
 
@@ -6,12 +7,19 @@ import { cardValues } from '../models/card-values';
   providedIn: 'root',
 })
 export class DeckService {
-  public deck: Card[] = [];
+  private deck: Card[] = [];
+  private deckSubject = new Subject<Card[]>();
+  public deck$ = this.deckSubject.asObservable();
 
   constructor() {}
 
+  emitDeck(): void {
+    this.deckSubject.next(this.deck);
+  }
+
   resetDeck(): void {
     this.deck = [];
+    this.emitDeck();
   }
 
   createDeck(): void {
@@ -29,6 +37,7 @@ export class DeckService {
         });
       });
     });
+    this.emitDeck();
   }
 
   /**
@@ -53,5 +62,6 @@ export class DeckService {
       this.deck[currentIndex] = this.deck[randomIndex];
       this.deck[randomIndex] = temporaryValue;
     }
+    this.emitDeck();
   }
 }
