@@ -35,6 +35,7 @@ export class DeckService {
    * Fisher-Yates (aka Knuth) Shuffle
    * Stack Overflow: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
    * Visualization: https://bost.ocks.org/mike/shuffle/
+   * Blog Post: https://blog.codinghorror.com/the-danger-of-naivete/
    */
   shuffleDeck(): void {
     var currentIndex = this.deck.length,
