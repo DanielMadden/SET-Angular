@@ -1,4 +1,3 @@
-// This is a card.
 export interface ICard {
   [key: string]: any;
   count: number;
@@ -7,7 +6,7 @@ export interface ICard {
   shade: 'solid' | 'striped' | 'hollow';
 }
 
-export class Card {
+export class Card implements ICard {
   count!: number;
   color!: number;
   shape!: 'oval' | 'diamond' | 'squiggle';

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { ICard } from '../models/card';
+import { Card, ICard } from '../models/card';
 import { cardValues } from '../models/card-values';
 
 @Injectable({
@@ -27,12 +27,7 @@ export class DeckService {
       cardValues.color.forEach((color) => {
         cardValues.shape.forEach((shape) => {
           cardValues.shade.forEach((shade) => {
-            this.deck.push({
-              count: count,
-              color: color,
-              shape: shape,
-              shade: shade,
-            });
+            this.deck.push(new Card(count, color, shape, shade));
           });
         });
       });
