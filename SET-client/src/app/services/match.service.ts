@@ -12,7 +12,7 @@ import { cardProperties } from '../models/card-properties';
 export class MatchService {
   constructor() {}
 
-  checkMatches(cards: [Card, Card, Card]): CardMatchCheck {
+  checkIfCardsMatch(cards: [Card, Card, Card]): CardMatchCheck {
     let matches = new CardMatchCheckClass();
 
     // Available for refactoring?
