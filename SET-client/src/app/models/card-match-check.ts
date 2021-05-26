@@ -1,4 +1,4 @@
-export interface CardMatchCheck {
+export interface ICardMatchCheck {
   [key: string]: boolean;
   count: boolean;
   color: boolean;
@@ -8,7 +8,7 @@ export interface CardMatchCheck {
 
 // I use this to find out which properties were matches.
 // This allows me to give the user info on what went wrong.
-export class CardMatchCheckClass implements CardMatchCheck {
+export class CardMatchCheck implements ICardMatchCheck {
   [key: string]: boolean;
   count = false;
   color = false;
