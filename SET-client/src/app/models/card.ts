@@ -1,3 +1,4 @@
+// This is a card.
 export interface Card {
   [key: string]: any;
   count: number;
