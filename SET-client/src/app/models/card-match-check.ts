@@ -6,8 +6,6 @@ export interface ICardMatchCheck {
   shade: boolean;
 }
 
-// I use this to find out which properties were matches.
-// This allows me to give the user info on what went wrong.
 export class CardMatchCheck implements ICardMatchCheck {
   [key: string]: boolean;
   count = false;
