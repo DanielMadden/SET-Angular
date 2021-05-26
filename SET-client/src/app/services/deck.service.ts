@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Card } from '../models/card';
+import { ICard } from '../models/card';
 import { cardValues } from '../models/card-values';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DeckService {
-  private deck: Card[] = [];
-  private deckSubject = new Subject<Card[]>();
+  private deck: ICard[] = [];
+  private deckSubject = new Subject<ICard[]>();
   public deck$ = this.deckSubject.asObservable();
 
   constructor() {}

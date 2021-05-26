@@ -1,11 +1,11 @@
 # Match Service
 
 - Purpose: To determine if an array of three cards constitutes a valid set.
-- Input: [Card, Card, Card]
-- Output: Object of type CardMatchCheck
+- Input: [ICard, ICard, ICard]
+- Output: Object of type ICardMatchCheck
 
 ```javascript
-export interface CardMatchCheck {
+export interface ICardMatchCheck {
   [key: string]: boolean;
   count: boolean;
   color: boolean;

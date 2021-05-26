@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Card } from '../models/card';
-import {
-  CardMatchCheck,
-  CardMatchCheckClass,
-} from '../models/card-match-check';
-import { cardProperties } from '../models/card-properties';
+import { ICard } from '../models/card';
+import { ICardMatchCheck, CardMatchCheck } from '../models/card-match-check';
+import { cardPropertiesArray } from '../models/card-properties';
 
 @Injectable({
   providedIn: 'root',
@@ -12,11 +9,11 @@ import { cardProperties } from '../models/card-properties';
 export class MatchService {
   constructor() {}
 
-  checkIfCardsMatch(cards: [Card, Card, Card]): CardMatchCheck {
-    let matches = new CardMatchCheckClass();
+  checkIfCardsMatch(cards: [ICard, ICard, ICard]): ICardMatchCheck {
+    let matches = new CardMatchCheck();
 
     // Available for refactoring?
-    cardProperties.forEach((prop) => {
+    cardPropertiesArray.forEach((prop) => {
       let match: boolean;
       if (
         cards[0][prop] === cards[1][prop] &&

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { Card } from 'src/app/models/card';
+import { ICard } from 'src/app/models/card';
 import { DeckService } from 'src/app/services/deck.service';
 import { MatchService } from 'src/app/services/match.service';
 
@@ -15,7 +15,7 @@ export class PagePracticeComponent implements OnInit {
     private matchService: MatchService
   ) {}
 
-  deck!: Observable<Card[]>;
+  deck!: Observable<ICard[]>;
 
   ngOnInit(): void {}
 }
