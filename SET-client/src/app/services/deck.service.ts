@@ -13,16 +13,17 @@ export class DeckService {
 
   constructor() {}
 
-  emitDeck(): void {
+  private emitDeck(): void {
     this.deckSubject.next(this.deck);
   }
 
-  resetDeck(): void {
+  public resetDeck(): void {
     this.deck = [];
     this.emitDeck();
   }
 
-  createDeck(): void {
+  public createDeck(): void {
+    this.resetDeck();
     cardValues.count.forEach((count) => {
       cardValues.color.forEach((color) => {
         cardValues.shape.forEach((shape) => {
@@ -41,7 +42,7 @@ export class DeckService {
    * Visualization: https://bost.ocks.org/mike/shuffle/
    * Blog Post: https://blog.codinghorror.com/the-danger-of-naivete/
    */
-  shuffleDeck(): void {
+  public shuffleDeck(): void {
     var currentIndex = this.deck.length,
       temporaryValue,
       randomIndex;
