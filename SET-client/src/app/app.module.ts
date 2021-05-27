@@ -7,9 +7,20 @@ import { AppComponent } from './app.component';
 
 import { routes } from './shared/routes';
 import { PagePracticeComponent } from './pages/page-practice/page-practice.component';
+import { BarTopComponent } from './components/bars/bar-top/bar-top.component';
+import { BarBottomMobileComponent } from './components/bars/bar-bottom-mobile/bar-bottom-mobile.component';
+import { BarBottomDesktopComponent } from './components/bars/bar-bottom-desktop/bar-bottom-desktop.component';
+import { BarSideMobileComponent } from './components/bars/bar-side-mobile/bar-side-mobile.component';
+import { BarSideMobileStatsComponent } from './components/bars/bar-side-mobile-stats/bar-side-mobile-stats.component';
+import { GameLogComponent } from './components/game-log/game-log/game-log.component';
+import { GameLogMessageComponent } from './components/game-log/game-log-message/game-log-message.component';
+import { GameLogMessageCardComponent } from './components/game-log/game-log-message-card/game-log-message-card.component';
+import { SetCardDeckComponent } from './components/set-card/set-card-deck/set-card-deck.component';
+import { SetCardComponent } from './components/set-card/set-card/set-card.component';
+import { SetCardGridComponent } from './components/set-card/set-card-grid/set-card-grid.component';
 
 @NgModule({
-  declarations: [AppComponent, PagePracticeComponent],
+  declarations: [AppComponent, PagePracticeComponent, BarTopComponent, BarBottomMobileComponent, BarBottomDesktopComponent, BarSideMobileComponent, BarSideMobileStatsComponent, GameLogComponent, GameLogMessageComponent, GameLogMessageCardComponent, SetCardDeckComponent, SetCardComponent, SetCardGridComponent],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(routes)],
   providers: [],
   bootstrap: [AppComponent],
