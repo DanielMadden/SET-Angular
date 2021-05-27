@@ -13,3 +13,5 @@ export interface ICardMatchCheck {
   shade: boolean;
 }
 ```
+
+I desire this CardMatchCheck so I can give the user a more intuitive and informative explanation as to why their set failed.
