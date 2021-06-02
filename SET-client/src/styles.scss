@@ -57,5 +57,16 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 .font-pattaya {
-  font-family: "Pattaya", sans-serif;
+  font-family: "Pattaya", sans-serif !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
