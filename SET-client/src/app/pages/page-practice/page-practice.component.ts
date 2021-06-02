@@ -26,7 +26,7 @@ export class PagePracticeComponent implements OnInit {
     );
     this.deckService.createDeck();
     this.deckService.shuffleDeck();
-    this.deckService.resetDeck();
+    // this.deckService.resetDeck();
 
     console.log(
       this.matchService.checkIfCardsMatch([
@@ -50,6 +50,7 @@ export class PagePracticeComponent implements OnInit {
         },
       ])
     );
+    console.log(this.deckService.pullThreeCardsFromDeck());
   }
 }
 

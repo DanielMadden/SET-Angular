@@ -60,4 +60,16 @@ export class DeckService {
     }
     this.emitDeck();
   }
+
+  public pullThreeCardsFromDeck(): Card[] {
+    let cards: Card[] = [];
+    for (let i = 0; i <= 2; i++) {
+      cards[i] = this.deck.splice(
+        Math.floor(Math.random() * this.deck.length),
+        1
+      )[0];
+    }
+    this.emitDeck();
+    return cards;
+  }
 }
