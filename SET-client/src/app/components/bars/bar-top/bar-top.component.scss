@@ -1,6 +1,35 @@
+@import "../../../shared/variables.scss";
+
 #bar-top {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
+  height: $bar-height;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  #logo {
+    margin: 0;
+    color: white;
+  }
+
+  #button-account {
+    padding-right: 0;
+    padding-left: 7px;
+    transition: 0.2s;
+    color: white;
+    background-color: transparent;
+    &:hover {
+      background-color: white;
+      color: black;
+    }
+
+    #button-account-icon {
+      color: black;
+      background-color: white;
+      width: 46px;
+      height: 46px;
+      border-radius: 4px;
+    }
+  }
 }
