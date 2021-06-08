@@ -1,1 +1,7 @@
-<p>set-card-grid works!</p>
+<div id="set-card-grid" class="component">
+  <div class="grid grid-cols-3 gap-4">
+    <div *ngFor="let card of cards">
+      <app-set-card [card]="card"></app-set-card>
+    </div>
+  </div>
+</div>

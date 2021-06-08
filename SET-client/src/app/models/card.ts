@@ -1,20 +1,20 @@
 export interface ICard {
   [key: string]: any;
-  count: number;
-  color: number;
+  count: 1 | 2 | 3;
+  color: 1 | 2 | 3;
   shape: 'oval' | 'diamond' | 'squiggle';
   shade: 'solid' | 'striped' | 'hollow';
 }
 
 export class Card implements ICard {
-  count!: number;
-  color!: number;
+  count!: 1 | 2 | 3;
+  color!: 1 | 2 | 3;
   shape!: 'oval' | 'diamond' | 'squiggle';
   shade!: 'solid' | 'striped' | 'hollow';
 
   constructor(
-    count: number,
-    color: number,
+    count: 1 | 2 | 3,
+    color: 1 | 2 | 3,
     shape: 'oval' | 'diamond' | 'squiggle',
     shade: 'solid' | 'striped' | 'hollow'
   ) {

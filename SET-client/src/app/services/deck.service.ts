@@ -61,8 +61,8 @@ export class DeckService {
     this.emitDeck();
   }
 
-  public pullThreeCardsFromDeck(): Card[] {
-    let cards: Card[] = [];
+  public pullThreeCardsFromDeck(): [ICard, ICard, ICard] {
+    let cards: [ICard, ICard, ICard] = [null!, null!, null!];
     for (let i = 0; i <= 2; i++) {
       cards[i] = this.deck.splice(
         Math.floor(Math.random() * this.deck.length),

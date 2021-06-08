@@ -1,1 +1,17 @@
-<p>set-card works!</p>
+<div
+  class="
+    set-card
+    count-{{ card.count }}
+    color-{{ card.color }}
+    shape-{{ card.shape }}
+    shade-{{ card.shade }}
+  "
+>
+  {{ card.count }}
+  {{ card.color }}
+  {{ card.shape }}
+  {{ card.shade }}]
+  <svg *ngFor="let icon of iconCountArray" width="10px" viewBox="-2 -2 54 104">
+    <path d="" fill="red"></path>
+  </svg>
+</div>

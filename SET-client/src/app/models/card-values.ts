@@ -1,6 +1,6 @@
 interface ICardValues {
-  count: number[];
-  color: number[];
+  count: [1, 2, 3];
+  color: [1, 2, 3];
   shape: ('oval' | 'diamond' | 'squiggle')[];
   shade: ('solid' | 'striped' | 'hollow')[];
 }
