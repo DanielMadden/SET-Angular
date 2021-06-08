@@ -31,7 +31,9 @@ export class SetCardComponent implements OnInit {
       `set-card-${this.cardSlot}-svg-path`
     );
     for (let i = 0; i < paths.length; i++) {
-      paths[i].setAttribute('d', 'M25 0 L50 50 L25 100 L0 50 Z');
+      paths[i].setAttribute('d', cardPaths[this.card.shape].d);
+      if (this.card.shade === 'striped')
+        paths[i].setAttribute('fill', `url(#striped-${this.card.color})`);
     }
   }
 }

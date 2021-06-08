@@ -1,4 +1,4 @@
-<div id="set-card-grid" class="component">
+<div id="set-card-grid" class="component flex items-center justify-center">
   <div class="grid grid-cols-3 gap-4">
     <div *ngFor="let card of cards; let index = index">
       <app-set-card [card]="card" [cardSlot]="index"></app-set-card>

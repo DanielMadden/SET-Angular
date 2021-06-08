@@ -62,6 +62,12 @@ body {
   font-weight: normal !important;
 }
 
+:root {
+  --color-1: #e74c3c;
+  --color-2: #27ae60;
+  --color-3: #8e44ad;
+}
+
 html,
 body {
   height: 100%;
@@ -69,4 +75,9 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.set-game-screen {
+  height: 100%;
+  width: 100%;
 }

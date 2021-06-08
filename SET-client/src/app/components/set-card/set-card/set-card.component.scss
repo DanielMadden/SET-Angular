@@ -1,9 +1,44 @@
+@import "../../../shared/variables.scss";
 .set-card {
-  width: 100%;
-  height: 100%;
+  width: $card-width;
+  height: $card-height;
   background-color: white;
+  border-radius: $border-radius;
 }
 
-.shape-diamond svg path {
-  d: path("awd");
+.set-card path {
+  stroke-width: 2;
+}
+
+.color-1 {
+  path {
+    stroke: var(--color-1);
+  }
+  &.shade-solid {
+    path {
+      fill: var(--color-1);
+    }
+  }
+}
+
+.color-2 {
+  path {
+    stroke: var(--color-2);
+  }
+  &.shade-solid {
+    path {
+      fill: var(--color-2);
+    }
+  }
+}
+
+.color-3 {
+  path {
+    stroke: var(--color-3);
+  }
+  &.shade-solid {
+    path {
+      fill: var(--color-3);
+    }
+  }
 }
