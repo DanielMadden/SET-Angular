@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
 import { ICard } from 'src/app/models/card';
 import { cardPaths } from '../../../shared/card-attributes';
 
@@ -15,6 +15,8 @@ export class SetCardComponent implements OnInit {
     shade: 'hollow',
   };
 
+  @Input() cardSlot: number = 0;
+
   iconCountArray: any[] = [];
   cardPaths = cardPaths;
 
@@ -22,5 +24,14 @@ export class SetCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.iconCountArray = [...Array(this.card.count).keys()];
+  }
+
+  ngAfterViewInit(): void {
+    let paths = document.getElementsByClassName(
+      `set-card-${this.cardSlot}-svg-path`
+    );
+    for (let i = 0; i < paths.length; i++) {
+      paths[i].setAttribute('d', 'M25 0 L50 50 L25 100 L0 50 Z');
+    }
   }
 }
