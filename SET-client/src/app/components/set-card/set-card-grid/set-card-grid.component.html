@@ -1,7 +1,11 @@
 <div id="set-card-grid" class="component flex items-center justify-center">
   <div class="grid grid-cols-3 gap-4">
-    <div *ngFor="let card of cards; let index = index">
-      <app-set-card [card]="card" [cardSlot]="index"></app-set-card>
+    <div *ngFor="let slot of slots; let index = index">
+      <app-set-card
+        *ngIf="slot.display"
+        [card]="slot.card"
+        [cardSlot]="index"
+      ></app-set-card>
     </div>
   </div>
 </div>
