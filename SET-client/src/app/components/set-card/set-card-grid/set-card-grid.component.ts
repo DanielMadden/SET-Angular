@@ -15,11 +15,17 @@ export class SetCardGridComponent implements OnInit {
   constructor(private deckService: DeckService) {}
 
   ngOnInit(): void {
-    this.deckService.createDeck();
-    for (let i = 0; i < 4; i++) {
-      let newCards = this.deckService.pullThreeCardsFromDeck();
-      newCards.forEach((card) => this.slots.push(new CardGridSlot(true, card)));
-    }
-    console.log(this.slots);
+    setTimeout(() => {
+      for (let i = 0; i < 4; i++) {
+        let newCards = this.deckService.pullThreeCardsFromDeck();
+        newCards.forEach((card) =>
+          this.slots.push(new CardGridSlot(true, card))
+        );
+      }
+      console.log(this.slots);
+      setInterval(() => {
+        this.deckService.pullThreeCardsFromDeck();
+      }, 1000);
+    }, 1000);
   }
 }

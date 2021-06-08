@@ -1,5 +1,16 @@
-<app-bar-top></app-bar-top>
-<div class="set-game-screen flex flex-row justify-center items-center w-full">
-  <app-set-card-grid></app-set-card-grid>
+<div class="page w-full h-full flex flex-row items-center justify-around">
+  <app-bar-top></app-bar-top>
+  <div class="set-game-screen flex flex-row justify-around items-center w-full">
+    <app-set-card-grid *ngIf="deck.length > 0"></app-set-card-grid>
+    <div id="set-game-column-right" class="set-game-column">
+      <app-set-card-deck
+        [firstCards]="deck"
+        [cardStream$]="deck$"
+      ></app-set-card-deck>
+      <button>+3 Cards</button>
+      <button>Hint</button>
+      <app-set-card-deck></app-set-card-deck>
+    </div>
+  </div>
+  <app-bar-bottom-desktop></app-bar-bottom-desktop>
 </div>
-<app-bar-bottom-desktop></app-bar-bottom-desktop>

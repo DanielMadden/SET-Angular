@@ -17,10 +17,18 @@ export class PagePracticeComponent implements OnInit {
     private cardTestsService: CardTestsService
   ) {}
 
-  deck!: Observable<ICard[]>;
+  deck$!: Observable<ICard[]>;
+  deck: ICard[] = [];
 
   ngOnInit(): void {
-    this.cardTestsService.runTests();
+    this.deck$ = this.deckService.deck$;
+    this.deck$.subscribe((deck) => {
+      this.deck = deck;
+    });
+    setTimeout(() => {
+      this.deckService.createDeck();
+    }, 1000);
+    // this.cardTestsService.runTests();
   }
 }
 

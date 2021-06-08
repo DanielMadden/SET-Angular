@@ -1,1 +1,3 @@
-<p>set-card-deck works!</p>
+<div id="set-card-back" *ngIf="cards.length > 0">HOWDY</div>
+Stacks: {{ stackCountArray.length }}
+<div *ngFor="let stack of stackCountArray" class="set-card-stack"></div>
