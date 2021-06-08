@@ -4,3 +4,6 @@ $border-radius: 5px;
 $card-multiplier: 1;
 $card-height: 130px * $card-multiplier;
 $card-width: 210px * $card-multiplier;
+$card-padding: 12px * $card-multiplier;
+$card-corner-radius: $border-radius * $card-multiplier;
+$card-svg-padding: 4px * $card-multiplier;

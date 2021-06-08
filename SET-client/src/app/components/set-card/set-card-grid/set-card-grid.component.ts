@@ -18,5 +18,16 @@ export class SetCardGridComponent implements OnInit {
       this.cards.push(...this.deckService.pullThreeCardsFromDeck());
     }
     console.log(this.cards);
+
+    setTimeout(() => {
+      this.cards.push(...this.deckService.pullThreeCardsFromDeck());
+    }, 1000);
+
+    setInterval(() => {
+      let newCards = this.deckService.pullThreeCardsFromDeck();
+      for (let i = 0; i < 3; i++) {
+        this.cards[Math.floor(Math.random() * this.cards.length)] = newCards[i];
+      }
+    }, 3000);
   }
 }

@@ -3,11 +3,16 @@
   width: $card-width;
   height: $card-height;
   background-color: white;
-  border-radius: $border-radius;
-}
+  border-radius: $card-corner-radius;
+  padding: $card-padding;
 
-.set-card path {
-  stroke-width: 2;
+  .svg-container {
+    padding: $card-svg-padding;
+  }
+
+  path {
+    stroke-width: 2;
+  }
 }
 
 .color-1 {
