@@ -2,14 +2,15 @@ import { ICard } from './card';
 
 export interface ICardGridSlot {
   display: boolean;
+  selected: boolean;
   card: ICard;
 }
 
 export class CardGridSlot {
-  constructor(display: boolean, card: ICard) {
-    this.display = display;
+  constructor(card: ICard) {
     this.card = card;
   }
-  display: boolean;
+  display: boolean = true;
+  selected: boolean = false;
   card: ICard;
 }

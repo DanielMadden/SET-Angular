@@ -32,6 +32,17 @@ export class MatchService {
 
     return matches;
   }
+
+  checkIfMatchCheckPropertiesAreTrue(matchCheck: ICardMatchCheck): boolean {
+    if (
+      matchCheck.color &&
+      matchCheck.count &&
+      matchCheck.shade &&
+      matchCheck.shape
+    )
+      return true;
+    else return false;
+  }
 }
 
 // TODO Check if the first and last are the same
