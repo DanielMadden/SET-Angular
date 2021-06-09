@@ -27,7 +27,6 @@ export class SetCardDeckComponent implements OnInit, OnChanges {
       },
       (err) => console.error(`[ERROR]: ${err}`)
     );
-    // this.stackCountArray = [...Array(this.cards.length / 3).keys()];
     console.log('hi');
   }
 }

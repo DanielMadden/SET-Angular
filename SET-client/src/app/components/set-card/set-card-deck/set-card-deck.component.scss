@@ -1,0 +1,34 @@
+@import "../../../shared/variables.scss";
+.set-card-back {
+  width: $card-width;
+  height: $card-height;
+  border-radius: $card-corner-radius;
+  .outline {
+    width: 100%;
+    height: 100%;
+    border-radius: $card-corner-radius;
+    padding: $card-padding * 2/3;
+    background-image: url("../../../../assets/images/card/gold-gradient.jpg");
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-size: cover;
+    .texture {
+      // width: calc(100% - $card-padding);
+      // height: calc(100% - $card-padding);
+      width: 100%;
+      height: 100%;
+      border-radius: $card-corner-radius;
+      background-image: url("../../../../assets/images/card/black-pattern-1.jpg");
+      background-position-x: 50%;
+      background-position-y: 50%;
+      background-size: cover;
+      .logo {
+        background-image: url("../../../../assets/images/card/gold-gradient.jpg");
+        background-repeat: repeat;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+  }
+}

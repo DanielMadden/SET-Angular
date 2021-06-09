@@ -25,9 +25,7 @@ export class PagePracticeComponent implements OnInit {
     this.deck$.subscribe((deck) => {
       this.deck = deck;
     });
-    setTimeout(() => {
-      this.deckService.createDeck();
-    }, 1000);
+    this.deckService.createDeck();
     // this.cardTestsService.runTests();
   }
 }

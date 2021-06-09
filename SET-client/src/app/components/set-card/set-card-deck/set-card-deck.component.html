@@ -1,3 +1,9 @@
-<div id="set-card-back" *ngIf="cards.length > 0">HOWDY</div>
+<div class="set-card-back" *ngIf="cards.length > 0">
+  <div class="outline flex justify-center items-center">
+    <div class="texture flex justify-center items-center">
+      <h1 class="logo font-pattaya text-3xl">S E T</h1>
+    </div>
+  </div>
+</div>
 Stacks: {{ stackCountArray.length }}
 <div *ngFor="let stack of stackCountArray" class="set-card-stack"></div>
