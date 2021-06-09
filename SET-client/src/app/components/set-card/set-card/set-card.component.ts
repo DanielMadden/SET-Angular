@@ -16,6 +16,7 @@ export class SetCardComponent implements OnInit {
   };
 
   @Input() cardSlot: number = 0;
+  @Input() highlighted: boolean = false;
 
   iconCountArray: any[] = [];
   cardPaths = cardPaths;
