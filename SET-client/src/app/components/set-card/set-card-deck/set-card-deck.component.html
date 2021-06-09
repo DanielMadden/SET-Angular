@@ -7,7 +7,7 @@
     [style.margin-right]="stackCountArray.length * stackPixelHeight + 'px'"
   >
     <div class="top">
-      <app-set-card-back></app-set-card-back>
+      <app-set-card-back *ngIf="stackCountArray.length > 0"></app-set-card-back>
     </div>
     <div class="stack-container">
       <div
