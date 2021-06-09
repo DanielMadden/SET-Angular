@@ -5,6 +5,8 @@
         *ngIf="slot.display"
         [card]="slot.card"
         [cardSlot]="index"
+        [highlighted]="slot.selected"
+        (click)="slot.selected ? deSelectCard(index) : selectCard(index)"
       ></app-set-card>
     </div>
   </div>
