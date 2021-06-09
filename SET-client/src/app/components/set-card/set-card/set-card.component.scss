@@ -2,9 +2,10 @@
 .set-card {
   width: $card-width;
   height: $card-height;
-  background-color: white;
+  background-color: $card-color;
   border-radius: $card-corner-radius;
   padding: $card-padding;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.3);
 
   .svg-container {
     padding: $card-svg-padding;
