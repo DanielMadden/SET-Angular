@@ -1,9 +1,29 @@
-<div class="set-card-back" *ngIf="cards.length > 0">
-  <div class="outline flex justify-center items-center">
-    <div class="texture flex justify-center items-center">
-      <h1 class="logo font-pattaya text-3xl">S E T</h1>
+{{ stackCountArray.length }}
+
+<div class="set-card-deck-container">
+  <div
+    class="set-card-deck component"
+    [style.margin-bottom]="stackCountArray.length * stackPixelHeight + 'px'"
+    [style.margin-right]="stackCountArray.length * stackPixelHeight + 'px'"
+  >
+    <div class="top">
+      <app-set-card-back></app-set-card-back>
+    </div>
+    <div class="stack-container">
+      <div
+        *ngFor="
+          let stack of stackCountArray;
+          let index = index;
+          let last = last
+        "
+        class="stack"
+        [style.top]="(index + 1) * stackPixelHeight + 'px'"
+        [style.left]="(index + 1) * stackPixelHeight * 0.8 + 'px'"
+        [style.z-index]="index * -1"
+        [class]="index % 2 ? 'even' : 'odd'"
+        [class.tail]="last"
+        [style.box-shadow]="last ? calculateShadow() : ''"
+      ></div>
     </div>
   </div>
 </div>
-Stacks: {{ stackCountArray.length }}
-<div *ngFor="let stack of stackCountArray" class="set-card-stack"></div>

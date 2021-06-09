@@ -1,0 +1,14 @@
+@import "../../shared/variables.scss";
+
+.set-game-column {
+  height: $card-height * 4;
+}
+
+#set-game-column-right {
+  width: $card-hypotenuse + 20px * $card-multiplier;
+}
+
+.set-card-deck-container {
+  width: 100%;
+  height: $card-height;
+}

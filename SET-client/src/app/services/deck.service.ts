@@ -17,6 +17,10 @@ export class DeckService {
     this.deckSubject.next(this.deck);
   }
 
+  public getDeck(): ICard[] {
+    return this.deck;
+  }
+
   public resetDeck(): void {
     this.deck = [];
     this.emitDeck();

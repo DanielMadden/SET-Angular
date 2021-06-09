@@ -2,11 +2,18 @@
   <app-bar-top></app-bar-top>
   <div class="set-game-screen flex flex-row justify-around items-center w-full">
     <app-set-card-grid></app-set-card-grid>
-    <div id="set-game-column-right" class="set-game-column">
-      <app-set-card-deck
-        [firstCards]="deck"
-        [cardStream$]="deck$"
-      ></app-set-card-deck>
+    <div
+      id="set-game-column-right"
+      class="set-game-column flex flex-col items-center justify-between"
+    >
+      <div
+        class="set-card-deck-container flex flex-row justify-center items-end"
+      >
+        <app-set-card-deck
+          [pointToDeckService]="true"
+          [cardStream$]="deck$"
+        ></app-set-card-deck>
+      </div>
       <button>+3 Cards</button>
       <button>Hint</button>
       <app-set-card-deck></app-set-card-deck>
