@@ -13,7 +13,7 @@ export class SetCardDeckComponent implements OnInit, OnChanges {
   @Input() pointToDeckService: boolean = false;
   cards: ICard[] = [];
   stackCountArray: number[] = [];
-  stackPixelHeight: number = 0.5;
+  stackPixelHeight: number = 1;
 
   constructor(private deckService: DeckService) {}
 

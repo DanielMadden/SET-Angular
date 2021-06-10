@@ -1,49 +1,52 @@
 @import "../../../shared/variables.scss";
-// .set-card-deck-container {
-//   box-shadow: 5px 5px 5px 5px black;
-//   transform: rotate(20deg);
-//   width: fit-content;
-//   height: fit-content;
-.set-card-deck {
-  transform: rotate(20deg);
-  position: relative;
+.set-card-deck-container {
+  //   box-shadow: 5px 5px 5px 5px black;
+  //   transform: rotate(20deg);
+  //   width: fit-content;
+  //   height: fit-content;
   width: $card-width;
   height: $card-height;
-  .top {
+  position: relative;
+  .set-card-deck {
+    transform: rotate(20deg);
     position: absolute;
-    top: 0;
-    left: 0;
     width: $card-width;
     height: $card-height;
-    z-index: 10;
-  }
-  .stack-container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: $card-width;
-    .stack {
+    .top {
       position: absolute;
+      top: 0;
       left: 0;
       width: $card-width;
       height: $card-height;
-      border-radius: $card-corner-radius;
-      &.odd {
-        background-color: $card-color;
-      }
-      &.even {
-        background-color: #e1e1e1;
-        // background-color: rgb(243, 213, 77);
-        // background-color: gold;
-        // background-image: url("../../../../assets/images/card/gold-gradient.jpg");
-        // background-position-x: 50%;
-        // background-position-y: 50%;
-        // background-size: cover;
-      }
-      &.tail {
-        box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.5);
+      z-index: 10;
+    }
+    .stack-container {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: $card-width;
+      .stack {
+        position: absolute;
+        left: 0;
+        width: $card-width;
+        height: $card-height;
+        border-radius: $card-corner-radius;
+        &.odd {
+          background-color: $card-color;
+        }
+        &.even {
+          background-color: #e1e1e1;
+          // background-color: rgb(243, 213, 77);
+          // background-color: gold;
+          // background-image: url("../../../../assets/images/card/gold-gradient.jpg");
+          // background-position-x: 50%;
+          // background-position-y: 50%;
+          // background-size: cover;
+        }
+        &.tail {
+          box-shadow: 10px 10px 10px 1px rgba(0, 0, 0, 0.5);
+        }
       }
     }
   }
 }
-// }

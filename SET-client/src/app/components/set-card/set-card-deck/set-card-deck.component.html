@@ -1,10 +1,7 @@
-{{ stackCountArray.length }}
-
 <div class="set-card-deck-container">
   <div
     class="set-card-deck component"
-    [style.margin-bottom]="stackCountArray.length * stackPixelHeight + 'px'"
-    [style.margin-right]="stackCountArray.length * stackPixelHeight + 'px'"
+    [style.bottom]="stackCountArray.length * stackPixelHeight + 'px'"
   >
     <div class="top">
       <app-set-card-back *ngIf="stackCountArray.length > 0"></app-set-card-back>
@@ -27,3 +24,10 @@
     </div>
   </div>
 </div>
+
+<!-- [style.right]="stackCountArray.length * stackPixelHeight * 0.8 + 'px'" -->
+
+<!-- [style.margin-bottom]="stackCountArray.length * stackPixelHeight + 'px'"
+    [style.margin-right]="
+      stackCountArray.length * stackPixelHeight * 0.8 + 'px'
+    " -->
