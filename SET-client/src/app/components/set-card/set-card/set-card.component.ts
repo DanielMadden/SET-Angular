@@ -1,4 +1,10 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+} from '@angular/core';
 import { ICard } from 'src/app/models/card';
 import { cardPaths } from '../../../shared/card-attributes';
 
@@ -7,7 +13,7 @@ import { cardPaths } from '../../../shared/card-attributes';
   templateUrl: './set-card.component.html',
   styleUrls: ['./set-card.component.scss'],
 })
-export class SetCardComponent implements OnInit {
+export class SetCardComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() card: ICard = {
     count: 1,
     color: 1,
@@ -28,6 +34,14 @@ export class SetCardComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
+    this.drawPaths();
+  }
+
+  ngOnChanges(): void {
+    this.drawPaths();
+  }
+
+  private drawPaths(): void {
     let paths = document.getElementsByClassName(
       `set-card-${this.cardSlot}-svg-path`
     );
