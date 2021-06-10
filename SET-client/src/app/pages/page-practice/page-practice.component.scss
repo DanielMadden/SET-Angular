@@ -1,14 +1,22 @@
 @import "../../shared/variables.scss";
 
 .set-game-column {
-  height: $card-height * 4;
+  height: $card-height * 2 + $card-padding * 2;
 }
 
 #set-game-column-right {
-  width: $card-hypotenuse + 20px * $card-multiplier;
+  width: $card-width;
 }
 
 .set-card-deck-container {
-  width: 100%;
+  width: $card-width;
   height: $card-height;
+}
+
+.set-game-button {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 5px;
+  // transform: rotate(20deg);
 }
