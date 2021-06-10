@@ -1,7 +1,9 @@
 <div class="page w-full h-full flex flex-row items-center justify-around">
   <app-bar-top></app-bar-top>
   <div class="set-game-screen flex flex-row justify-around items-center w-full">
-    <app-set-card-grid></app-set-card-grid>
+    <app-set-card-grid
+      (setOfCardsEvent)="addCardsToHand($event)"
+    ></app-set-card-grid>
     <div
       id="set-game-column-right"
       class="set-game-column flex flex-col items-center justify-between"
@@ -18,7 +20,7 @@
       <button class="set-game-button p-4">
         <h1 class="text-3xl">Hint</h1>
       </button> -->
-      <app-set-card-deck></app-set-card-deck>
+      <app-set-card-deck [cardStream$]="hand$"></app-set-card-deck>
     </div>
   </div>
   <app-bar-bottom-desktop></app-bar-bottom-desktop>

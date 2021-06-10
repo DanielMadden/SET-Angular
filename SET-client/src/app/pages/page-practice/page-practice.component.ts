@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ICard } from 'src/app/models/card';
 import { CardTestsService } from 'src/app/services/card-tests.service';
 import { DeckService } from 'src/app/services/deck.service';
@@ -17,8 +17,11 @@ export class PagePracticeComponent implements OnInit {
     private cardTestsService: CardTestsService
   ) {}
 
-  deck$!: Observable<ICard[]>;
-  deck: ICard[] = [];
+  public deck$!: Observable<ICard[]>;
+  private deck: ICard[] = [];
+  private hand: ICard[] = [];
+  private handSubject = new Subject<ICard[]>();
+  public hand$: Observable<ICard[]> = this.handSubject.asObservable();
 
   ngOnInit(): void {
     this.deck$ = this.deckService.deck$;
@@ -26,7 +29,15 @@ export class PagePracticeComponent implements OnInit {
       this.deck = deck;
     });
     this.deckService.createDeck();
-    // this.cardTestsService.runTests();
+  }
+
+  private emitHand(): void {
+    this.handSubject.next(this.hand);
+  }
+
+  addCardsToHand(cards: [ICard, ICard, ICard]) {
+    this.hand.push(...cards);
+    this.emitHand();
   }
 }
 
