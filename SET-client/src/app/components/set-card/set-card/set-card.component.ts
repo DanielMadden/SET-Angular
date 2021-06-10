@@ -13,7 +13,7 @@ import { cardPaths } from '../../../shared/card-attributes';
   templateUrl: './set-card.component.html',
   styleUrls: ['./set-card.component.scss'],
 })
-export class SetCardComponent implements OnInit, AfterViewInit, OnChanges {
+export class SetCardComponent implements AfterViewInit, OnChanges {
   @Input() card: ICard = {
     count: 1,
     color: 1,
@@ -29,10 +29,6 @@ export class SetCardComponent implements OnInit, AfterViewInit, OnChanges {
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.iconCountArray = [...Array(this.card.count).keys()];
-  }
-
   ngAfterViewInit(): void {
     this.drawPaths();
   }
@@ -41,7 +37,12 @@ export class SetCardComponent implements OnInit, AfterViewInit, OnChanges {
     this.drawPaths();
   }
 
+  // setIconCount(): void {
+  //   this.iconCountArray = [...Array(this.card.count).keys()];
+  // }
+
   private drawPaths(): void {
+    // this.setIconCount();
     let paths = document.getElementsByClassName(
       `set-card-${this.cardSlot}-svg-path`
     );

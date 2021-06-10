@@ -57,4 +57,17 @@
       }
     }
   }
+
+  &.count-1 {
+    .svg-container-2,
+    .svg-container-3 {
+      display: none;
+    }
+  }
+
+  &.count-2 {
+    .svg-container-3 {
+      display: none;
+    }
+  }
 }
