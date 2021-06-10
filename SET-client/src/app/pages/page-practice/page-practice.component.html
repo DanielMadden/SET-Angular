@@ -6,16 +6,18 @@
       id="set-game-column-right"
       class="set-game-column flex flex-col items-center justify-between"
     >
-      <div
-        class="set-card-deck-container flex flex-row justify-center items-end"
-      >
+      <div class="set-card-deck-container flex flex-row justify-end items-end">
         <app-set-card-deck
           [pointToDeckService]="true"
           [cardStream$]="deck$"
         ></app-set-card-deck>
       </div>
-      <button>+3 Cards</button>
-      <button>Hint</button>
+      <!-- <button class="set-game-button p-4">
+        <h1 class="text-3xl">+3 Cards</h1>
+      </button>
+      <button class="set-game-button p-4">
+        <h1 class="text-3xl">Hint</h1>
+      </button> -->
       <app-set-card-deck></app-set-card-deck>
     </div>
   </div>
