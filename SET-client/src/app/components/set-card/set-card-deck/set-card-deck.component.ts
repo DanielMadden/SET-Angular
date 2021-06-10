@@ -26,16 +26,15 @@ export class SetCardDeckComponent implements OnInit, OnChanges {
       (cards) => this.updateCards(cards),
       (err) => console.error(`[ERROR]: ${err}`)
     );
-    console.log('hi');
   }
 
   private updateCards(cards: ICard[]): void {
     this.cards = cards;
-    this.stackCountArray = [...Array(this.cards.length / 3 + 1).keys()];
+    this.stackCountArray = [...Array(this.cards.length / 3).keys()];
   }
 
   public calculateShadow(): string {
     let pixels = (this.stackCountArray.length + 5) * 1;
-    return `${pixels / 2}px ${pixels / 2}px ${pixels}px px rgba(0, 0, 0, 0.7)`;
+    return `${pixels / 2}px ${pixels / 2}px ${pixels}px 1px rgba(0, 0, 0, 0.7)`;
   }
 }

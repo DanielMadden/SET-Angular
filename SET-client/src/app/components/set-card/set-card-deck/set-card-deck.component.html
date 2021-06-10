@@ -8,20 +8,22 @@
     </div>
     <div class="stack-container">
       <div
-        *ngFor="
-          let stack of stackCountArray;
-          let index = index;
-          let last = last
-        "
+        *ngFor="let stack of stackCountArray; let index = index"
         class="stack"
         [style.top]="(index + 1) * stackPixelHeight + 'px'"
         [style.left]="(index + 1) * stackPixelHeight * 0.8 + 'px'"
         [style.z-index]="index * -1"
         [class]="index % 2 ? 'even' : 'odd'"
-        [class.tail]="last"
-        [style.box-shadow]="last ? calculateShadow() : ''"
       ></div>
     </div>
+    <div
+      class="shadow"
+      [style.top]="stackCountArray.length * stackPixelHeight + 'px'"
+      [style.left]="stackCountArray.length * stackPixelHeight * 0.8 + 'px'"
+      [style.z-index]="stackCountArray.length * -1"
+      [style.box-shadow]="calculateShadow()"
+      *ngIf="stackCountArray.length > 0"
+    ></div>
   </div>
 </div>
 
