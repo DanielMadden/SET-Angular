@@ -30,6 +30,6 @@ export class CardTestsService {
 
     console.log(threeRandoms);
 
-    console.log(this.matchService.checkIfCardsMatch(threeRandoms));
+    console.log(this.matchService.generateMatchCheck(threeRandoms));
   }
 }

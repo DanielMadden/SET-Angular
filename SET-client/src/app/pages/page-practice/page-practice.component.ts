@@ -43,7 +43,7 @@ export class PagePracticeComponent implements OnInit {
     this.deckService.resetDeck();
 
     console.log(
-      this.matchService.checkIfCardsMatch([
+      this.matchService.generateMatchCheck([
         {
           color: 1,
           count: 1,

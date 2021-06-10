@@ -9,7 +9,7 @@ import { cardPropertiesArray } from '../models/card-properties';
 export class MatchService {
   constructor() {}
 
-  checkIfCardsMatch(cards: [ICard, ICard, ICard]): ICardMatchCheck {
+  generateMatchCheck(cards: [ICard, ICard, ICard]): ICardMatchCheck {
     let matches = new CardMatchCheck();
 
     // Available for refactoring?
@@ -33,7 +33,7 @@ export class MatchService {
     return matches;
   }
 
-  checkIfMatchCheckPropertiesAreTrue(matchCheck: ICardMatchCheck): boolean {
+  checkIfMatchCheckIsSet(matchCheck: ICardMatchCheck): boolean {
     if (
       matchCheck.color &&
       matchCheck.count &&
