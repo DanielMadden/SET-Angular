@@ -14,7 +14,7 @@ export class SetCardGridComponent implements OnInit {
   // public cards: ICard[] = [];
   public slots: ICardGridSlot[] = [];
   public selectedSlots: ISelectedCardSlot[] = [];
-  @Output() setOfCards = new EventEmitter<[ICard, ICard, ICard]>();
+  @Output() setOfCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
 
   constructor(
     private deckService: DeckService,
@@ -85,6 +85,7 @@ export class SetCardGridComponent implements OnInit {
     let cardMatchCheck = this.matchService.generateMatchCheck(cardsToCheck);
     let validSet = this.matchService.checkIfMatchCheckIsSet(cardMatchCheck);
     if (validSet) {
+      this.emitCardsToParent(cardsToCheck);
       let newCards = this.deckService.pullThreeCardsFromDeck();
       this.replaceActiveCards(newCards);
       this.resetSelectedCards();
@@ -92,5 +93,9 @@ export class SetCardGridComponent implements OnInit {
       this.deSelectCards();
       this.resetSelectedCards();
     }
+  }
+
+  private emitCardsToParent(cards: [ICard, ICard, ICard]) {
+    this.setOfCardsEvent.emit(cards);
   }
 }
