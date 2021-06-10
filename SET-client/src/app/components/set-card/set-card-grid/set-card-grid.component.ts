@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ICard } from 'src/app/models/card';
 import { CardGridSlot, ICardGridSlot } from 'src/app/models/card-grid-slot';
 import { ISelectedCardSlot } from 'src/app/models/selected-card-slot';
@@ -14,6 +14,7 @@ export class SetCardGridComponent implements OnInit {
   // public cards: ICard[] = [];
   public slots: ICardGridSlot[] = [];
   public selected: ISelectedCardSlot[] = [];
+  @Output() setOfCards = new EventEmitter<[ICard, ICard, ICard]>();
 
   constructor(
     private deckService: DeckService,
@@ -42,6 +43,7 @@ export class SetCardGridComponent implements OnInit {
         this.selected[1].card,
         this.selected[2].card,
       ];
+      console.log(cardsToCheck);
       if (
         this.matchService.checkIfMatchCheckPropertiesAreTrue(
           this.matchService.checkIfCardsMatch(cardsToCheck)
