@@ -12,7 +12,7 @@ import { MatchService } from 'src/app/services/match.service';
   styleUrls: ['./set-card-grid.component.scss'],
 })
 export class SetCardGridComponent implements OnInit {
-  // public cards: ICard[] = [];
+  private deckIsEmpty = false;
   public slots: ICardGridSlot[] = [];
   public selectedSlots: ISelectedCardSlot[] = [];
   @Output() setOfCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
@@ -29,6 +29,12 @@ export class SetCardGridComponent implements OnInit {
       () => this.addThreeCards(),
       (err) => console.error(`[ERROR]: ${err}`)
     );
+    this.deckService.deck$.subscribe({
+      complete: () => {
+        this.deckIsEmpty = true;
+        console.log('deck is empty!');
+      },
+    });
   }
 
   private addThreeCards(): void {
@@ -66,11 +72,21 @@ export class SetCardGridComponent implements OnInit {
     }
   }
 
-  private replaceActiveCards(newCards: [ICard, ICard, ICard]) {
-    for (let i = 0; i < newCards.length; i++) {
-      let slotIndex = this.slots[this.selectedSlots[i].slotIndex];
-      slotIndex.card = newCards[i];
-      slotIndex.selected = false;
+  private replaceActiveCards(): void {
+    if (!this.deckIsEmpty && this.slots.length <= 12) {
+      let newCards = this.deckService.pullThreeCardsFromDeck();
+      for (let i = 0; i < newCards.length; i++) {
+        let slotIndex = this.slots[this.selectedSlots[i].slotIndex];
+        slotIndex.card = newCards[i];
+        slotIndex.selected = false;
+      }
+    } else this.shrinkSlotsArray();
+  }
+
+  private shrinkSlotsArray(): void {
+    this.selectedSlots.sort((a, b) => b.slotIndex - a.slotIndex);
+    for (let i = 0; i < this.selectedSlots.length; i++) {
+      this.slots.splice(this.selectedSlots[i].slotIndex, 1);
     }
   }
 
@@ -85,17 +101,17 @@ export class SetCardGridComponent implements OnInit {
         this.selectedSlots[1].card,
         this.selectedSlots[2].card,
       ];
-      this.checkIfCardsMatch(cardsToCheck);
+      this.checkIfCardsMatchThenAct(cardsToCheck);
     }
   }
 
-  private checkIfCardsMatch(cardsToCheck: [ICard, ICard, ICard]) {
+  private checkIfCardsMatchThenAct(cardsToCheck: [ICard, ICard, ICard]): void {
     let cardMatchCheck = this.matchService.generateMatchCheck(cardsToCheck);
     let validSet = this.matchService.checkIfMatchCheckIsSet(cardMatchCheck);
     if (validSet) {
+      this.deSelectCards();
       this.emitCardsToParent(cardsToCheck);
-      let newCards = this.deckService.pullThreeCardsFromDeck();
-      this.replaceActiveCards(newCards);
+      this.replaceActiveCards();
       this.resetSelectedCards();
     } else {
       this.deSelectCards();

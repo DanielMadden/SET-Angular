@@ -13,8 +13,16 @@ export class DeckService {
 
   constructor() {}
 
+  private resetDeckSubject(): void {
+    this.deckSubject = new Subject<ICard[]>();
+  }
+
   private emitDeck(): void {
     this.deckSubject.next(this.deck);
+  }
+
+  private completeDeckObservable(): void {
+    this.deckSubject.complete();
   }
 
   public getDeck(): ICard[] {
@@ -27,6 +35,7 @@ export class DeckService {
   }
 
   public createDeck(): void {
+    this.resetDeckSubject();
     this.resetDeck();
     cardValues.count.forEach((count) => {
       cardValues.color.forEach((color) => {
@@ -74,6 +83,7 @@ export class DeckService {
       )[0];
     }
     this.emitDeck();
+    if (this.deck.length == 0) this.completeDeckObservable();
     return cards;
   }
 }
