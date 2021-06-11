@@ -1,9 +1,11 @@
 @import "../../../shared/variables.scss";
 .set-card-back {
+  position: relative;
   width: $card-width;
   height: $card-height;
   border-radius: $card-corner-radius;
   .outline {
+    position: relative;
     width: 100%;
     height: 100%;
     border-radius: $card-corner-radius;
@@ -13,8 +15,7 @@
     background-position-y: 50%;
     background-size: cover;
     .texture {
-      // width: calc(100% - $card-padding);
-      // height: calc(100% - $card-padding);
+      position: relative;
       width: 100%;
       height: 100%;
       border-radius: $card-corner-radius;
@@ -22,18 +23,44 @@
       background-position-x: 50%;
       background-position-y: 50%;
       background-size: cover;
-      .logo {
+      overflow: hidden;
+      .slider-section {
+        position: absolute;
         width: 100%;
-        margin-left: -15px * $card-multiplier;
-        margin-bottom: -5px * $card-multiplier;
-        text-align: center;
-        background-image: url("../../../../assets/images/card/gold-gradient.jpg");
-        background-position-x: 50%;
-        background-position-y: 50%;
-        background-size: cover;
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        height: 100%;
+        transition: 0.3s;
+        &.logo {
+          top: 0;
+          left: 0;
+        }
+        &.buttons {
+          bottom: -100%;
+          left: 0;
+        }
+        .text {
+          width: 100%;
+          margin-left: -15px * $card-multiplier;
+          margin-bottom: -5px * $card-multiplier;
+          text-align: center;
+          background-image: url("../../../../assets/images/card/gold-gradient.jpg");
+          background-position-x: 50%;
+          background-position-y: 50%;
+          background-size: cover;
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+      &.slide:hover {
+        cursor: pointer;
+        .slider-section {
+          &.logo {
+            top: -100%;
+          }
+          &.buttons {
+            bottom: 0;
+          }
+        }
       }
     }
   }

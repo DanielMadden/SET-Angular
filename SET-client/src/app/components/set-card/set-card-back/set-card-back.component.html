@@ -1,7 +1,12 @@
 <div class="set-card-back">
   <div class="outline flex justify-center items-center">
-    <div class="texture flex justify-center items-center">
-      <h1 class="logo font-pattaya text-7xl">S E T</h1>
+    <div class="texture" [class.slide]="slideForButtons">
+      <div class="slider-section logo flex justify-center items-center">
+        <h1 class="text font-pattaya text-7xl">S E T</h1>
+      </div>
+      <div class="slider-section buttons flex justify-center items-center">
+        <h1 id="button-plus-3" class="text font-pattaya text-7xl">+ 3</h1>
+      </div>
     </div>
   </div>
 </div>
