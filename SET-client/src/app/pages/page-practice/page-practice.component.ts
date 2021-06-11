@@ -22,6 +22,9 @@ export class PagePracticeComponent implements OnInit {
   private hand: ICard[] = [];
   private handSubject = new Subject<ICard[]>();
   public hand$: Observable<ICard[]> = this.handSubject.asObservable();
+  private tellGridToAddThreeCardsSubject = new Subject<boolean>();
+  public tellGridToAddThreeCards$ =
+    this.tellGridToAddThreeCardsSubject.asObservable();
 
   ngOnInit(): void {
     this.deck$ = this.deckService.deck$;
@@ -35,9 +38,13 @@ export class PagePracticeComponent implements OnInit {
     this.handSubject.next(this.hand);
   }
 
-  addCardsToHand(cards: [ICard, ICard, ICard]) {
+  public addCardsToHand(cards: [ICard, ICard, ICard]) {
     this.hand.push(...cards);
     this.emitHand();
+  }
+
+  public tellGridToAddThreeCards() {
+    this.tellGridToAddThreeCardsSubject.next(true);
   }
 }
 

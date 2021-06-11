@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ICard } from 'src/app/models/card';
 import { CardGridSlot, ICardGridSlot } from 'src/app/models/card-grid-slot';
 import { ISelectedCardSlot } from 'src/app/models/selected-card-slot';
@@ -15,6 +16,7 @@ export class SetCardGridComponent implements OnInit {
   public slots: ICardGridSlot[] = [];
   public selectedSlots: ISelectedCardSlot[] = [];
   @Output() setOfCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
+  @Input() listenToAddThreeCards$!: Observable<boolean>;
 
   constructor(
     private deckService: DeckService,
@@ -22,10 +24,16 @@ export class SetCardGridComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    for (let i = 0; i < 4; i++) {
-      let newCards = this.deckService.pullThreeCardsFromDeck();
-      newCards.forEach((card) => this.slots.push(new CardGridSlot(card)));
-    }
+    for (let i = 0; i < 4; i++) this.addThreeCards();
+    this.listenToAddThreeCards$.subscribe(
+      () => this.addThreeCards(),
+      (err) => console.error(`[ERROR]: ${err}`)
+    );
+  }
+
+  private addThreeCards(): void {
+    let newCards = this.deckService.pullThreeCardsFromDeck();
+    newCards.forEach((card) => this.slots.push(new CardGridSlot(card)));
   }
 
   private resetSelectedCards(): void {

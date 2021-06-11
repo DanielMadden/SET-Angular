@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICard } from 'src/app/models/card';
 import { DeckService } from 'src/app/services/deck.service';
@@ -11,6 +18,7 @@ import { DeckService } from 'src/app/services/deck.service';
 export class SetCardDeckComponent implements OnInit, OnChanges {
   @Input() cardStream$!: Observable<ICard[]>;
   @Input() pointToDeckService: boolean = false;
+  @Output() addThreeCardsEvent = new EventEmitter<boolean>();
   cards: ICard[] = [];
   stackCountArray: number[] = [];
   stackPixelHeight: number = 1;
@@ -36,5 +44,13 @@ export class SetCardDeckComponent implements OnInit, OnChanges {
   public calculateShadow(): string {
     let pixels = (this.stackCountArray.length + 5) * 1;
     return `${pixels / 2}px ${pixels / 2}px ${pixels}px 1px rgba(0, 0, 0, 0.7)`;
+  }
+
+  public topWasClicked(): void {
+    if (this.pointToDeckService) this.addThreeCardsToGrid();
+  }
+
+  private addThreeCardsToGrid() {
+    this.addThreeCardsEvent.emit(true);
   }
 }

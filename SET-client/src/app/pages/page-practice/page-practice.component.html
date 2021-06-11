@@ -3,6 +3,7 @@
   <div class="set-game-screen flex flex-row justify-around items-center w-full">
     <app-set-card-grid
       (setOfCardsEvent)="addCardsToHand($event)"
+      [listenToAddThreeCards$]="tellGridToAddThreeCards$"
     ></app-set-card-grid>
     <div
       id="set-game-column-right"
@@ -12,6 +13,7 @@
         <app-set-card-deck
           [pointToDeckService]="true"
           [cardStream$]="deck$"
+          (addThreeCardsEvent)="tellGridToAddThreeCards()"
         ></app-set-card-deck>
       </div>
       <!-- <button class="set-game-button p-4">
