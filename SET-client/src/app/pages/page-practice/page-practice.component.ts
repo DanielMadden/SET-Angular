@@ -31,10 +31,11 @@ export class PagePracticeComponent implements OnInit {
 
   ngOnInit(): void {
     this.deck$ = this.deckService.deck$;
+    this.deckService.createDeck();
     this.deck$.subscribe((deck) => {
       this.deck = deck;
+      this.cardsRemaining = this.deck.length;
     });
-    this.deckService.createDeck();
   }
 
   private emitHand(): void {
@@ -43,6 +44,7 @@ export class PagePracticeComponent implements OnInit {
 
   public addCardsToHand(cards: [ICard, ICard, ICard]) {
     this.hand.push(...cards);
+    this.sets = this.hand.length / 3;
     this.emitHand();
   }
 

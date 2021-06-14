@@ -13,7 +13,7 @@ export class DeckService {
 
   constructor() {}
 
-  private resetDeckSubject(): void {
+  public resetDeckSubject(): void {
     this.deckSubject = new Subject<ICard[]>();
   }
 
@@ -35,7 +35,6 @@ export class DeckService {
   }
 
   public createDeck(): void {
-    this.resetDeckSubject();
     this.resetDeck();
     cardValues.count.forEach((count) => {
       cardValues.color.forEach((color) => {

@@ -9,7 +9,7 @@ export class BarBottomDesktopComponent implements OnInit {
   @Input() gameMode: string = '';
   @Input() time: string = '';
   @Input() sets: number = 0;
-  @Input() cardsRemaining: number = 81;
+  @Input() cardsRemaining!: number;
 
   constructor() {}
 
