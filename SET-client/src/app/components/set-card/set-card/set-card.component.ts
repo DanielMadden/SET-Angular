@@ -21,6 +21,7 @@ export class SetCardComponent implements AfterViewInit, OnChanges {
     shade: 'hollow',
   };
 
+  @Input() inGameLog: boolean = false;
   @Input() cardSlot: number = 0;
   @Input() highlighted: boolean = false;
 
