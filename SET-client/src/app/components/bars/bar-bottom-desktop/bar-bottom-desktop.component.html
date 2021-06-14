@@ -1,9 +1,17 @@
 <div
   id="bar-bottom-desktop"
-  class="flex flex-row justify-evenly text-4xl items-center font-montserrat"
+  class="text-4xl font-montserrat flex flex-row justify-between items-center"
 >
-  <span>{{ gameMode }} Mode</span>
-  <span>{{ time }}</span>
-  <span>Sets: {{ sets }}</span>
-  <span>Cards: {{ cardsRemaining }}</span>
+  <div class="gameStat flex justify-center items-center">
+    <span>{{ gameMode }} Mode</span>
+  </div>
+  <div class="gameStat flex justify-center items-center">
+    <span>{{ time }}</span>
+  </div>
+  <div class="gameStat flex justify-center items-center">
+    <span>Sets: {{ sets }}</span>
+  </div>
+  <div class="gameStat flex justify-center items-center">
+    <span>Cards: {{ cardsRemaining }}</span>
+  </div>
 </div>
