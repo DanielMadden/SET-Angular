@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { interval, Observable, Subject } from 'rxjs';
 import { ICard } from 'src/app/models/card';
 import { DeckService } from 'src/app/services/deck.service';
 import { MatchService } from 'src/app/services/match.service';
@@ -24,8 +24,11 @@ export class PagePracticeComponent implements OnInit {
   public tellGridToAddThreeCards$ =
     this.tellGridToAddThreeCardsSubject.asObservable();
 
+  private startingMilliseconds!: number;
+  private secondsCounter!: Observable<number>;
+  private secondsPassed!: number;
   public gameMode = 'Practice';
-  public time = '1';
+  public timePassed = '1';
   public sets = 0;
   public cardsRemaining = 81;
 
@@ -36,6 +39,7 @@ export class PagePracticeComponent implements OnInit {
       this.deck = deck;
       this.cardsRemaining = this.deck.length;
     });
+    this.startTimer();
   }
 
   private emitHand(): void {
@@ -50,5 +54,23 @@ export class PagePracticeComponent implements OnInit {
 
   public tellGridToAddThreeCards() {
     this.tellGridToAddThreeCardsSubject.next(true);
+  }
+
+  private startTimer() {
+    this.startingMilliseconds = new Date().getTime();
+    this.secondsCounter = interval(100);
+    this.secondsCounter.subscribe((intervalIndex) => {
+      this.secondsPassed = Math.floor(
+        (new Date().getTime() - this.startingMilliseconds) / 1000
+      );
+      this.setTime();
+    });
+  }
+
+  private setTime() {
+    let minutesPassed = Math.floor(this.secondsPassed / 60);
+    this.timePassed = `
+    ${minutesPassed} : ${this.secondsPassed % 60}
+    `;
   }
 }
