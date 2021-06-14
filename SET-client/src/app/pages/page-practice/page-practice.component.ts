@@ -24,6 +24,11 @@ export class PagePracticeComponent implements OnInit {
   public tellGridToAddThreeCards$ =
     this.tellGridToAddThreeCardsSubject.asObservable();
 
+  public gameMode = 'Practice';
+  public time = '1';
+  public sets = 0;
+  public cardsRemaining = 81;
+
   ngOnInit(): void {
     this.deck$ = this.deckService.deck$;
     this.deck$.subscribe((deck) => {

@@ -25,5 +25,10 @@
       <app-set-card-deck [cardStream$]="hand$"></app-set-card-deck>
     </div>
   </div>
-  <app-bar-bottom-desktop></app-bar-bottom-desktop>
+  <app-bar-bottom-desktop
+    [gameMode]="gameMode"
+    [time]="time"
+    [sets]="sets"
+    [cardsRemaining]="cardsRemaining"
+  ></app-bar-bottom-desktop>
 </div>
