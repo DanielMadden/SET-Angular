@@ -59,7 +59,7 @@ export class PagePracticeComponent implements OnInit {
   private startTimer() {
     this.startingMilliseconds = new Date().getTime();
     this.secondsCounter = interval(100);
-    this.secondsCounter.subscribe((intervalIndex) => {
+    this.secondsCounter.subscribe(() => {
       this.secondsPassed = Math.floor(
         (new Date().getTime() - this.startingMilliseconds) / 1000
       );
@@ -70,7 +70,9 @@ export class PagePracticeComponent implements OnInit {
   private setTime() {
     let minutesPassed = Math.floor(this.secondsPassed / 60);
     this.timePassed = `
-    ${minutesPassed} : ${this.secondsPassed % 60}
+    ${minutesPassed > 0 ? minutesPassed : ''} ${minutesPassed > 0 ? ':' : ''} ${
+      this.secondsPassed % 60
+    }
     `;
   }
 }
