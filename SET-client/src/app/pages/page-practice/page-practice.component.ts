@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { interval, Observable, Subject } from 'rxjs';
 import { ICard } from 'src/app/models/card';
+import { GameLog, IGameLog } from 'src/app/models/game-log';
 import { DeckService } from 'src/app/services/deck.service';
 import { MatchService } from 'src/app/services/match.service';
 
@@ -23,6 +24,10 @@ export class PagePracticeComponent implements OnInit {
   private tellGridToAddThreeCardsSubject = new Subject<boolean>();
   public tellGridToAddThreeCards$ =
     this.tellGridToAddThreeCardsSubject.asObservable();
+  private gameLogSubject = new Subject<IGameLog>();
+  public gameLogStream$ = this.gameLogSubject.asObservable();
+  private startGameLogSubject = new Subject<boolean>();
+  public startGameLog$ = this.startGameLogSubject.asObservable();
 
   private startingMilliseconds!: number;
   private secondsCounter!: Observable<number>;
@@ -39,7 +44,11 @@ export class PagePracticeComponent implements OnInit {
       this.deck = deck;
       this.cardsRemaining = this.deck.length;
     });
+  }
+
+  public startGame() {
     this.startTimer();
+    this.startGameLog();
   }
 
   private emitHand(): void {
@@ -54,6 +63,22 @@ export class PagePracticeComponent implements OnInit {
 
   public tellGridToAddThreeCards() {
     this.tellGridToAddThreeCardsSubject.next(true);
+  }
+
+  public sendThePlusThreeCardsToGameLog(cards: [ICard, ICard, ICard]) {
+    this.emitGameLog(cards, 'plus three');
+  }
+
+  private emitGameLog(
+    cards: [ICard, ICard, ICard],
+    type: 'match' | 'no match' | 'plus three'
+  ) {
+    console.log('emitGameLog()');
+    this.gameLogSubject.next(new GameLog(cards, type));
+  }
+
+  private startGameLog() {
+    this.startGameLogSubject.complete();
   }
 
   private startTimer() {

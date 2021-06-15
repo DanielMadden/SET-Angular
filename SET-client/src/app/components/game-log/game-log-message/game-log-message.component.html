@@ -1,7 +1,8 @@
-<div class="game-log-message">
+<div class="game-log-message" *ngIf="gameLog">
   <div class="cards-container">
-    <div class="card-container" *ngFor="let card of cards">
+    <div class="card-container" *ngFor="let card of gameLog.cards">
       <app-set-card [card]="card" [inGameLog]="true"></app-set-card>
     </div>
   </div>
+  {{ gameLog.type }}
 </div>

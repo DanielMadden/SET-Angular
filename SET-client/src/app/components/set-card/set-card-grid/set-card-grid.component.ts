@@ -17,6 +17,8 @@ export class SetCardGridComponent implements OnInit {
   public selectedSlots: ISelectedCardSlot[] = [];
   @Output() setOfCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
   @Input() listenToAddThreeCards$!: Observable<boolean>;
+  @Output() plusThreeCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
+  @Output() gameStartEvent = new EventEmitter<boolean>();
 
   constructor(
     private deckService: DeckService,
@@ -24,11 +26,24 @@ export class SetCardGridComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.listenToDeck();
+    this.listenToAddThreeCards();
+    this.startGame();
+  }
+
+  private startGame(): void {
     for (let i = 0; i < 4; i++) this.addThreeCards();
+    this.emitGameStart();
+  }
+
+  private listenToAddThreeCards() {
     this.listenToAddThreeCards$.subscribe(
       () => this.addThreeCards(),
       (err) => console.error(`[ERROR]: ${err}`)
     );
+  }
+
+  private listenToDeck() {
     this.deckService.deck$.subscribe({
       complete: () => {
         this.deckIsEmpty = true;
@@ -40,6 +55,7 @@ export class SetCardGridComponent implements OnInit {
   private addThreeCards(): void {
     let newCards = this.deckService.pullThreeCardsFromDeck();
     newCards.forEach((card) => this.slots.push(new CardGridSlot(card)));
+    this.emitPlusThreeCardsToParent(newCards);
   }
 
   private resetSelectedCards(): void {
@@ -110,7 +126,7 @@ export class SetCardGridComponent implements OnInit {
     let validSet = this.matchService.checkIfMatchCheckIsSet(cardMatchCheck);
     if (validSet) {
       this.deSelectCards();
-      this.emitCardsToParent(cardsToCheck);
+      this.emitSetOfCardsToParent(cardsToCheck);
       this.replaceActiveCards();
       this.resetSelectedCards();
     } else {
@@ -119,7 +135,15 @@ export class SetCardGridComponent implements OnInit {
     }
   }
 
-  private emitCardsToParent(cards: [ICard, ICard, ICard]) {
+  private emitSetOfCardsToParent(cards: [ICard, ICard, ICard]) {
     this.setOfCardsEvent.emit(cards);
+  }
+
+  private emitPlusThreeCardsToParent(cards: [ICard, ICard, ICard]) {
+    this.plusThreeCardsEvent.emit(cards);
+  }
+
+  private emitGameStart() {
+    this.gameStartEvent.emit(true);
   }
 }

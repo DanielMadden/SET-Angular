@@ -2,10 +2,15 @@
   <app-bar-top></app-bar-top>
   <div class="set-game-screen flex flex-row justify-around items-center w-full">
     <div id="set-game-column-left" class="set-game-column">
-      <app-game-log></app-game-log>
+      <app-game-log
+        [gameLog$]="gameLogStream$"
+        [startListeningForGameLogs$]="startGameLog$"
+      ></app-game-log>
     </div>
     <app-set-card-grid
       (setOfCardsEvent)="addCardsToHand($event)"
+      (plusThreeCardsEvent)="sendThePlusThreeCardsToGameLog($event)"
+      (gameStartEvent)="startGame()"
       [listenToAddThreeCards$]="tellGridToAddThreeCards$"
     ></app-set-card-grid>
     <div

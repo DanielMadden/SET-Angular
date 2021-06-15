@@ -1,1 +1,6 @@
-<div id="game-log" class="component"></div>
+<div id="game-log" class="component">
+  <app-game-log-message
+    *ngFor="let gameLog of gameLogs"
+    [gameLog]="gameLog"
+  ></app-game-log-message>
+</div>
