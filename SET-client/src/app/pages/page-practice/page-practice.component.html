@@ -1,6 +1,9 @@
 <div class="page w-full h-full flex flex-row items-center justify-around">
   <app-bar-top></app-bar-top>
   <div class="set-game-screen flex flex-row justify-around items-center w-full">
+    <div id="set-game-column-left" class="set-game-column">
+      <app-game-log></app-game-log>
+    </div>
     <app-set-card-grid
       (setOfCardsEvent)="addCardsToHand($event)"
       [listenToAddThreeCards$]="tellGridToAddThreeCards$"
@@ -16,12 +19,6 @@
           (addThreeCardsEvent)="tellGridToAddThreeCards()"
         ></app-set-card-deck>
       </div>
-      <!-- <button class="set-game-button p-4">
-        <h1 class="text-3xl">+3 Cards</h1>
-      </button>
-      <button class="set-game-button p-4">
-        <h1 class="text-3xl">Hint</h1>
-      </button> -->
       <app-set-card-deck [cardStream$]="hand$"></app-set-card-deck>
     </div>
   </div>
