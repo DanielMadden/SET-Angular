@@ -1,12 +1,10 @@
 @import "../../shared/variables.scss";
 
-#set-game-column-right {
+.set-game-column {
   height: $card-height * 2.5;
-  width: $card-width;
 }
 
-#set-game-column-left {
-  height: $card-height * 4;
+#set-game-column-right {
   width: $card-width;
 }
 
