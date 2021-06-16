@@ -10,6 +10,11 @@ import { IGameLog } from 'src/app/models/game-log';
 export class GameLogMessageComponent implements OnInit {
   @Input() gameLog!: IGameLog;
   @Input() gameLogId!: number;
+  public actionMessages = {
+    match: 'Match!',
+    'no match': 'No match',
+    'plus three': '+3 Cards',
+  };
 
   constructor() {}
 

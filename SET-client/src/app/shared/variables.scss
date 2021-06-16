@@ -17,3 +17,6 @@ $card-game-log-height: ($card-height - ($card-padding * 2)) *
 $card-game-log-padding: $card-padding * $card-game-log-ratio;
 $card-game-log-corner-radius: $card-corner-radius;
 $card-game-log-svg-padding: $card-svg-padding * $card-game-log-ratio;
+$game-log-title-color-red: #f29393;
+$game-log-title-color-green: #8ed18c;
+$game-log-title-color-blue: #94d2e5;

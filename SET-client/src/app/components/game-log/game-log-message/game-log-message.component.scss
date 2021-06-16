@@ -4,6 +4,20 @@
   width: 100%;
   height: fit-content;
   padding: $card-padding;
+  background-color: black;
+  border-radius: $card-corner-radius;
+  .game-log-title {
+    color: white;
+    &.color-green {
+      color: $game-log-title-color-green;
+    }
+    &.color-red {
+      color: $game-log-title-color-red;
+    }
+    &.color-blue {
+      color: $game-log-title-color-blue;
+    }
+  }
 }
 
 .cards-container {
