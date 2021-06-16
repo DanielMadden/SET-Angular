@@ -1,7 +1,7 @@
 <div class="game-log-message" *ngIf="gameLog">
-  <div class="cards-container">
+  <div class="cards-container flex flex-row justify-between">
     <div
-      class="card-container"
+      class="card-container flex flex-row justify-center items-center"
       *ngFor="let card of gameLog.cards; let index = index"
     >
       <app-set-card
@@ -12,5 +12,4 @@
       ></app-set-card>
     </div>
   </div>
-  {{ gameLog.type }}
 </div>

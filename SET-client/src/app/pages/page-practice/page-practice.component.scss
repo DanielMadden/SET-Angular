@@ -2,12 +2,14 @@
 
 #set-game-column-right {
   height: $card-height * 2.5;
-  width: $card-width;
 }
 
 #set-game-column-left {
   height: $card-height * 4;
-  width: $card-width;
+}
+
+.set-game-column {
+  width: $card-width + ($card-padding * 2);
 }
 
 .set-card-deck-container {

@@ -1,4 +1,20 @@
-#game-log-message {
+@import "../../../shared/variables.scss";
+
+.game-log-message {
   width: 100%;
   height: fit-content;
+  padding: $card-padding;
+}
+
+.cards-container {
+  width: (($card-game-log-height) * 3) + 8;
+}
+
+.card-container {
+  height: $card-game-log-width;
+  width: $card-game-log-height;
+}
+
+app-set-card {
+  transform: rotate(90deg);
 }

@@ -9,3 +9,11 @@ $card-hypotenuse: 250px * $card-multiplier;
 $card-padding: 12px * $card-multiplier;
 $card-corner-radius: $border-radius * $card-multiplier;
 $card-svg-padding: 4px * $card-multiplier;
+
+$card-game-log-ratio: 0.3;
+$card-game-log-width: ($card-width - ($card-padding * 2)) * $card-game-log-ratio;
+$card-game-log-height: ($card-height - ($card-padding * 2)) *
+  $card-game-log-ratio;
+$card-game-log-padding: $card-padding * $card-game-log-ratio;
+$card-game-log-corner-radius: $card-corner-radius;
+$card-game-log-svg-padding: $card-svg-padding * $card-game-log-ratio;

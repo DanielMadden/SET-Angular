@@ -8,10 +8,13 @@
   box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.3);
 
   &.in-game-log {
-    $ratio: 0.5;
-    width: $card-width * $ratio;
-    height: $card-height * $ratio;
-    border-radius: $card-corner-radius * $ratio;
+    width: $card-game-log-width;
+    height: $card-game-log-height;
+    border-radius: $card-corner-radius;
+    padding: $card-padding * $card-game-log-ratio;
+    .svg-container {
+      padding: $card-svg-padding * $card-game-log-ratio;
+    }
   }
 
   &.highlighted {
