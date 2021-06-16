@@ -1,6 +1,7 @@
 <div id="game-log" class="component">
   <app-game-log-message
-    *ngFor="let gameLog of gameLogs"
+    *ngFor="let gameLog of gameLogs; let index = index"
     [gameLog]="gameLog"
+    [gameLogId]="index"
   ></app-game-log-message>
 </div>

@@ -22,6 +22,7 @@ export class SetCardComponent implements AfterViewInit, OnChanges {
   };
 
   @Input() inGameLog: boolean = false;
+  @Input() gameLogId: number = 0;
   @Input() cardSlot: number = 0;
   @Input() highlighted: boolean = false;
 
@@ -38,12 +39,7 @@ export class SetCardComponent implements AfterViewInit, OnChanges {
     this.drawPaths();
   }
 
-  // setIconCount(): void {
-  //   this.iconCountArray = [...Array(this.card.count).keys()];
-  // }
-
   private drawPaths(): void {
-    // this.setIconCount();
     let paths = document.getElementsByClassName(
       `set-card-${this.cardSlot}-svg-path`
     );

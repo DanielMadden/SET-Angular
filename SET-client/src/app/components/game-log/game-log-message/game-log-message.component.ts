@@ -9,6 +9,7 @@ import { IGameLog } from 'src/app/models/game-log';
 })
 export class GameLogMessageComponent implements OnInit {
   @Input() gameLog!: IGameLog;
+  @Input() gameLogId!: number;
 
   constructor() {}
 

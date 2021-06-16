@@ -1,5 +1,7 @@
 <div
-  id="set-card-{{ cardSlot }}"
+  id="{{ inGameLog ? 'game-log-' + gameLogId + '-' : '' }}set-card-{{
+    cardSlot
+  }}"
   class="
     set-card
     count-{{ card.count }}
@@ -16,17 +18,35 @@
 >
   <div class="svg-container svg-container-1 w-1/3">
     <svg class="w-full" viewBox="-2 -2 54 104">
-      <path class="set-card-{{ cardSlot }}-svg-path" d="" fill="none"></path>
+      <path
+        class="{{ inGameLog ? 'game-log-' + gameLogId + '-' : '' }}set-card-{{
+          cardSlot
+        }}-svg-path"
+        d=""
+        fill="none"
+      ></path>
     </svg>
   </div>
   <div class="svg-container svg-container-2 w-1/3">
     <svg class="w-full" viewBox="-2 -2 54 104">
-      <path class="set-card-{{ cardSlot }}-svg-path" d="" fill="none"></path>
+      <path
+        class="{{ inGameLog ? 'game-log-' + gameLogId + '-' : '' }}set-card-{{
+          cardSlot
+        }}-svg-path"
+        d=""
+        fill="none"
+      ></path>
     </svg>
   </div>
   <div class="svg-container svg-container-3 w-1/3">
     <svg class="w-full" viewBox="-2 -2 54 104">
-      <path class="set-card-{{ cardSlot }}-svg-path" d="" fill="none"></path>
+      <path
+        class="{{ inGameLog ? 'game-log-' + gameLogId + '-' : '' }}set-card-{{
+          cardSlot
+        }}-svg-path"
+        d=""
+        fill="none"
+      ></path>
     </svg>
   </div>
 </div>
