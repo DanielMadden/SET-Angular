@@ -1,8 +1,12 @@
 <div class="game-log-message" *ngIf="gameLog">
   <div class="cards-container">
-    <div class="card-container" *ngFor="let card of gameLog.cards">
+    <div
+      class="card-container"
+      *ngFor="let card of gameLog.cards; let index = index"
+    >
       <app-set-card
         [card]="card"
+        [cardSlot]="index"
         [inGameLog]="true"
         [gameLogId]="gameLogId"
       ></app-set-card>

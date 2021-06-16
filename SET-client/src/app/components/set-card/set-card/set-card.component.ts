@@ -41,7 +41,8 @@ export class SetCardComponent implements AfterViewInit, OnChanges {
 
   private drawPaths(): void {
     let paths = document.getElementsByClassName(
-      `set-card-${this.cardSlot}-svg-path`
+      (this.inGameLog ? `game-log-${this.gameLogId}-` : '') +
+        `set-card-${this.cardSlot}-svg-path`
     );
     for (let i = 0; i < paths.length; i++) {
       paths[i].setAttribute('d', cardPaths[this.card.shape].d);
