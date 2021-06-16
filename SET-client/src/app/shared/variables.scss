@@ -10,7 +10,7 @@ $card-padding: 12px * $card-multiplier;
 $card-corner-radius: $border-radius * $card-multiplier;
 $card-svg-padding: 4px * $card-multiplier;
 
-$card-game-log-ratio: 0.3;
+$card-game-log-ratio: 0.25;
 $card-game-log-width: ($card-width - ($card-padding * 2)) * $card-game-log-ratio;
 $card-game-log-height: ($card-height - ($card-padding * 2)) *
   $card-game-log-ratio;
