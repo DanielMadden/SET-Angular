@@ -1,4 +1,5 @@
 import {
+  AfterViewChecked,
   AfterViewInit,
   Component,
   Input,
@@ -13,7 +14,7 @@ import { cardPaths } from '../../../shared/card-attributes';
   templateUrl: './set-card.component.html',
   styleUrls: ['./set-card.component.scss'],
 })
-export class SetCardComponent implements AfterViewInit, OnChanges {
+export class SetCardComponent implements AfterViewChecked {
   @Input() card: ICard = {
     count: 1,
     color: 1,
@@ -31,11 +32,7 @@ export class SetCardComponent implements AfterViewInit, OnChanges {
 
   constructor() {}
 
-  ngAfterViewInit(): void {
-    this.drawPaths();
-  }
-
-  ngOnChanges(): void {
+  ngAfterViewChecked(): void {
     this.drawPaths();
   }
 
