@@ -26,6 +26,6 @@ export class GameLogComponent implements OnInit {
   }
 
   addGameLog(gameLog: IGameLog): void {
-    this.gameLogs.push(gameLog);
+    this.gameLogs.unshift(gameLog);
   }
 }
