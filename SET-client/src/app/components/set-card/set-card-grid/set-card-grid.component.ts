@@ -16,6 +16,7 @@ export class SetCardGridComponent implements OnInit {
   public slots: ICardGridSlot[] = [];
   public selectedSlots: ISelectedCardSlot[] = [];
   @Output() setOfCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
+  @Output() falseSetOfCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
   @Input() listenToAddThreeCards$!: Observable<boolean>;
   @Output() plusThreeCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
   @Output() gameStartEvent = new EventEmitter<boolean>();
@@ -131,8 +132,13 @@ export class SetCardGridComponent implements OnInit {
       this.resetSelectedCards();
     } else {
       this.deSelectCards();
+      this.emitFalseSetOfCardsToParent(cardsToCheck);
       this.resetSelectedCards();
     }
+  }
+
+  private emitFalseSetOfCardsToParent(cards: [ICard, ICard, ICard]) {
+    this.falseSetOfCardsEvent.emit(cards);
   }
 
   private emitSetOfCardsToParent(cards: [ICard, ICard, ICard]) {

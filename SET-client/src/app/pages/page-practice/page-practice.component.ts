@@ -55,6 +55,15 @@ export class PagePracticeComponent implements OnInit {
     this.handSubject.next(this.hand);
   }
 
+  public setOfCardsEvent(cards: [ICard, ICard, ICard]) {
+    this.emitGameLog(cards, 'match');
+    this.addCardsToHand(cards);
+  }
+
+  public falseSetOfCardsEvent(cards: [ICard, ICard, ICard]) {
+    this.emitGameLog(cards, 'no match');
+  }
+
   public addCardsToHand(cards: [ICard, ICard, ICard]) {
     this.hand.push(...cards);
     this.sets = this.hand.length / 3;
@@ -94,10 +103,11 @@ export class PagePracticeComponent implements OnInit {
 
   private setTime() {
     let minutesPassed = Math.floor(this.secondsPassed / 60);
+    let secondsPerMinutePassed = this.secondsPassed % 60;
     this.timePassed = `
     ${minutesPassed > 0 ? minutesPassed : ''} ${minutesPassed > 0 ? ':' : ''} ${
-      this.secondsPassed % 60
-    }
+      secondsPerMinutePassed < 10 ? '0' : ''
+    }${secondsPerMinutePassed}
     `;
   }
 }

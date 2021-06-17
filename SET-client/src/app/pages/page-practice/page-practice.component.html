@@ -8,7 +8,8 @@
       ></app-game-log>
     </div>
     <app-set-card-grid
-      (setOfCardsEvent)="addCardsToHand($event)"
+      (setOfCardsEvent)="setOfCardsEvent($event)"
+      (falseSetOfCardsEvent)="falseSetOfCardsEvent($event)"
       (plusThreeCardsEvent)="sendThePlusThreeCardsToGameLog($event)"
       (gameStartEvent)="startGame()"
       [listenToAddThreeCards$]="tellGridToAddThreeCards$"
