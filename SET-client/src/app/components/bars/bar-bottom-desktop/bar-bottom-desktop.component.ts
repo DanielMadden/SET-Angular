@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { gameBarHeight } from 'src/app/shared/variables';
 
 @Component({
   selector: 'app-bar-bottom-desktop',
@@ -10,6 +11,8 @@ export class BarBottomDesktopComponent implements OnInit {
   @Input() time: string = '';
   @Input() sets: number = 0;
   @Input() cardsRemaining!: number;
+
+  public barHeight = gameBarHeight;
 
   constructor() {}
 
