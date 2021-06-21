@@ -12,6 +12,7 @@ import { CardGridSlot, ICardGridSlot } from 'src/app/models/card-grid-slot';
 import { ISelectedCardSlot } from 'src/app/models/selected-card-slot';
 import { DeckService } from 'src/app/services/deck.service';
 import { MatchService } from 'src/app/services/match.service';
+import { gameBarHeight } from 'src/app/shared/variables';
 
 @Component({
   selector: 'app-set-card-grid',
@@ -29,6 +30,7 @@ export class SetCardGridComponent implements OnInit {
   @Output() gameStartEvent = new EventEmitter<boolean>();
 
   public maxHeight!: string;
+  public verticalPadding = parseInt(gameBarHeight) / 2 + 'px';
 
   constructor(
     private deckService: DeckService,

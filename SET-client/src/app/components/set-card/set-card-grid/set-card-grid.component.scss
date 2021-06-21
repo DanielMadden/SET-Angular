@@ -1,5 +1,21 @@
 #set-card-grid {
   width: fit-content;
   height: fit-content;
-  overflow: scroll;
+  overflow-y: auto;
+  padding-right: 15px;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+  }
 }

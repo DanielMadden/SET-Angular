@@ -1,7 +1,11 @@
 <div
   id="set-card-grid"
-  class="component flex items-center justify-center"
-  [style.max-height]="maxHeight"
+  class="component"
+  [style]="{
+    'max-height': maxHeight,
+    'padding-top': verticalPadding,
+    'padding-bottom': verticalPadding
+  }"
 >
   <div class="grid grid-cols-3 gap-4">
     <div *ngFor="let slot of slots; let index = index">
