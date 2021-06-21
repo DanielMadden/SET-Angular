@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ICard } from 'src/app/models/card';
 import { IGameLog } from 'src/app/models/game-log';
+import { MatchService } from 'src/app/services/match.service';
 
 @Component({
   selector: 'app-game-log-message',
@@ -16,7 +17,23 @@ export class GameLogMessageComponent implements OnInit {
     'plus three': '+3 Cards',
   };
 
-  constructor() {}
+  constructor(private matchService: MatchService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.gameLog.type == 'no match') {
+      this.generateMessages();
+    }
+  }
+  generateMessages() {
+    let doesNotMatchString = ' does not match';
+    let matchCheck = this.matchService.generateMatchCheck(this.gameLog.cards);
+    if (!matchCheck.count)
+      this.gameLog.messages.push('Count' + doesNotMatchString);
+    if (!matchCheck.color)
+      this.gameLog.messages.push('Color' + doesNotMatchString);
+    if (!matchCheck.shape)
+      this.gameLog.messages.push('Shape' + doesNotMatchString);
+    if (!matchCheck.shade)
+      this.gameLog.messages.push('Shade' + doesNotMatchString);
+  }
 }
