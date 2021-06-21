@@ -1,7 +1,10 @@
 <div id="game-log" class="component">
-  <app-game-log-message
-    *ngFor="let gameLog of gameLogs; let index = index"
-    [gameLog]="gameLog"
-    [gameLogId]="index"
-  ></app-game-log-message>
+  <ul [@listAnimation]="gameLogs.length">
+    <li *ngFor="let gameLog of gameLogs; let index = index" class="game-log-li">
+      <app-game-log-message
+        [gameLog]="gameLog"
+        [gameLogId]="index"
+      ></app-game-log-message>
+    </li>
+  </ul>
 </div>

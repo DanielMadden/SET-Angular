@@ -16,6 +16,10 @@ export class GameLogMessageComponent implements OnInit {
     'no match': 'No match',
     'plus three': '+3 Cards',
   };
+  private gameLogWidth = parseInt(
+    document.getElementById('game-log')!.style.width
+  );
+  public leftCSSProperty = -1 * this.gameLogWidth;
 
   constructor(private matchService: MatchService) {}
 
@@ -35,5 +39,8 @@ export class GameLogMessageComponent implements OnInit {
       this.gameLog.messages.push('Shape' + doesNotMatchString);
     if (!matchCheck.shade)
       this.gameLog.messages.push('Shade' + doesNotMatchString);
+  }
+  animateSlideIn() {
+    this.leftCSSProperty = 0;
   }
 }

@@ -1,41 +1,47 @@
-<div class="game-log-message mb-5" *ngIf="gameLog">
-  <div class="flex flex-row justify-between items-center w-full">
-    <div class="cards-container flex flex-row justify-between">
-      <div
-        class="card-container flex flex-row justify-center items-center"
-        *ngFor="let card of gameLog.cards; let index = index"
-      >
-        <app-set-card
-          [card]="card"
-          [cardSlot]="index"
-          [inGameLog]="true"
-          [gameLogId]="gameLogId"
-        ></app-set-card>
-      </div>
-    </div>
-    <h1
-      class="game-log-title text-3xl font-pattaya"
-      [class]="{
-        'color-green': gameLog.type == 'match',
-        'color-red': gameLog.type == 'no match',
-        'color-blue': gameLog.type == 'plus three'
-      }"
-    >
-      {{ actionMessages[gameLog.type] }}
-    </h1>
-  </div>
+<div class="game-log-message-container">
   <div
-    *ngFor="let message of gameLog.messages; let first = first"
-    class="
-      messages
-      flex flex-row
-      justify-center
-      items-center
-      w-full
-      text-center
-    "
-    [class.mt-5]="first"
+    class="game-log-message mb-5"
+    *ngIf="gameLog"
+    [style.left]="leftCSSProperty"
   >
-    <h1 class="font-montserrat text-lg">{{ message }}</h1>
+    <div class="flex flex-row justify-between items-center w-full">
+      <div class="cards-container flex flex-row justify-between">
+        <div
+          class="card-container flex flex-row justify-center items-center"
+          *ngFor="let card of gameLog.cards; let index = index"
+        >
+          <app-set-card
+            [card]="card"
+            [cardSlot]="index"
+            [inGameLog]="true"
+            [gameLogId]="gameLogId"
+          ></app-set-card>
+        </div>
+      </div>
+      <h1
+        class="game-log-title text-3xl font-pattaya"
+        [class]="{
+          'color-green': gameLog.type == 'match',
+          'color-red': gameLog.type == 'no match',
+          'color-blue': gameLog.type == 'plus three'
+        }"
+      >
+        {{ actionMessages[gameLog.type] }}
+      </h1>
+    </div>
+    <div
+      *ngFor="let message of gameLog.messages; let first = first"
+      class="
+        messages
+        flex flex-row
+        justify-center
+        items-center
+        w-full
+        text-center
+      "
+      [class.mt-5]="first"
+    >
+      <h1 class="font-montserrat text-lg">{{ message }}</h1>
+    </div>
   </div>
 </div>
