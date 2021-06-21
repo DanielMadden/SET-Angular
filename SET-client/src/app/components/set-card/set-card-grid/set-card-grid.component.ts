@@ -1,4 +1,11 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  Input,
+  HostListener,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { ICard } from 'src/app/models/card';
 import { CardGridSlot, ICardGridSlot } from 'src/app/models/card-grid-slot';
@@ -15,11 +22,13 @@ export class SetCardGridComponent implements OnInit {
   private deckIsEmpty = false;
   public slots: ICardGridSlot[] = [];
   public selectedSlots: ISelectedCardSlot[] = [];
+  @Input() listenToAddThreeCards$!: Observable<boolean>;
   @Output() setOfCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
   @Output() falseSetOfCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
-  @Input() listenToAddThreeCards$!: Observable<boolean>;
   @Output() plusThreeCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
   @Output() gameStartEvent = new EventEmitter<boolean>();
+
+  public maxHeight!: string;
 
   constructor(
     private deckService: DeckService,
@@ -30,6 +39,15 @@ export class SetCardGridComponent implements OnInit {
     this.listenToDeck();
     this.listenToAddThreeCards();
     this.startGame();
+    this.setMaxHeightToWindow();
+  }
+
+  public screenWidth: any;
+  public screenHeight: any;
+
+  @HostListener('window:resize')
+  private setMaxHeightToWindow(): void {
+    this.maxHeight = window.innerHeight + 'px';
   }
 
   private startGame(): void {
