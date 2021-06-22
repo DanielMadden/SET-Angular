@@ -1,9 +1,13 @@
+$grid-padding: 15px;
+
 #set-card-grid {
   width: fit-content;
   height: fit-content;
   overflow-y: auto;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: $grid-padding;
+  padding-left: $grid-padding;
+  margin-right: -$grid-padding;
+  margin-left: -$grid-padding;
 
   &::-webkit-scrollbar {
     width: 15px;
