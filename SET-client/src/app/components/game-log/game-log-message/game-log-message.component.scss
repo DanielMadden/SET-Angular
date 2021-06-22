@@ -1,14 +1,6 @@
 @import "../../../shared/variables.scss";
 
-.game-log-message-container {
-  position: relative;
-}
-
 .game-log-message {
-  left: 0;
-  top: 0;
-  position: absolute;
-  transition: all 1s;
   width: 100%;
   height: fit-content;
   padding: $card-padding;
