@@ -1,17 +1,41 @@
 @import "../../../shared/variables.scss";
 .set-card {
-  width: $card-width;
-  height: $card-height;
-  background-color: $card-color;
-  border-radius: $card-corner-radius;
-  padding: $card-padding;
   box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.3);
+  $background-color: "background-color";
+  #{$background-color}: $card-color;
+  // background-color: $card-color;
+
+  // @include screen-large-x {
+  //   $ratio: 0.9;
+  //   width: $card-width * $ratio;
+  //   height: $card-height * $ratio;
+  //   border-radius: $card-corner-radius * $ratio;
+  //   padding: $card-padding * $ratio;
+  // }
+
+  // @include screen-large-x-x {
+  //   width: $card-width;
+  //   height: $card-height;
+  //   border-radius: $card-corner-radius;
+  //   padding: $card-padding;
+  // }
+
+  @include responsive-properties(
+    (
+      "width": $card-width,
+      "height": $card-height,
+      "border-radius": $card-corner-radius,
+      "padding": $card-padding,
+    )
+  );
 
   &.in-game-log {
+    // @include screen-large-x-x {
     width: $card-game-log-width;
     height: $card-game-log-height;
     border-radius: $card-corner-radius;
     padding: $card-padding * $card-game-log-ratio;
+    // }
     .svg-container {
       padding: $card-svg-padding * $card-game-log-ratio;
     }

@@ -20,3 +20,73 @@ $card-game-log-svg-padding: $card-svg-padding * $card-game-log-ratio;
 $game-log-title-color-red: #f29393;
 $game-log-title-color-green: #8ed18c;
 $game-log-title-color-blue: #94d2e5;
+
+$min-width-small: 640px;
+$min-width-medium: 768px;
+$min-width-large: 1024px;
+$min-width-large-x: 1280px;
+$min-width-large-x-x: 1536px;
+$responsive-ratios: (
+  $min-width-large-x-x: 1,
+  $min-width-large-x: 0.9,
+  $min-width-large: 0.7,
+  $min-width-medium: 0.5,
+  $min-width-small: 0.3,
+);
+
+@mixin screen-small {
+  @media (min-width: $min-width-small) {
+    @content;
+  }
+}
+
+@mixin screen-medium {
+  @media (min-width: $min-width-medium) {
+    @content;
+  }
+}
+
+@mixin screen-large {
+  @media (min-width: $min-width-large) {
+    @content;
+  }
+}
+
+@mixin screen-large-x {
+  @media (min-width: $min-width-large-x) {
+    @content;
+  }
+}
+
+@mixin screen-large-x-x {
+  @media (min-width: $min-width-large-x-x) {
+    @content;
+  }
+}
+
+@mixin responsive-property($property, $biggest-size) {
+  @each $min-breakpoint, $ratio in $responsive-ratios {
+    @media (min-width: $min-breakpoint) {
+      #{$property}: $biggest-size * $ratio;
+    }
+  }
+}
+
+@mixin media-query($min-width) {
+  @media screen and (max-width: 1000px) {
+    @content;
+  }
+}
+
+@mixin responsive-properties($properties) {
+  @each $property, $max-value in $properties {
+    @each $min-breakpoint, $ratio in $responsive-ratios {
+      // @media screen and (max-width: #{$min-breakpoint}) {
+      //   #{$property}: $max-value * $ratio;
+      // }
+      @include media-query($min-breakpoint) {
+        #{$property}: $max-value * $ratio;
+      }
+    }
+  }
+}
