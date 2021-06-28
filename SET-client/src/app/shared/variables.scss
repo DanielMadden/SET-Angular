@@ -76,7 +76,7 @@ $responsive-ratios: (
 }
 
 // Doesn't work because Sass has bugs with media queries
-@mixin responsive-property($property, $biggest-size) {
+@mixin responsive-property-BROKEN($property, $biggest-size) {
   @each $min-breakpoint, $ratio in $responsive-ratios {
     @media (min-width: $min-breakpoint) {
       #{$property}: $biggest-size * $ratio;
@@ -85,7 +85,7 @@ $responsive-ratios: (
 }
 
 // Massive brain, but doesn't work because Sass has bugs with media queries
-@mixin responsive-properties($properties) {
+@mixin responsive-properties-BROKEN($properties) {
   @each $property, $max-value in $properties {
     @each $min-breakpoint, $ratio in $responsive-ratios {
       @media screen and (max-width: #{$min-breakpoint}) {
@@ -95,7 +95,7 @@ $responsive-ratios: (
   }
 }
 
-@mixin responsive-properties-fixed($properties) {
+@mixin responsive-properties($properties) {
   @include screen-large-x-x {
     @include multiply-properties($properties, $ratio-large-x-x);
   }

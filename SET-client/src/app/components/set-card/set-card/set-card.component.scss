@@ -2,44 +2,30 @@
 .set-card {
   box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.3);
   background-color: $card-color;
-  $ratio-properties: (
+  $properties-set-card: (
     "width": $card-width,
     "height": $card-height,
     "border-radius": $card-corner-radius,
     "padding": $card-padding,
   );
 
-  // @include screen-large-x-x {
-  //   @include multiply-properties($ratio-properties, $ratio-large-x-x);
-  // }
-
-  // @include screen-large-x {
-  //   @include multiply-properties($ratio-properties, $ratio-large-x);
-  // }
-
-  // @include screen-large {
-  //   @include multiply-properties($ratio-properties, $ratio-large);
-  // }
-
-  // @include screen-medium {
-  //   @include multiply-properties($ratio-properties, $ratio-medium);
-  // }
-
-  // @include screen-small {
-  //   @include multiply-properties($ratio-properties, $ratio-small);
-  // }
-
-  @include responsive-properties-fixed($ratio-properties);
+  @include responsive-properties($properties-set-card);
 
   &.in-game-log {
-    // @include screen-large-x-x {
-    width: $card-game-log-width;
-    height: $card-game-log-height;
-    border-radius: $card-corner-radius;
-    padding: $card-padding * $card-game-log-ratio;
-    // }
+    $properties-set-card-in-game: (
+      "width": $card-game-log-width,
+      "height": $card-game-log-height,
+      "border-radius": $card-corner-radius,
+      "padding": $card-padding * $card-game-log-ratio,
+    );
+    @include responsive-properties($properties-set-card-in-game);
     .svg-container {
-      padding: $card-svg-padding * $card-game-log-ratio;
+      $properties-set-card-in-game-log-svg-container: (
+        "padding": $card-svg-padding * $card-game-log-ratio,
+      );
+      @include responsive-properties(
+        $properties-set-card-in-game-log-svg-container
+      );
     }
   }
 
@@ -48,7 +34,10 @@
   }
 
   .svg-container {
-    padding: $card-svg-padding;
+    $properties-svg-container: (
+      "padding": $card-svg-padding,
+    );
+    @include responsive-properties($properties-svg-container);
   }
 
   path {
