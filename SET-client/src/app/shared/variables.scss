@@ -26,6 +26,11 @@ $min-width-medium: 768px;
 $min-width-large: 1024px;
 $min-width-large-x: 1280px;
 $min-width-large-x-x: 1536px;
+$ratio-large-x-x: 1;
+$ratio-large-x: 0.9;
+$ratio-large: 0.7;
+$ratio-medium: 0.5;
+$ratio-small: 0.3;
 $responsive-ratios: (
   $min-width-large-x-x: 1,
   $min-width-large-x: 0.9,
@@ -34,26 +39,32 @@ $responsive-ratios: (
   $min-width-small: 0.3,
 );
 
+@mixin multiply-properties($properties, $multiplier) {
+  @each $property, $original-value in $properties {
+    #{$property}: $original-value * $multiplier;
+  }
+}
+
 @mixin screen-small {
-  @media (min-width: $min-width-small) {
+  @media (min-width: $min-width-small) and (max-width: #{$min-width-medium - 1}) {
     @content;
   }
 }
 
 @mixin screen-medium {
-  @media (min-width: $min-width-medium) {
+  @media (min-width: $min-width-medium) and (max-width: #{$min-width-large - 1}) {
     @content;
   }
 }
 
 @mixin screen-large {
-  @media (min-width: $min-width-large) {
+  @media (min-width: $min-width-large) and (max-width: #{$min-width-large-x - 1}) {
     @content;
   }
 }
 
 @mixin screen-large-x {
-  @media (min-width: $min-width-large-x) {
+  @media (min-width: $min-width-large-x) and (max-width: #{$min-width-large-x-x - 1}) {
     @content;
   }
 }
@@ -64,6 +75,7 @@ $responsive-ratios: (
   }
 }
 
+// Doesn't work because Sass has bugs with media queries
 @mixin responsive-property($property, $biggest-size) {
   @each $min-breakpoint, $ratio in $responsive-ratios {
     @media (min-width: $min-breakpoint) {
@@ -72,21 +84,35 @@ $responsive-ratios: (
   }
 }
 
-@mixin media-query($min-width) {
-  @media screen and (max-width: 1000px) {
-    @content;
-  }
-}
-
+// Massive brain, but doesn't work because Sass has bugs with media queries
 @mixin responsive-properties($properties) {
   @each $property, $max-value in $properties {
     @each $min-breakpoint, $ratio in $responsive-ratios {
-      // @media screen and (max-width: #{$min-breakpoint}) {
-      //   #{$property}: $max-value * $ratio;
-      // }
-      @include media-query($min-breakpoint) {
+      @media screen and (max-width: #{$min-breakpoint}) {
         #{$property}: $max-value * $ratio;
       }
     }
+  }
+}
+
+@mixin responsive-properties-fixed($properties) {
+  @include screen-large-x-x {
+    @include multiply-properties($properties, $ratio-large-x-x);
+  }
+
+  @include screen-large-x {
+    @include multiply-properties($properties, $ratio-large-x);
+  }
+
+  @include screen-large {
+    @include multiply-properties($properties, $ratio-large);
+  }
+
+  @include screen-medium {
+    @include multiply-properties($properties, $ratio-medium);
+  }
+
+  @include screen-small {
+    @include multiply-properties($properties, $ratio-small);
   }
 }

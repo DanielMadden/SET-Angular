@@ -1,33 +1,35 @@
 @import "../../../shared/variables.scss";
 .set-card {
   box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.3);
-  $background-color: "background-color";
-  #{$background-color}: $card-color;
-  // background-color: $card-color;
-
-  // @include screen-large-x {
-  //   $ratio: 0.9;
-  //   width: $card-width * $ratio;
-  //   height: $card-height * $ratio;
-  //   border-radius: $card-corner-radius * $ratio;
-  //   padding: $card-padding * $ratio;
-  // }
+  background-color: $card-color;
+  $ratio-properties: (
+    "width": $card-width,
+    "height": $card-height,
+    "border-radius": $card-corner-radius,
+    "padding": $card-padding,
+  );
 
   // @include screen-large-x-x {
-  //   width: $card-width;
-  //   height: $card-height;
-  //   border-radius: $card-corner-radius;
-  //   padding: $card-padding;
+  //   @include multiply-properties($ratio-properties, $ratio-large-x-x);
   // }
 
-  @include responsive-properties(
-    (
-      "width": $card-width,
-      "height": $card-height,
-      "border-radius": $card-corner-radius,
-      "padding": $card-padding,
-    )
-  );
+  // @include screen-large-x {
+  //   @include multiply-properties($ratio-properties, $ratio-large-x);
+  // }
+
+  // @include screen-large {
+  //   @include multiply-properties($ratio-properties, $ratio-large);
+  // }
+
+  // @include screen-medium {
+  //   @include multiply-properties($ratio-properties, $ratio-medium);
+  // }
+
+  // @include screen-small {
+  //   @include multiply-properties($ratio-properties, $ratio-small);
+  // }
+
+  @include responsive-properties-fixed($ratio-properties);
 
   &.in-game-log {
     // @include screen-large-x-x {
