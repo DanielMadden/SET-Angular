@@ -1,31 +1,30 @@
 @import "../../../shared/variables.scss";
 .set-card-deck-container {
-  width: $card-width;
-  height: $card-height;
+  // width: $card-width;
+  // height: $card-height;
   position: relative;
   .set-card-deck {
     transform: rotate(20deg);
     position: absolute;
-    width: $card-width;
-    height: $card-height;
+    // width: $card-width;
+    // height: $card-height;
     .top {
       position: absolute;
       top: 0;
       left: 0;
-      width: $card-width;
-      height: $card-height;
+      // width: $card-width;
+      // height: $card-height;
       z-index: 10;
     }
     .stack-container {
       position: absolute;
       left: 0;
       top: 0;
-      width: $card-width;
       .stack {
         position: absolute;
         left: 0;
-        width: $card-width;
-        height: $card-height;
+        // width: $card-width;
+        // height: $card-height;
         border-radius: $card-corner-radius;
         &.odd {
           background-color: $card-color;
@@ -37,9 +36,23 @@
     }
     .shadow {
       position: absolute;
-      width: $card-width;
-      height: $card-height;
+      // width: $card-width;
+      // height: $card-height;
       border-radius: $card-corner-radius;
     }
   }
+}
+
+.set-card-deck-container,
+.set-card-deck,
+.top,
+.stack,
+.shadow {
+  // width: $card-width;
+  // height: $card-height;
+  $properties-width-and-height: (
+    "width": $card-width,
+    "height": $card-height,
+  );
+  @include responsive-properties($properties-width-and-height);
 }
