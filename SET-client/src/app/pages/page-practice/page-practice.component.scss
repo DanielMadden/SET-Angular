@@ -14,12 +14,20 @@
 }
 
 .set-game-column {
-  width: $card-width + ($card-padding * 2);
+  // width: $card-width + ($card-padding * 2);
+  $properties-set-game-column: (
+    width: $card-width + $card-padding * 2,
+  );
+  @include responsive-properties($properties-set-game-column);
 }
 
 .set-card-deck-container {
-  width: $card-width;
-  height: $card-height;
+  // width: $card-width;
+  // height: $card-height;
+  $properties-set-card-deck-container: (
+    width: $card-width,
+    height: $card-height,
+  );
 }
 
 .set-game-button {
