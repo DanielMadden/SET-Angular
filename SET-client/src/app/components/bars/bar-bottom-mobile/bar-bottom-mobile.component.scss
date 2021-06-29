@@ -1,0 +1,13 @@
+@import "../../../shared/variables.scss";
+
+#bar-bottom-mobile {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+
+  @include hide-above-medium-screens;
+}
