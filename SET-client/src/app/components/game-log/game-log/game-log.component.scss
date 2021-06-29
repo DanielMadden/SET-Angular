@@ -5,6 +5,9 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: $border-radius;
+  @include below-large-screens {
+    border-radius: 0;
+  }
   overflow-y: scroll;
   $properties-game-log: (
     padding: $card-padding,
