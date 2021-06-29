@@ -31,6 +31,7 @@ $ratio-large-x: 0.9;
 $ratio-large: 0.7;
 $ratio-medium: 0.8;
 $ratio-small: 0.7;
+$ratio-mobile: 0.5;
 // $responsive-ratios: (
 //   $min-width-large-x-x: 1,
 //   $min-width-large-x: 0.9,
@@ -42,6 +43,12 @@ $ratio-small: 0.7;
 @mixin multiply-properties($properties, $multiplier) {
   @each $property, $original-value in $properties {
     #{$property}: $original-value * $multiplier;
+  }
+}
+
+@mixin screen-mobile {
+  @media (max-width: #{$min-width-small - 1}) {
+    @content;
   }
 }
 
@@ -115,10 +122,29 @@ $ratio-small: 0.7;
   @include screen-small {
     @include multiply-properties($properties, $ratio-small);
   }
+
+  @include screen-mobile {
+    @include multiply-properties($properties, $ratio-mobile);
+  }
+}
+
+@mixin below-large-screens() {
+  @media screen and (max-width: #{$min-width-large - 1}) {
+    @content;
+  }
 }
 
 @mixin hide-below-large-screens() {
-  @media screen and (max-width: #{$min-width-large - 1}) {
+  // @media screen and (max-width: #{$min-width-large - 1}) {
+  //   display: none;
+  // }
+  @include below-large-screens() {
+    display: none;
+  }
+}
+
+@mixin hide-above-medium-screens() {
+  @media screen and (min-width: $min-width-large) {
     display: none;
   }
 }
