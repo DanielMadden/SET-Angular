@@ -5,18 +5,44 @@
   width: 100%;
 }
 
+$set-game-column-width: $card-width + $card-padding * 2;
+
 #set-game-column-right {
   height: $card-height * 2.5;
 }
 
 #set-game-column-left {
   height: $card-height * 4;
+  #set-game-log-container {
+    width: 100%;
+    height: 100%;
+  }
+  @include below-large-screens {
+    z-index: 2;
+    $split-top: 20%;
+    $split-bottom: 100% - $split-top;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    $negative-left: $set-game-column-width * -1;
+    $properties-set-game-column-left: (
+      left: $negative-left,
+    );
+    @include responsive-properties($properties-set-game-column-left);
+    &.over-screen {
+      display: block;
+      left: 0;
+    }
+    #set-game-log-container {
+      height: $split-bottom;
+    }
+  }
 }
 
 .set-game-column {
   // width: $card-width + ($card-padding * 2);
   $properties-set-game-column: (
-    width: $card-width + $card-padding * 2,
+    width: $set-game-column-width,
   );
   @include responsive-properties($properties-set-game-column);
   @include hide-below-large-screens();

@@ -1,11 +1,13 @@
 <div class="page w-full h-full flex flex-row items-center justify-around">
   <app-bar-top></app-bar-top>
   <div class="set-game-screen flex flex-row justify-around items-center w-full">
-    <div id="set-game-column-left" class="set-game-column">
-      <app-game-log
-        [gameLog$]="gameLogStream$"
-        [startListeningForGameLogs$]="startGameLog$"
-      ></app-game-log>
+    <div id="set-game-column-left" class="set-game-column over-screen">
+      <div id="set-game-log-container">
+        <app-game-log
+          [gameLog$]="gameLogStream$"
+          [startListeningForGameLogs$]="startGameLog$"
+        ></app-game-log>
+      </div>
     </div>
     <app-set-card-grid
       (setOfCardsEvent)="setOfCardsEvent($event)"
@@ -34,4 +36,5 @@
     [sets]="sets"
     [cardsRemaining]="cardsRemaining"
   ></app-bar-bottom-desktop>
+  <app-bar-bottom-mobile></app-bar-bottom-mobile>
 </div>
