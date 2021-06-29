@@ -29,15 +29,15 @@ $min-width-large-x-x: 1536px;
 $ratio-large-x-x: 1;
 $ratio-large-x: 0.9;
 $ratio-large: 0.7;
-$ratio-medium: 0.5;
-$ratio-small: 0.3;
-$responsive-ratios: (
-  $min-width-large-x-x: 1,
-  $min-width-large-x: 0.9,
-  $min-width-large: 0.7,
-  $min-width-medium: 0.5,
-  $min-width-small: 0.3,
-);
+$ratio-medium: 0.8;
+$ratio-small: 0.7;
+// $responsive-ratios: (
+//   $min-width-large-x-x: 1,
+//   $min-width-large-x: 0.9,
+//   $min-width-large: 0.7,
+//   $min-width-medium: 0.8,
+//   $min-width-small: 0.3,
+// );
 
 @mixin multiply-properties($properties, $multiplier) {
   @each $property, $original-value in $properties {
@@ -114,5 +114,11 @@ $responsive-ratios: (
 
   @include screen-small {
     @include multiply-properties($properties, $ratio-small);
+  }
+}
+
+@mixin hide-below-large-screens() {
+  @media screen and (max-width: #{$min-width-large - 1}) {
+    display: none;
   }
 }

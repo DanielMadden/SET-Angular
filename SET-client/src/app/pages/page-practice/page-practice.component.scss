@@ -19,6 +19,7 @@
     width: $card-width + $card-padding * 2,
   );
   @include responsive-properties($properties-set-game-column);
+  @include hide-below-large-screens();
 }
 
 .set-card-deck-container {
