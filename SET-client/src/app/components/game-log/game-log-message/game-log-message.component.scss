@@ -3,10 +3,18 @@
 .game-log-message {
   width: 100%;
   height: fit-content;
-  padding: $card-padding;
+  $properties-game-log-message: (
+    padding: $card-padding,
+    margin-bottom: 1.25rem,
+  );
+  @include responsive-properties($properties-game-log-message);
   background-color: black;
   border-radius: $card-corner-radius;
   .game-log-title {
+    $properties-game-log-title: (
+      font-size: 1.875rem,
+    );
+    @include responsive-properties($properties-game-log-title);
     color: white;
     &.color-green {
       color: $game-log-title-color-green;
@@ -24,12 +32,18 @@
 }
 
 .cards-container {
-  width: (($card-game-log-height) * 3) + 8;
+  $properties-cards-container: (
+    width: $card-game-log-height * 3 + 8,
+  );
+  @include responsive-properties($properties-cards-container);
 }
 
 .card-container {
-  height: $card-game-log-width;
-  width: $card-game-log-height;
+  $properties-card-container: (
+    height: $card-game-log-width,
+    width: $card-game-log-height,
+  );
+  @include responsive-properties($properties-card-container);
 }
 
 app-set-card {

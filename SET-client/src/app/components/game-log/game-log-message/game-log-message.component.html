@@ -1,9 +1,5 @@
 <!-- <div class="game-log-message-container"> -->
-<div
-  class="game-log-message mb-5"
-  *ngIf="gameLog"
-  [style.left]="leftCSSProperty"
->
+<div class="game-log-message" *ngIf="gameLog" [style.left]="leftCSSProperty">
   <div class="flex flex-row justify-between items-center w-full">
     <div class="cards-container flex flex-row justify-between">
       <div
@@ -19,7 +15,7 @@
       </div>
     </div>
     <h1
-      class="game-log-title text-3xl font-pattaya"
+      class="game-log-title font-pattaya"
       [class]="{
         'color-green': gameLog.type == 'match',
         'color-red': gameLog.type == 'no match',
