@@ -12,4 +12,6 @@
   .gameStat {
     width: 25%;
   }
+
+  @include hide-below-large-screens;
 }
