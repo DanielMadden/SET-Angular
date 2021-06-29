@@ -1,7 +1,24 @@
 <div class="page w-full h-full flex flex-row items-center justify-around">
   <app-bar-top></app-bar-top>
   <div class="set-game-screen flex flex-row justify-around items-center w-full">
-    <div id="set-game-column-left" class="set-game-column over-screen">
+    <div
+      id="set-game-column-left"
+      class="set-game-column over-screen flex flex-col"
+    >
+      <div id="set-game-column-left-stats">
+        <div class="stat mode">
+          <span>{{ gameMode }} Mode</span>
+        </div>
+        <div class="stat">
+          <span>{{ timePassed }}</span>
+        </div>
+        <div class="stat">
+          <span>Sets: {{ sets }}</span>
+        </div>
+        <div class="stat">
+          <span>Cards: {{ cardsRemaining }}</span>
+        </div>
+      </div>
       <div id="set-game-log-container">
         <app-game-log
           [gameLog$]="gameLogStream$"

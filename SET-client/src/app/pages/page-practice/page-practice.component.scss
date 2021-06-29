@@ -13,6 +13,9 @@ $set-game-column-width: $card-width + $card-padding * 2;
 
 #set-game-column-left {
   height: $card-height * 4;
+  #set-game-column-left-stats {
+    display: none;
+  }
   #set-game-log-container {
     width: 100%;
     height: 100%;
@@ -32,6 +35,13 @@ $set-game-column-width: $card-width + $card-padding * 2;
     &.over-screen {
       display: block;
       left: 0;
+    }
+    #set-game-column-left-stats {
+      display: block;
+      height: $split-top;
+      width: 100%;
+      background-color: black;
+      color: white;
     }
     #set-game-log-container {
       height: $split-bottom;
