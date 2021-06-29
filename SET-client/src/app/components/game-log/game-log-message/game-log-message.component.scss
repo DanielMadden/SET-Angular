@@ -28,6 +28,18 @@
   }
   .messages {
     color: white;
+    &.first {
+      $properties-game-log-messages-first: (
+        margin-top: 1.25rem,
+      );
+      @include responsive-properties($properties-game-log-messages-first);
+    }
+    h1 {
+      $properties-game-log-messages-h1: (
+        font-size: 1.125rem,
+      );
+      @include responsive-properties($properties-game-log-messages-h1);
+    }
   }
 }
 
