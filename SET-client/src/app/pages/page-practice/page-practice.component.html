@@ -6,17 +6,19 @@
       class="set-game-column over-screen flex flex-col"
     >
       <div id="set-game-column-left-stats">
-        <div class="stat mode">
-          <span>{{ gameMode }} Mode</span>
-        </div>
-        <div class="stat">
-          <span>{{ timePassed }}</span>
-        </div>
-        <div class="stat">
-          <span>Sets: {{ sets }}</span>
-        </div>
-        <div class="stat">
-          <span>Cards: {{ cardsRemaining }}</span>
+        <div class="flex flex-col justify-between items-start w-full h-full">
+          <div class="stat mode font-pattaya">
+            <span>{{ gameMode }} Mode</span>
+          </div>
+          <div class="stat font-montserrat">
+            <span>{{ timePassed }}</span>
+          </div>
+          <div class="stat font-montserrat">
+            <span>Sets: {{ sets }}</span>
+          </div>
+          <div class="stat font-montserrat">
+            <span>Cards: {{ cardsRemaining }}</span>
+          </div>
         </div>
       </div>
       <div id="set-game-log-container">
