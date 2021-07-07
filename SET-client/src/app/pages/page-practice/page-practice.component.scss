@@ -42,6 +42,13 @@ $set-game-column-width: $card-width + $card-padding * 2;
       width: 100%;
       background-color: black;
       color: white;
+      $properties-set-game-column-left-stats: (
+        padding: $card-padding,
+      );
+      @include responsive-properties($properties-set-game-column-left-stats);
+      .mode {
+        font-size: 2rem;
+      }
     }
     #set-game-log-container {
       height: $split-bottom;
