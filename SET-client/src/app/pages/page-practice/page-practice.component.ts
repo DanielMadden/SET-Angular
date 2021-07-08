@@ -112,4 +112,6 @@ export class PagePracticeComponent implements OnInit {
     }${secondsPerMinutePassed}
     `;
   }
+
+  public travelHome() {}
 }

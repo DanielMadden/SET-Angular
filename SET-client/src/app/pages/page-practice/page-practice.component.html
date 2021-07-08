@@ -56,5 +56,9 @@
     [sets]="sets"
     [cardsRemaining]="cardsRemaining"
   ></app-bar-bottom-desktop>
-  <app-bar-bottom-mobile></app-bar-bottom-mobile>
+  <app-bar-bottom-mobile
+    (openGameLogEvent)="showGameLogOnMobile = true"
+    (goHomeEvent)="travelHome()"
+    (plusThreeCardsEvent)="tellGridToAddThreeCards()"
+  ></app-bar-bottom-mobile>
 </div>
