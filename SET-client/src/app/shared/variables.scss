@@ -29,7 +29,7 @@ $min-width-large-x-x: 1536px;
 
 $ratio-large-x-x: 1;
 $ratio-large-x: 0.8;
-$ratio-large: 0.7;
+$ratio-large: 0.6;
 $ratio-medium: 0.8;
 $ratio-small: 0.7;
 $ratio-mobile: 0.3;
@@ -91,7 +91,7 @@ $game-log-ratio-below-small: 0.7;
 }
 
 @mixin screen-medium {
-  @media (min-width: $min-width-medium) and (max-width: #{$min-width-medium-mid - 1}) {
+  @media (min-width: $min-width-medium) and (max-width: #{$min-width-large - 1}) {
     @content;
   }
 }
@@ -175,9 +175,9 @@ $game-log-ratio-below-small: 0.7;
 }
 
 @mixin responsive-properties-below-large-above-mobile($properties) {
-  @include screen-medium-mid {
-    @include multiply-properties($properties, $ratio-medium-mid);
-  }
+  // @include screen-medium-mid {
+  //   @include multiply-properties($properties, $ratio-medium-mid);
+  // }
   @include screen-medium {
     @include multiply-properties($properties, $ratio-medium);
   }

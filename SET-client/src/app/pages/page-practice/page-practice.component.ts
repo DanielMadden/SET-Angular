@@ -37,6 +37,8 @@ export class PagePracticeComponent implements OnInit {
   public sets = 0;
   public cardsRemaining = 81;
 
+  public showGameLogOnMobile = false;
+
   ngOnInit(): void {
     this.deck$ = this.deckService.deck$;
     this.deckService.createDeck();

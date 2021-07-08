@@ -24,6 +24,7 @@ $set-game-column-width: $card-width + $card-padding * 2;
     height: 100%;
   }
   @include below-large-screens {
+    transition: 0.5s;
     width: $set-game-column-width;
     z-index: 2;
     $split-top: 20%;
@@ -35,11 +36,20 @@ $set-game-column-width: $card-width + $card-padding * 2;
     $properties-set-game-column-left: (
       left: $negative-left,
     );
-    @include responsive-properties-below-large-above-mobile(
-      $properties-set-game-column-left
-    );
+    @include below-large-screens-above-mobile-screens() {
+      @include multiply-properties(
+        $properties-set-game-column-left,
+        $game-log-ratio-below-large-above-mobile
+      );
+    }
+    @include below-small-screens {
+      @include multiply-properties(
+        $properties-set-game-column-left,
+        $game-log-ratio-below-small
+      );
+    }
+    display: block;
     &.over-screen {
-      display: block;
       left: 0;
     }
     #set-game-column-left-stats {
