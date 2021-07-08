@@ -12,7 +12,19 @@
   $properties-game-log: (
     padding: $card-padding,
   );
-  @include responsive-properties($properties-game-log);
+  @include responsive-properties-above-medium($properties-game-log);
+  @include below-large-screens-above-mobile-screens() {
+    @include multiply-properties(
+      $properties-game-log,
+      $game-log-ratio-below-large-above-mobile
+    );
+  }
+  @include below-small-screens {
+    @include multiply-properties(
+      $properties-game-log,
+      $game-log-ratio-below-small
+    );
+  }
 
   &::-webkit-scrollbar {
     display: none; /* Hide scrollbar for Chrome, Safari and Opera */

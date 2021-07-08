@@ -48,9 +48,18 @@ $set-game-column-width: $card-width + $card-padding * 2;
       $properties-set-game-column-left-stats: (
         padding: $card-padding,
       );
-      @include responsive-properties-below-large-above-mobile(
-        $properties-set-game-column-left-stats
-      );
+      @include below-large-screens-above-mobile-screens() {
+        @include multiply-properties(
+          $properties-set-game-column-left-stats,
+          $game-log-ratio-below-large-above-mobile
+        );
+      }
+      @include below-small-screens {
+        @include multiply-properties(
+          $properties-set-game-column-left-stats,
+          $game-log-ratio-below-small
+        );
+      }
       .mode {
         font-size: 2rem;
       }
