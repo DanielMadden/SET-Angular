@@ -26,12 +26,30 @@ $min-width-medium: 768px;
 $min-width-large: 1024px;
 $min-width-large-x: 1280px;
 $min-width-large-x-x: 1536px;
+
 $ratio-large-x-x: 1;
 $ratio-large-x: 0.9;
 $ratio-large: 0.7;
 $ratio-medium: 0.8;
 $ratio-small: 0.7;
 $ratio-mobile: 0.5;
+
+$min-width-large-x-mid: $min-width-large-x +
+  (($min-width-large-x-x - $min-width-large-x) / 2);
+$min-width-large-mid: $min-width-large +
+  (($min-width-large-x - $min-width-large) / 2);
+$min-width-medium-mid: $min-width-medium +
+  (($min-width-large - $min-width-medium) / 2);
+$min-width-small-mid: $min-width-small +
+  (($min-width-medium - $min-width-small) / 2);
+$min-width-mobile-mid: $min-width-small / 2;
+
+$ratio-large-x-mid: $ratio-large-x + (($ratio-large-x-x - $ratio-large-x) / 2);
+$ratio-large-mid: $ratio-large + (($ratio-large-x - $ratio-large) / 2);
+$ratio-medium-mid: $ratio-medium + (($ratio-large - $ratio-medium) / 2);
+$ratio-small-mid: $ratio-small + (($ratio-medium - $ratio-small) / 2);
+$ratio-mobile-mid: $ratio-small / 2;
+
 // $responsive-ratios: (
 //   $min-width-large-x-x: 1,
 //   $min-width-large-x: 0.9,
@@ -39,7 +57,6 @@ $ratio-mobile: 0.5;
 //   $min-width-medium: 0.8,
 //   $min-width-small: 0.3,
 // );
-
 @mixin multiply-properties($properties, $multiplier) {
   @each $property, $original-value in $properties {
     #{$property}: $original-value * $multiplier;
@@ -47,31 +64,61 @@ $ratio-mobile: 0.5;
 }
 
 @mixin screen-mobile {
-  @media (max-width: #{$min-width-small - 1}) {
+  @media (max-width: #{$min-width-mobile-mid - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-mobile-mid {
+  @media (min-width: $min-width-mobile-mid) and (max-width: #{$min-width-small - 1}) {
     @content;
   }
 }
 
 @mixin screen-small {
-  @media (min-width: $min-width-small) and (max-width: #{$min-width-medium - 1}) {
+  @media (min-width: $min-width-small) and (max-width: #{$min-width-small-mid - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-small-mid {
+  @media (min-width: $min-width-small-mid) and (max-width: #{$min-width-medium - 1}) {
     @content;
   }
 }
 
 @mixin screen-medium {
-  @media (min-width: $min-width-medium) and (max-width: #{$min-width-large - 1}) {
+  @media (min-width: $min-width-medium) and (max-width: #{$min-width-medium-mid - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-medium-mid {
+  @media (min-width: $min-width-medium-mid) and (max-width: #{$min-width-large - 1}) {
     @content;
   }
 }
 
 @mixin screen-large {
-  @media (min-width: $min-width-large) and (max-width: #{$min-width-large-x - 1}) {
+  @media (min-width: $min-width-large) and (max-width: #{$min-width-large-mid - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-large-mid {
+  @media (min-width: $min-width-large-mid) and (max-width: #{$min-width-large-x - 1}) {
     @content;
   }
 }
 
 @mixin screen-large-x {
-  @media (min-width: $min-width-large-x) and (max-width: #{$min-width-large-x-x - 1}) {
+  @media (min-width: $min-width-large-x) and (max-width: #{$min-width-large-x-mid - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-large-x-mid {
+  @media (min-width: $min-width-large-x-mid) and (max-width: #{$min-width-large-x-x - 1}) {
     @content;
   }
 }
@@ -102,25 +149,48 @@ $ratio-mobile: 0.5;
   }
 }
 
+@mixin responsive-properties-above-medium($properties) {
+}
+
 @mixin responsive-properties($properties) {
   @include screen-large-x-x {
     @include multiply-properties($properties, $ratio-large-x-x);
+  }
+
+  @include screen-large-x-mid {
+    @include multiply-properties($properties, $ratio-large-x-mid);
   }
 
   @include screen-large-x {
     @include multiply-properties($properties, $ratio-large-x);
   }
 
+  @include screen-large-mid {
+    @include multiply-properties($properties, $ratio-large-mid);
+  }
+
   @include screen-large {
     @include multiply-properties($properties, $ratio-large);
+  }
+
+  @include screen-medium-mid {
+    @include multiply-properties($properties, $ratio-medium-mid);
   }
 
   @include screen-medium {
     @include multiply-properties($properties, $ratio-medium);
   }
 
+  @include screen-small-mid {
+    @include multiply-properties($properties, $ratio-small-mid);
+  }
+
   @include screen-small {
     @include multiply-properties($properties, $ratio-small);
+  }
+
+  @include screen-mobile-mid {
+    @include multiply-properties($properties, $ratio-mobile-mid);
   }
 
   @include screen-mobile {
