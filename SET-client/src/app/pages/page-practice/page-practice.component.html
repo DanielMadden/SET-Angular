@@ -1,4 +1,9 @@
 <div class="page w-full h-full flex flex-row items-center justify-around">
+  <div
+    class="screen-darken"
+    [class.show]="showGameLogOnMobile"
+    (click)="showGameLogOnMobile = false"
+  ></div>
   <app-bar-top></app-bar-top>
   <div class="set-game-screen flex flex-row justify-around items-center w-full">
     <div

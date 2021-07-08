@@ -5,6 +5,22 @@
   width: 100%;
 }
 
+.screen-darken {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  z-index: 2;
+  pointer-events: none;
+  transition: 0.5s;
+  &.show {
+    background-color: rgba(0, 0, 0, 0.2);
+    pointer-events: all;
+  }
+}
+
 $set-game-column-width: $card-width + $card-padding * 2;
 
 #set-game-column-right {
@@ -26,7 +42,7 @@ $set-game-column-width: $card-width + $card-padding * 2;
   @include below-large-screens {
     transition: 0.5s;
     width: $set-game-column-width;
-    z-index: 2;
+    z-index: 3;
     $split-top: 20%;
     $split-bottom: 100% - $split-top;
     height: 100%;
