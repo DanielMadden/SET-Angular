@@ -8,7 +8,10 @@
 $set-game-column-width: $card-width + $card-padding * 2;
 
 #set-game-column-right {
-  height: $card-height * 2.5;
+  $properties-set-game-column-right: (
+    height: $card-height * 2.5,
+  );
+  @include responsive-properties($properties-set-game-column-right);
 }
 
 #set-game-column-left {
