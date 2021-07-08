@@ -150,9 +150,6 @@ $ratio-mobile-mid: $ratio-small / 2;
 }
 
 @mixin responsive-properties-above-medium($properties) {
-}
-
-@mixin responsive-properties($properties) {
   @include screen-large-x-x {
     @include multiply-properties($properties, $ratio-large-x-x);
   }
@@ -176,7 +173,9 @@ $ratio-mobile-mid: $ratio-small / 2;
   @include screen-medium-mid {
     @include multiply-properties($properties, $ratio-medium-mid);
   }
+}
 
+@mixin responsive-properties-medium-and-below($properties) {
   @include screen-medium {
     @include multiply-properties($properties, $ratio-medium);
   }
@@ -196,6 +195,11 @@ $ratio-mobile-mid: $ratio-small / 2;
   @include screen-mobile {
     @include multiply-properties($properties, $ratio-mobile);
   }
+}
+
+@mixin responsive-properties($properties) {
+  @include responsive-properties-above-medium($properties);
+  @include responsive-properties-medium-and-below($properties);
 }
 
 @mixin below-large-screens() {
