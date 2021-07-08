@@ -12,20 +12,46 @@
   @include responsive-properties($properties-set-card);
 
   &.in-game-log {
-    $properties-set-card-in-game: (
+    $properties-set-card-in-game-log: (
       "width": $card-game-log-width,
       "height": $card-game-log-height,
       "border-radius": $card-corner-radius,
       "padding": $card-padding * $card-game-log-ratio,
     );
-    @include responsive-properties($properties-set-card-in-game);
+    @include responsive-properties-above-medium(
+      $properties-set-card-in-game-log
+    );
+    @include below-large-screens-above-mobile-screens() {
+      @include multiply-properties(
+        $properties-set-card-in-game-log,
+        $game-log-ratio-below-large-above-mobile
+      );
+    }
+    @include below-small-screens {
+      @include multiply-properties(
+        $properties-set-card-in-game-log,
+        $game-log-ratio-below-small
+      );
+    }
     .svg-container {
       $properties-set-card-in-game-log-svg-container: (
         "padding": $card-svg-padding * $card-game-log-ratio,
       );
-      @include responsive-properties(
+      @include responsive-properties-above-medium(
         $properties-set-card-in-game-log-svg-container
       );
+      @include below-large-screens-above-mobile-screens() {
+        @include multiply-properties(
+          $properties-set-card-in-game-log-svg-container,
+          $game-log-ratio-below-large-above-mobile
+        );
+      }
+      @include below-small-screens {
+        @include multiply-properties(
+          $properties-set-card-in-game-log-svg-container,
+          $game-log-ratio-below-small
+        );
+      }
     }
   }
 

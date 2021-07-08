@@ -28,11 +28,11 @@ $min-width-large-x: 1280px;
 $min-width-large-x-x: 1536px;
 
 $ratio-large-x-x: 1;
-$ratio-large-x: 0.9;
+$ratio-large-x: 0.8;
 $ratio-large: 0.7;
 $ratio-medium: 0.8;
 $ratio-small: 0.7;
-$ratio-mobile: 0.5;
+$ratio-mobile: 0.3;
 
 $min-width-large-x-mid: $min-width-large-x +
   (($min-width-large-x-x - $min-width-large-x) / 2);
@@ -48,7 +48,10 @@ $ratio-large-x-mid: $ratio-large-x + (($ratio-large-x-x - $ratio-large-x) / 2);
 $ratio-large-mid: $ratio-large + (($ratio-large-x - $ratio-large) / 2);
 $ratio-medium-mid: $ratio-medium + (($ratio-large - $ratio-medium) / 2);
 $ratio-small-mid: $ratio-small + (($ratio-medium - $ratio-small) / 2);
-$ratio-mobile-mid: $ratio-small / 2;
+$ratio-mobile-mid: $ratio-mobile + (($ratio-small - $ratio-mobile) / 2);
+
+$game-log-ratio-below-large-above-mobile: 1;
+$game-log-ratio-below-small: 0.7;
 
 // $responsive-ratios: (
 //   $min-width-large-x-x: 1,
@@ -169,13 +172,12 @@ $ratio-mobile-mid: $ratio-small / 2;
   @include screen-large {
     @include multiply-properties($properties, $ratio-large);
   }
+}
 
+@mixin responsive-properties-below-large-above-mobile($properties) {
   @include screen-medium-mid {
     @include multiply-properties($properties, $ratio-medium-mid);
   }
-}
-
-@mixin responsive-properties-medium-and-below($properties) {
   @include screen-medium {
     @include multiply-properties($properties, $ratio-medium);
   }
@@ -187,7 +189,9 @@ $ratio-mobile-mid: $ratio-small / 2;
   @include screen-small {
     @include multiply-properties($properties, $ratio-small);
   }
+}
 
+@mixin responsive-properties-below-small($properties) {
   @include screen-mobile-mid {
     @include multiply-properties($properties, $ratio-mobile-mid);
   }
@@ -199,11 +203,24 @@ $ratio-mobile-mid: $ratio-small / 2;
 
 @mixin responsive-properties($properties) {
   @include responsive-properties-above-medium($properties);
-  @include responsive-properties-medium-and-below($properties);
+  @include responsive-properties-below-large-above-mobile($properties);
+  @include responsive-properties-below-small($properties);
 }
 
 @mixin below-large-screens() {
   @media screen and (max-width: #{$min-width-large - 1}) {
+    @content;
+  }
+}
+
+@mixin below-large-screens-above-mobile-screens() {
+  @media screen and (min-width: $min-width-small) and (max-width: #{$min-width-large - 1}) {
+    @content;
+  }
+}
+
+@mixin below-small-screens() {
+  @media screen and (max-width: #{$min-width-small - 1}) {
     @content;
   }
 }

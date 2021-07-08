@@ -21,6 +21,7 @@ $set-game-column-width: $card-width + $card-padding * 2;
     height: 100%;
   }
   @include below-large-screens {
+    width: $set-game-column-width;
     z-index: 2;
     $split-top: 20%;
     $split-bottom: 100% - $split-top;
@@ -31,7 +32,9 @@ $set-game-column-width: $card-width + $card-padding * 2;
     $properties-set-game-column-left: (
       left: $negative-left,
     );
-    @include responsive-properties($properties-set-game-column-left);
+    @include responsive-properties-below-large-above-mobile(
+      $properties-set-game-column-left
+    );
     &.over-screen {
       display: block;
       left: 0;
@@ -45,7 +48,9 @@ $set-game-column-width: $card-width + $card-padding * 2;
       $properties-set-game-column-left-stats: (
         padding: $card-padding,
       );
-      @include responsive-properties($properties-set-game-column-left-stats);
+      @include responsive-properties-below-large-above-mobile(
+        $properties-set-game-column-left-stats
+      );
       .mode {
         font-size: 2rem;
       }
@@ -54,6 +59,9 @@ $set-game-column-width: $card-width + $card-padding * 2;
       height: $split-bottom;
     }
   }
+  @include below-small-screens {
+    width: $set-game-column-width * $game-log-ratio-below-small;
+  }
 }
 
 .set-game-column {
@@ -61,7 +69,7 @@ $set-game-column-width: $card-width + $card-padding * 2;
   $properties-set-game-column: (
     width: $set-game-column-width,
   );
-  @include responsive-properties($properties-set-game-column);
+  @include responsive-properties-above-medium($properties-set-game-column);
   @include hide-below-large-screens();
 }
 
