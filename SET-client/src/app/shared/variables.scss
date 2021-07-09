@@ -239,3 +239,30 @@ $game-log-ratio-below-small: 0.7;
     display: none;
   }
 }
+
+$max-width-card-rotate: 420px;
+$ratio-after-card-rotate: 0.6;
+
+@mixin screen-after-card-rotate {
+  @media (max-width: $max-width-card-rotate) {
+    @content;
+  }
+}
+
+@mixin responsive-properties-after-card-rotate($properties) {
+  @include screen-after-card-rotate() {
+    @include multiply-properties($properties, $ratio-after-card-rotate);
+  }
+}
+
+@mixin responsive-properties-between-small-and-card-rotation($properties) {
+  @media screen and (min-width: #{$max-width-card-rotate + 1 + (($min-width-small - $max-width-card-rotate) / 2)}) and (max-width: #{$min-width-small - 1}) {
+    $ratio-card-rotate-mid: $ratio-mobile-mid +
+      (($ratio-small - $ratio-mobile-mid) / 2);
+    @include multiply-properties($properties, $ratio-card-rotate-mid);
+  }
+
+  @media screen and (min-width: #{$max-width-card-rotate + 1}) and (max-width: #{$max-width-card-rotate + (($min-width-small - $max-width-card-rotate) / 2)}) {
+    @include multiply-properties($properties, $ratio-mobile-mid);
+  }
+}

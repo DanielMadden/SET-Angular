@@ -1,17 +1,64 @@
 @import "../../../shared/variables.scss";
-.set-card {
-  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.3);
-  background-color: $card-color;
-  $properties-set-card: (
-    "width": $card-width,
-    "height": $card-height,
-    "border-radius": $card-corner-radius,
-    "padding": $card-padding,
-  );
 
-  @include responsive-properties($properties-set-card);
+@mixin horizontal-card-shadow {
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.3);
+}
+
+@mixin vertical-card-shadow {
+  box-shadow: 3px -3px 0px 0px rgba(0, 0, 0, 0.3);
+}
+
+.set-card {
+  background-color: $card-color;
+
+  &.in-grid {
+    @include horizontal-card-shadow();
+    $properties-set-card: (
+      "width": $card-width,
+      "height": $card-height,
+      "border-radius": $card-corner-radius,
+      "padding": $card-padding,
+    );
+
+    @include responsive-properties-above-medium($properties-set-card);
+    @include responsive-properties-below-large-above-mobile(
+      $properties-set-card
+    );
+    @include responsive-properties-between-small-and-card-rotation(
+      $properties-set-card
+    );
+    @include responsive-properties-after-card-rotate($properties-set-card);
+
+    @include screen-after-card-rotate() {
+      @include vertical-card-shadow();
+      transform: rotate(90deg);
+    }
+
+    &.highlighted {
+      box-shadow: 0px 0px 10px 10px rgba(255, 251, 0, 0.5);
+    }
+
+    .svg-container {
+      $properties-svg-container: (
+        "padding": $card-svg-padding,
+      );
+      // @include responsive-properties($properties-svg-container);
+      @include responsive-properties-above-medium($properties-svg-container);
+      @include responsive-properties-below-large-above-mobile(
+        $properties-svg-container
+      );
+      @include responsive-properties-between-small-and-card-rotation(
+        $properties-svg-container
+      );
+
+      @include responsive-properties-after-card-rotate(
+        $properties-svg-container
+      );
+    }
+  }
 
   &.in-game-log {
+    @include vertical-card-shadow();
     $properties-set-card-in-game-log: (
       "width": $card-game-log-width,
       "height": $card-game-log-height,
@@ -53,17 +100,6 @@
         );
       }
     }
-  }
-
-  &.highlighted {
-    box-shadow: 0px 0px 10px 10px rgba(255, 251, 0, 0.5);
-  }
-
-  .svg-container {
-    $properties-svg-container: (
-      "padding": $card-svg-padding,
-    );
-    @include responsive-properties($properties-svg-container);
   }
 
   path {
