@@ -241,7 +241,13 @@ $game-log-ratio-below-small: 0.7;
 }
 
 $max-width-card-rotate: 420px;
+$max-width-mobile-1: 360px;
+$max-width-mobile-2: 300px;
+$max-width-mobile-3: 240px;
 $ratio-after-card-rotate: 0.6;
+$ratio-mobile-1: 0.5;
+$ratio-mobile-2: 0.4;
+$ratio-mobile-3: 0.3;
 
 @mixin screen-after-card-rotate {
   @media (max-width: $max-width-card-rotate) {
@@ -249,9 +255,42 @@ $ratio-after-card-rotate: 0.6;
   }
 }
 
+@mixin screen-between-mobile-1-and-card-rotate {
+  @media screen and (min-width: #{$max-width-mobile-1 + 1}) and (max-width: $max-width-card-rotate) {
+    @content;
+  }
+}
+
+@mixin screen-between-mobile-2-and-mobile-1 {
+  @media screen and (min-width: #{$max-width-mobile-2 + 1}) and (max-width: $max-width-mobile-1) {
+    @content;
+  }
+}
+
+@mixin screen-between-mobile-3-and-mobile-2 {
+  @media screen and (min-width: #{$max-width-mobile-3 + 1}) and (max-width: $max-width-mobile-2) {
+    @content;
+  }
+}
+
+@mixin screen-below-mobile-3 {
+  @media screen and (max-width: $max-width-mobile-3) {
+    @content;
+  }
+}
+
 @mixin responsive-properties-after-card-rotate($properties) {
-  @include screen-after-card-rotate() {
+  @include screen-between-mobile-1-and-card-rotate() {
     @include multiply-properties($properties, $ratio-after-card-rotate);
+  }
+  @include screen-between-mobile-2-and-mobile-1() {
+    @include multiply-properties($properties, $ratio-mobile-1);
+  }
+  @include screen-between-mobile-3-and-mobile-2() {
+    @include multiply-properties($properties, $ratio-mobile-2);
+  }
+  @include screen-below-mobile-3() {
+    @include multiply-properties($properties, $ratio-mobile-3);
   }
 }
 
