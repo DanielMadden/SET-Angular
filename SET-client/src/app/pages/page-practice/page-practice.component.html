@@ -27,7 +27,7 @@
           </div>
         </div>
       </div>
-      <div id="set-game-log-container">
+      <div id="set-game-log-container" [style.height]="gameLogOnMobileHeight + 'px'" >
         <app-game-log
           [gameLog$]="gameLogStream$"
           [startListeningForGameLogs$]="startGameLog$"

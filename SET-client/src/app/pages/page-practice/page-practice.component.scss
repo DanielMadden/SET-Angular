@@ -70,7 +70,8 @@ $set-game-column-width: $card-width + $card-padding * 2;
     }
     #set-game-column-left-stats {
       display: block;
-      height: $split-top;
+      // height: $split-top;
+      height: $game-log-mobile-stats-height;
       width: 100%;
       background-color: black;
       color: white;
@@ -93,9 +94,9 @@ $set-game-column-width: $card-width + $card-padding * 2;
         font-size: 2rem;
       }
     }
-    #set-game-log-container {
-      height: $split-bottom;
-    }
+    // #set-game-log-container {
+    //   height: $split-bottom;
+    // }
   }
   @include below-small-screens {
     width: $set-game-column-width * $game-log-ratio-below-small;
