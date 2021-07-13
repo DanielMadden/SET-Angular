@@ -20,3 +20,289 @@ $card-game-log-svg-padding: $card-svg-padding * $card-game-log-ratio;
 $game-log-title-color-red: #f29393;
 $game-log-title-color-green: #8ed18c;
 $game-log-title-color-blue: #94d2e5;
+$game-log-mobile-stats-height: 169px;
+
+$min-width-small: 640px;
+$min-width-medium: 768px;
+$min-width-large: 1024px;
+$min-width-large-x: 1280px;
+$min-width-large-x-x: 1536px;
+
+$ratio-large-x-x: 1;
+$ratio-large-x: 0.8;
+$ratio-large: 0.6;
+$ratio-medium: 0.8;
+$ratio-small: 0.7;
+$ratio-mobile: 0.3;
+
+$min-width-large-x-mid: $min-width-large-x +
+  (($min-width-large-x-x - $min-width-large-x) / 2);
+$min-width-large-mid: $min-width-large +
+  (($min-width-large-x - $min-width-large) / 2);
+$min-width-medium-mid: $min-width-medium +
+  (($min-width-large - $min-width-medium) / 2);
+$min-width-small-mid: $min-width-small +
+  (($min-width-medium - $min-width-small) / 2);
+$min-width-mobile-mid: $min-width-small / 2;
+
+$ratio-large-x-mid: $ratio-large-x + (($ratio-large-x-x - $ratio-large-x) / 2);
+$ratio-large-mid: $ratio-large + (($ratio-large-x - $ratio-large) / 2);
+$ratio-medium-mid: $ratio-medium + (($ratio-large - $ratio-medium) / 2);
+$ratio-small-mid: $ratio-small + (($ratio-medium - $ratio-small) / 2);
+$ratio-mobile-mid: $ratio-mobile + (($ratio-small - $ratio-mobile) / 2);
+
+$game-log-ratio-below-large-above-mobile: 1;
+$game-log-ratio-below-small: 0.7;
+
+// $responsive-ratios: (
+//   $min-width-large-x-x: 1,
+//   $min-width-large-x: 0.9,
+//   $min-width-large: 0.7,
+//   $min-width-medium: 0.8,
+//   $min-width-small: 0.3,
+// );
+@mixin multiply-properties($properties, $multiplier) {
+  @each $property, $original-value in $properties {
+    #{$property}: $original-value * $multiplier;
+  }
+}
+
+@mixin screen-mobile {
+  @media (max-width: #{$min-width-mobile-mid - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-mobile-mid {
+  @media (min-width: $min-width-mobile-mid) and (max-width: #{$min-width-small - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-small {
+  @media (min-width: $min-width-small) and (max-width: #{$min-width-small-mid - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-small-mid {
+  @media (min-width: $min-width-small-mid) and (max-width: #{$min-width-medium - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-medium {
+  @media (min-width: $min-width-medium) and (max-width: #{$min-width-large - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-medium-mid {
+  @media (min-width: $min-width-medium-mid) and (max-width: #{$min-width-large - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-large {
+  @media (min-width: $min-width-large) and (max-width: #{$min-width-large-mid - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-large-mid {
+  @media (min-width: $min-width-large-mid) and (max-width: #{$min-width-large-x - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-large-x {
+  @media (min-width: $min-width-large-x) and (max-width: #{$min-width-large-x-mid - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-large-x-mid {
+  @media (min-width: $min-width-large-x-mid) and (max-width: #{$min-width-large-x-x - 1}) {
+    @content;
+  }
+}
+
+@mixin screen-large-x-x {
+  @media (min-width: $min-width-large-x-x) {
+    @content;
+  }
+}
+
+// Doesn't work because Sass has bugs with media queries
+@mixin responsive-property-BROKEN($property, $biggest-size) {
+  @each $min-breakpoint, $ratio in $responsive-ratios {
+    @media (min-width: $min-breakpoint) {
+      #{$property}: $biggest-size * $ratio;
+    }
+  }
+}
+
+// Massive brain, but doesn't work because Sass has bugs with media queries
+@mixin responsive-properties-BROKEN($properties) {
+  @each $property, $max-value in $properties {
+    @each $min-breakpoint, $ratio in $responsive-ratios {
+      @media screen and (max-width: #{$min-breakpoint}) {
+        #{$property}: $max-value * $ratio;
+      }
+    }
+  }
+}
+
+@mixin responsive-properties-above-medium($properties) {
+  @include screen-large-x-x {
+    @include multiply-properties($properties, $ratio-large-x-x);
+  }
+
+  @include screen-large-x-mid {
+    @include multiply-properties($properties, $ratio-large-x-mid);
+  }
+
+  @include screen-large-x {
+    @include multiply-properties($properties, $ratio-large-x);
+  }
+
+  @include screen-large-mid {
+    @include multiply-properties($properties, $ratio-large-mid);
+  }
+
+  @include screen-large {
+    @include multiply-properties($properties, $ratio-large);
+  }
+}
+
+@mixin responsive-properties-below-large-above-mobile($properties) {
+  // @include screen-medium-mid {
+  //   @include multiply-properties($properties, $ratio-medium-mid);
+  // }
+  @include screen-medium {
+    @include multiply-properties($properties, $ratio-medium);
+  }
+
+  @include screen-small-mid {
+    @include multiply-properties($properties, $ratio-small-mid);
+  }
+
+  @include screen-small {
+    @include multiply-properties($properties, $ratio-small);
+  }
+}
+
+@mixin responsive-properties-below-small($properties) {
+  @include screen-mobile-mid {
+    @include multiply-properties($properties, $ratio-mobile-mid);
+  }
+
+  @include screen-mobile {
+    @include multiply-properties($properties, $ratio-mobile);
+  }
+}
+
+@mixin responsive-properties($properties) {
+  @include responsive-properties-above-medium($properties);
+  @include responsive-properties-below-large-above-mobile($properties);
+  @include responsive-properties-below-small($properties);
+}
+
+@mixin below-large-screens() {
+  @media screen and (max-width: #{$min-width-large - 1}) {
+    @content;
+  }
+}
+
+@mixin below-large-screens-above-mobile-screens() {
+  @media screen and (min-width: $min-width-small) and (max-width: #{$min-width-large - 1}) {
+    @content;
+  }
+}
+
+@mixin below-small-screens() {
+  @media screen and (max-width: #{$min-width-small - 1}) {
+    @content;
+  }
+}
+
+@mixin hide-below-large-screens() {
+  // @media screen and (max-width: #{$min-width-large - 1}) {
+  //   display: none;
+  // }
+  @include below-large-screens() {
+    display: none;
+  }
+}
+
+@mixin hide-above-medium-screens() {
+  @media screen and (min-width: $min-width-large) {
+    display: none;
+  }
+}
+
+$max-width-card-rotate: 420px;
+$max-width-mobile-1: 360px;
+$max-width-mobile-2: 300px;
+$max-width-mobile-3: 240px;
+$ratio-after-card-rotate: 0.6;
+$ratio-mobile-1: 0.5;
+$ratio-mobile-2: 0.4;
+$ratio-mobile-3: 0.3;
+
+@mixin screen-after-card-rotate {
+  @media (max-width: $max-width-card-rotate) {
+    @content;
+  }
+}
+
+@mixin screen-between-mobile-1-and-card-rotate {
+  @media screen and (min-width: #{$max-width-mobile-1 + 1}) and (max-width: $max-width-card-rotate) {
+    @content;
+  }
+}
+
+@mixin screen-between-mobile-2-and-mobile-1 {
+  @media screen and (min-width: #{$max-width-mobile-2 + 1}) and (max-width: $max-width-mobile-1) {
+    @content;
+  }
+}
+
+@mixin screen-between-mobile-3-and-mobile-2 {
+  @media screen and (min-width: #{$max-width-mobile-3 + 1}) and (max-width: $max-width-mobile-2) {
+    @content;
+  }
+}
+
+@mixin screen-below-mobile-3 {
+  @media screen and (max-width: $max-width-mobile-3) {
+    @content;
+  }
+}
+
+@mixin responsive-properties-after-card-rotate($properties) {
+  @include screen-between-mobile-1-and-card-rotate() {
+    @include multiply-properties($properties, $ratio-after-card-rotate);
+  }
+  @include screen-between-mobile-2-and-mobile-1() {
+    @include multiply-properties($properties, $ratio-mobile-1);
+  }
+  @include screen-between-mobile-3-and-mobile-2() {
+    @include multiply-properties($properties, $ratio-mobile-2);
+  }
+  @include screen-below-mobile-3() {
+    @include multiply-properties($properties, $ratio-mobile-3);
+  }
+}
+
+@mixin responsive-properties-between-small-and-card-rotation($properties) {
+  @media screen and (min-width: #{$max-width-card-rotate + 1 + (($min-width-small - $max-width-card-rotate) / 2)}) and (max-width: #{$min-width-small - 1}) {
+    $ratio-card-rotate-mid: $ratio-mobile-mid +
+      (($ratio-small - $ratio-mobile-mid) / 2);
+    @include multiply-properties($properties, $ratio-card-rotate-mid);
+  }
+
+  @media screen and (min-width: #{$max-width-card-rotate + 1}) and (max-width: #{$max-width-card-rotate + (($min-width-small - $max-width-card-rotate) / 2)}) {
+    @include multiply-properties($properties, $ratio-mobile-mid);
+  }
+}

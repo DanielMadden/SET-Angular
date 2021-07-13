@@ -1,11 +1,38 @@
 <div class="page w-full h-full flex flex-row items-center justify-around">
+  <div
+    class="screen-darken"
+    [class.show]="showGameLogOnMobile"
+    (click)="showGameLogOnMobile = false"
+  ></div>
   <app-bar-top></app-bar-top>
   <div class="set-game-screen flex flex-row justify-around items-center w-full">
-    <div id="set-game-column-left" class="set-game-column">
-      <app-game-log
-        [gameLog$]="gameLogStream$"
-        [startListeningForGameLogs$]="startGameLog$"
-      ></app-game-log>
+    <div
+      id="set-game-column-left"
+      class="set-game-column flex flex-col"
+      [class.over-screen]="showGameLogOnMobile"
+    >
+      <div id="set-game-column-left-stats">
+        <div class="flex flex-col justify-between items-start w-full h-full">
+          <div class="stat mode font-pattaya">
+            <span>{{ gameMode }} Mode</span>
+          </div>
+          <div class="stat font-montserrat">
+            <span>{{ timePassed }}</span>
+          </div>
+          <div class="stat font-montserrat">
+            <span>Sets: {{ sets }}</span>
+          </div>
+          <div class="stat font-montserrat">
+            <span>Cards: {{ cardsRemaining }}</span>
+          </div>
+        </div>
+      </div>
+      <div id="set-game-log-container" [style.height]="gameLogOnMobileHeight + 'px'" >
+        <app-game-log
+          [gameLog$]="gameLogStream$"
+          [startListeningForGameLogs$]="startGameLog$"
+        ></app-game-log>
+      </div>
     </div>
     <app-set-card-grid
       (setOfCardsEvent)="setOfCardsEvent($event)"
@@ -34,4 +61,9 @@
     [sets]="sets"
     [cardsRemaining]="cardsRemaining"
   ></app-bar-bottom-desktop>
+  <app-bar-bottom-mobile
+    (openGameLogEvent)="showGameLogOnMobile = true"
+    (goHomeEvent)="travelHome()"
+    (plusThreeCardsEvent)="tellGridToAddThreeCards()"
+  ></app-bar-bottom-mobile>
 </div>

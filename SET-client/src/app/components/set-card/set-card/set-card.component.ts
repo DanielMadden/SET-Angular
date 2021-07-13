@@ -23,6 +23,7 @@ export class SetCardComponent implements AfterViewChecked {
   };
 
   @Input() inGameLog: boolean = false;
+  @Input() inGrid: boolean = false;
   @Input() gameLogId: number = 0;
   @Input() cardSlot: number = 0;
   @Input() highlighted: boolean = false;

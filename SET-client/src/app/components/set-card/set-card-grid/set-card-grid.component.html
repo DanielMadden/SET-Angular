@@ -8,12 +8,16 @@
   }"
 >
   <div class="grid grid-cols-3 gap-4">
-    <div *ngFor="let slot of slots; let index = index">
+    <div
+      class="card-container flex flex-row justify-center items-center"
+      *ngFor="let slot of slots; let index = index"
+    >
       <app-set-card
         *ngIf="slot.display"
         [card]="slot.card"
         [cardSlot]="index"
         [highlighted]="slot.selected"
+        [inGrid]="true"
         (click)="slot.selected ? deSelectCard(index) : selectCard(index)"
       ></app-set-card>
     </div>

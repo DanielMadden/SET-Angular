@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { interval, Observable, Subject } from 'rxjs';
+import { fromEvent, interval, Observable, Subject } from 'rxjs';
 import { ICard } from 'src/app/models/card';
 import { GameLog, IGameLog } from 'src/app/models/game-log';
 import { DeckService } from 'src/app/services/deck.service';
@@ -37,6 +37,10 @@ export class PagePracticeComponent implements OnInit {
   public sets = 0;
   public cardsRemaining = 81;
 
+  public showGameLogOnMobile = false;
+  public gameLogOnMobileStatsHeight = 169;
+  public gameLogOnMobileHeight = window.innerHeight - this.gameLogOnMobileStatsHeight;
+
   ngOnInit(): void {
     this.deck$ = this.deckService.deck$;
     this.deckService.createDeck();
@@ -44,6 +48,7 @@ export class PagePracticeComponent implements OnInit {
       this.deck = deck;
       this.cardsRemaining = this.deck.length;
     });
+    this.subscribeToPageResize()
   }
 
   public startGame() {
@@ -109,5 +114,13 @@ export class PagePracticeComponent implements OnInit {
       secondsPerMinutePassed < 10 ? '0' : ''
     }${secondsPerMinutePassed}
     `;
+  }
+
+  public travelHome() {}
+
+  private subscribeToPageResize() {
+    fromEvent(window, 'resize').subscribe(() => {
+      this.gameLogOnMobileHeight = window.innerHeight - this.gameLogOnMobileStatsHeight;
+    })
   }
 }

@@ -3,10 +3,42 @@
 .game-log-message {
   width: 100%;
   height: fit-content;
-  padding: $card-padding;
+  $properties-game-log-message: (
+    padding: $card-padding,
+    margin-bottom: 1.25rem,
+  );
+  @include responsive-properties-above-medium($properties-game-log-message);
+  @include below-large-screens-above-mobile-screens() {
+    @include multiply-properties(
+      $properties-game-log-message,
+      $game-log-ratio-below-large-above-mobile
+    );
+  }
+  @include below-small-screens {
+    @include multiply-properties(
+      $properties-game-log-message,
+      $game-log-ratio-below-small
+    );
+  }
   background-color: black;
   border-radius: $card-corner-radius;
   .game-log-title {
+    $properties-game-log-title: (
+      font-size: 1.875rem,
+    );
+    @include responsive-properties-above-medium($properties-game-log-title);
+    @include below-large-screens-above-mobile-screens() {
+      @include multiply-properties(
+        $properties-game-log-title,
+        $game-log-ratio-below-large-above-mobile
+      );
+    }
+    @include below-small-screens {
+      @include multiply-properties(
+        $properties-game-log-title,
+        $game-log-ratio-below-small
+      );
+    }
     color: white;
     &.color-green {
       color: $game-log-title-color-green;
@@ -20,16 +52,86 @@
   }
   .messages {
     color: white;
+    &.first {
+      $properties-game-log-messages-first: (
+        margin-top: 1.25rem,
+      );
+      @include responsive-properties-above-medium(
+        $properties-game-log-messages-first
+      );
+      @include below-large-screens-above-mobile-screens() {
+        @include multiply-properties(
+          $properties-game-log-messages-first,
+          $game-log-ratio-below-large-above-mobile
+        );
+      }
+      @include below-small-screens {
+        @include multiply-properties(
+          $properties-game-log-messages-first,
+          $game-log-ratio-below-small
+        );
+      }
+    }
+    h1 {
+      $properties-game-log-messages-h1: (
+        font-size: 1.125rem,
+      );
+      @include responsive-properties-above-medium(
+        $properties-game-log-messages-h1
+      );
+      @include below-large-screens-above-mobile-screens() {
+        @include multiply-properties(
+          $properties-game-log-messages-h1,
+          $game-log-ratio-below-large-above-mobile
+        );
+      }
+      @include below-small-screens {
+        @include multiply-properties(
+          $properties-game-log-messages-h1,
+          $game-log-ratio-below-small
+        );
+      }
+    }
   }
 }
 
 .cards-container {
-  width: (($card-game-log-height) * 3) + 8;
+  $properties-cards-container: (
+    width: $card-game-log-height * 3 + 8,
+  );
+  @include responsive-properties-above-medium($properties-cards-container);
+  @include below-large-screens-above-mobile-screens() {
+    @include multiply-properties(
+      $properties-cards-container,
+      $game-log-ratio-below-large-above-mobile
+    );
+  }
+  @include below-small-screens {
+    @include multiply-properties(
+      $properties-cards-container,
+      $game-log-ratio-below-small
+    );
+  }
 }
 
 .card-container {
-  height: $card-game-log-width;
-  width: $card-game-log-height;
+  $properties-card-container: (
+    height: $card-game-log-width,
+    width: $card-game-log-height,
+  );
+  @include responsive-properties-above-medium($properties-card-container);
+  @include below-large-screens-above-mobile-screens() {
+    @include multiply-properties(
+      $properties-card-container,
+      $game-log-ratio-below-large-above-mobile
+    );
+  }
+  @include below-small-screens {
+    @include multiply-properties(
+      $properties-card-container,
+      $game-log-ratio-below-small
+    );
+  }
 }
 
 app-set-card {

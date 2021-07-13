@@ -1,15 +1,24 @@
 @import "../../../shared/variables.scss";
 .set-card-back {
   position: relative;
-  width: $card-width;
-  height: $card-height;
+  // width: $card-width;
+  // height: $card-height;
+  $properties-set-card-back: (
+    width: $card-width,
+    height: $card-height,
+  );
+  @include responsive-properties($properties-set-card-back);
   border-radius: $card-corner-radius;
   .outline {
     position: relative;
     width: 100%;
     height: 100%;
     border-radius: $card-corner-radius;
-    padding: $card-padding * 2/3;
+    // padding: $card-padding * 2/3;
+    $properties-outline: (
+      padding: $card-padding * 2/3,
+    );
+    @include responsive-properties($properties-outline);
     background-image: url("../../../../assets/images/card/gold-gradient.jpg");
     background-position-x: 50%;
     background-position-y: 50%;
@@ -38,6 +47,11 @@
           left: 0;
         }
         .text {
+          // font-size: 4.5rem;
+          $properties-text: (
+            font-size: 4.5rem,
+          );
+          @include responsive-properties($properties-text);
           width: 100%;
           margin-left: -15px * $card-multiplier;
           margin-bottom: -5px * $card-multiplier;

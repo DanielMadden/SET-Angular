@@ -9,7 +9,13 @@
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
 
-  .gameStat {
-    width: 25%;
+  .gameStatDaddy {
+    width: 34%;
   }
+
+  .gameStat {
+    width: 22%;
+  }
+
+  @include hide-below-large-screens;
 }
