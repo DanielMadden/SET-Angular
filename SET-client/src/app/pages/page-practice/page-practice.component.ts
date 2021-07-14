@@ -39,7 +39,8 @@ export class PagePracticeComponent implements OnInit {
 
   public showGameLogOnMobile = false;
   public gameLogOnMobileStatsHeight = 169;
-  public gameLogOnMobileHeight = window.innerHeight - this.gameLogOnMobileStatsHeight;
+  public gameLogOnMobileHeight =
+    window.innerHeight - this.gameLogOnMobileStatsHeight;
 
   ngOnInit(): void {
     this.deck$ = this.deckService.deck$;
@@ -48,7 +49,7 @@ export class PagePracticeComponent implements OnInit {
       this.deck = deck;
       this.cardsRemaining = this.deck.length;
     });
-    this.subscribeToPageResize()
+    this.subscribeToPageResize();
   }
 
   public startGame() {
@@ -74,6 +75,8 @@ export class PagePracticeComponent implements OnInit {
     this.sets = this.hand.length / 3;
     this.emitHand();
   }
+
+  public addThreeCards() {}
 
   public tellGridToAddThreeCards() {
     this.tellGridToAddThreeCardsSubject.next(true);
@@ -120,7 +123,12 @@ export class PagePracticeComponent implements OnInit {
 
   private subscribeToPageResize() {
     fromEvent(window, 'resize').subscribe(() => {
-      this.gameLogOnMobileHeight = window.innerHeight - this.gameLogOnMobileStatsHeight;
-    })
+      this.gameLogOnMobileHeight =
+        window.innerHeight - this.gameLogOnMobileStatsHeight;
+    });
+  }
+
+  public playCardSound(sound: 'down' | 'flick1' | 'flick2' | 'shuffle') {
+    // let
   }
 }
