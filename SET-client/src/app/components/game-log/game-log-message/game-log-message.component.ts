@@ -11,6 +11,7 @@ import { MatchService } from 'src/app/services/match.service';
 export class GameLogMessageComponent implements OnInit {
   @Input() gameLog!: IGameLog;
   @Input() gameLogId!: number;
+  @Input() last = false;
   public actionMessages = {
     match: 'Match!',
     'no match': 'No match',

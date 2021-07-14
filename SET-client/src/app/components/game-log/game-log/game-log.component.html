@@ -1,9 +1,13 @@
 <div id="game-log" class="component">
   <ul [@listAnimation]="gameLogs.length">
-    <li *ngFor="let gameLog of gameLogs; let index = index" class="game-log-li">
+    <li
+      *ngFor="let gameLog of gameLogs; let index = index; let last = last"
+      class="game-log-li"
+    >
       <app-game-log-message
         [gameLog]="gameLog"
         [gameLogId]="index"
+        [last]="last"
       ></app-game-log-message>
     </li>
   </ul>

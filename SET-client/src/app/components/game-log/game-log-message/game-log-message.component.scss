@@ -20,6 +20,9 @@
       $game-log-ratio-below-small
     );
   }
+  &.last {
+    margin-bottom: 0;
+  }
   background-color: black;
   border-radius: $card-corner-radius;
   .game-log-title {
