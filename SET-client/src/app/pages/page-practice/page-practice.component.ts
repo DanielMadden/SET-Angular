@@ -129,6 +129,19 @@ export class PagePracticeComponent implements OnInit {
   }
 
   public playCardSound(sound: 'down' | 'flick1' | 'flick2' | 'shuffle') {
-    // let
+    let soundsPreId = 'sound-cards-';
+    let sounds = {
+      down: <HTMLAudioElement>document.getElementById(soundsPreId + 'down'),
+      flick1: <HTMLAudioElement>(
+        document.getElementById(soundsPreId + 'flick-1')
+      ),
+      flick2: <HTMLAudioElement>(
+        document.getElementById(soundsPreId + 'flick-2')
+      ),
+      shuffle: <HTMLAudioElement>(
+        document.getElementById(soundsPreId + 'shuffle')
+      ),
+    };
+    sounds[sound].play();
   }
 }
