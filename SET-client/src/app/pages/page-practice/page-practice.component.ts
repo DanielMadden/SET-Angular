@@ -39,7 +39,8 @@ export class PagePracticeComponent implements OnInit {
 
   public showGameLogOnMobile = false;
   public gameLogOnMobileStatsHeight = 169;
-  public gameLogOnMobileHeight = window.innerHeight - this.gameLogOnMobileStatsHeight;
+  public gameLogOnMobileHeight =
+    window.innerHeight - this.gameLogOnMobileStatsHeight;
 
   ngOnInit(): void {
     this.deck$ = this.deckService.deck$;
@@ -48,7 +49,7 @@ export class PagePracticeComponent implements OnInit {
       this.deck = deck;
       this.cardsRemaining = this.deck.length;
     });
-    this.subscribeToPageResize()
+    this.subscribeToPageResize();
   }
 
   public startGame() {
@@ -73,6 +74,11 @@ export class PagePracticeComponent implements OnInit {
     this.hand.push(...cards);
     this.sets = this.hand.length / 3;
     this.emitHand();
+  }
+
+  public addThreeCards() {
+    this.playCardSound('random-pull');
+    this.tellGridToAddThreeCards();
   }
 
   public tellGridToAddThreeCards() {
@@ -120,7 +126,34 @@ export class PagePracticeComponent implements OnInit {
 
   private subscribeToPageResize() {
     fromEvent(window, 'resize').subscribe(() => {
-      this.gameLogOnMobileHeight = window.innerHeight - this.gameLogOnMobileStatsHeight;
-    })
+      this.gameLogOnMobileHeight =
+        window.innerHeight - this.gameLogOnMobileStatsHeight;
+    });
+  }
+
+  public playCardSound(
+    sound: 'down' | 'flick1' | 'flick2' | 'shuffle' | 'random-pull'
+  ) {
+    let soundsPreId = 'sound-cards-';
+    let sounds = {
+      down: <HTMLAudioElement>document.getElementById(soundsPreId + 'down'),
+      flick1: <HTMLAudioElement>(
+        document.getElementById(soundsPreId + 'flick-1')
+      ),
+      flick2: <HTMLAudioElement>(
+        document.getElementById(soundsPreId + 'flick-2')
+      ),
+      shuffle: <HTMLAudioElement>(
+        document.getElementById(soundsPreId + 'shuffle')
+      ),
+    };
+    if (sound !== 'random-pull') {
+      sounds[sound].play();
+    } else {
+      let randomPullSounds = [sounds.down, sounds.flick1, sounds.flick2];
+      randomPullSounds[
+        Math.floor(Math.random() * randomPullSounds.length)
+      ].play();
+    }
   }
 }
