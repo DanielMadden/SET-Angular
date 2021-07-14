@@ -76,7 +76,10 @@ export class PagePracticeComponent implements OnInit {
     this.emitHand();
   }
 
-  public addThreeCards() {}
+  public addThreeCards() {
+    this.playCardSound('random-pull');
+    this.tellGridToAddThreeCards();
+  }
 
   public tellGridToAddThreeCards() {
     this.tellGridToAddThreeCardsSubject.next(true);
@@ -128,7 +131,9 @@ export class PagePracticeComponent implements OnInit {
     });
   }
 
-  public playCardSound(sound: 'down' | 'flick1' | 'flick2' | 'shuffle') {
+  public playCardSound(
+    sound: 'down' | 'flick1' | 'flick2' | 'shuffle' | 'random-pull'
+  ) {
     let soundsPreId = 'sound-cards-';
     let sounds = {
       down: <HTMLAudioElement>document.getElementById(soundsPreId + 'down'),
@@ -142,6 +147,13 @@ export class PagePracticeComponent implements OnInit {
         document.getElementById(soundsPreId + 'shuffle')
       ),
     };
-    sounds[sound].play();
+    if (sound !== 'random-pull') {
+      sounds[sound].play();
+    } else {
+      let randomPullSounds = [sounds.down, sounds.flick1, sounds.flick2];
+      randomPullSounds[
+        Math.floor(Math.random() * randomPullSounds.length)
+      ].play();
+    }
   }
 }

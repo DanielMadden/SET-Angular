@@ -27,7 +27,10 @@
           </div>
         </div>
       </div>
-      <div id="set-game-log-container" [style.height]="gameLogOnMobileHeight + 'px'" >
+      <div
+        id="set-game-log-container"
+        [style.height]="gameLogOnMobileHeight + 'px'"
+      >
         <app-game-log
           [gameLog$]="gameLogStream$"
           [startListeningForGameLogs$]="startGameLog$"
@@ -49,7 +52,7 @@
         <app-set-card-deck
           [pointToDeckService]="true"
           [cardStream$]="deck$"
-          (addThreeCardsEvent)="tellGridToAddThreeCards()"
+          (addThreeCardsEvent)="addThreeCards()"
         ></app-set-card-deck>
       </div>
       <app-set-card-deck [cardStream$]="hand$"></app-set-card-deck>
@@ -64,6 +67,6 @@
   <app-bar-bottom-mobile
     (openGameLogEvent)="showGameLogOnMobile = true"
     (goHomeEvent)="travelHome()"
-    (plusThreeCardsEvent)="tellGridToAddThreeCards()"
+    (plusThreeCardsEvent)="addThreeCards()"
   ></app-bar-bottom-mobile>
 </div>
