@@ -4,6 +4,7 @@ import { ICard } from 'src/app/models/card';
 import { GameLog, IGameLog } from 'src/app/models/game-log';
 import { DeckService } from 'src/app/services/deck.service';
 import { MatchService } from 'src/app/services/match.service';
+import { SoundService } from 'src/app/services/sound.service';
 
 @Component({
   selector: 'app-page-practice',
@@ -13,7 +14,8 @@ import { MatchService } from 'src/app/services/match.service';
 export class PagePracticeComponent implements OnInit {
   constructor(
     private deckService: DeckService,
-    private matchService: MatchService
+    private matchService: MatchService,
+    private soundService: SoundService
   ) {}
 
   public deck$!: Observable<ICard[]>;
@@ -62,11 +64,13 @@ export class PagePracticeComponent implements OnInit {
   }
 
   public setOfCardsEvent(cards: [ICard, ICard, ICard]) {
+    this.soundService.playFxSound('ding');
     this.emitGameLog(cards, 'match');
     this.addCardsToHand(cards);
   }
 
   public falseSetOfCardsEvent(cards: [ICard, ICard, ICard]) {
+    this.soundService.playFxSound('error');
     this.emitGameLog(cards, 'no match');
   }
 
@@ -77,7 +81,7 @@ export class PagePracticeComponent implements OnInit {
   }
 
   public addThreeCards() {
-    this.playCardSound('random-pull');
+    this.soundService.playCardSound('random-pull');
     this.tellGridToAddThreeCards();
   }
 
@@ -129,31 +133,5 @@ export class PagePracticeComponent implements OnInit {
       this.gameLogOnMobileHeight =
         window.innerHeight - this.gameLogOnMobileStatsHeight;
     });
-  }
-
-  public playCardSound(
-    sound: 'down' | 'flick1' | 'flick2' | 'shuffle' | 'random-pull'
-  ) {
-    let soundsPreId = 'sound-cards-';
-    let sounds = {
-      down: <HTMLAudioElement>document.getElementById(soundsPreId + 'down'),
-      flick1: <HTMLAudioElement>(
-        document.getElementById(soundsPreId + 'flick-1')
-      ),
-      flick2: <HTMLAudioElement>(
-        document.getElementById(soundsPreId + 'flick-2')
-      ),
-      shuffle: <HTMLAudioElement>(
-        document.getElementById(soundsPreId + 'shuffle')
-      ),
-    };
-    if (sound !== 'random-pull') {
-      sounds[sound].play();
-    } else {
-      let randomPullSounds = [sounds.down, sounds.flick1, sounds.flick2];
-      randomPullSounds[
-        Math.floor(Math.random() * randomPullSounds.length)
-      ].play();
-    }
   }
 }
