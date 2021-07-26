@@ -21,6 +21,7 @@ import { SetCardComponent } from './components/set-card/set-card/set-card.compon
 import { SetCardGridComponent } from './components/set-card/set-card-grid/set-card-grid.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SetCardBackComponent } from './components/set-card/set-card-back/set-card-back.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { SetCardBackComponent } from './components/set-card/set-card-back/set-ca
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     ...materials,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent],
