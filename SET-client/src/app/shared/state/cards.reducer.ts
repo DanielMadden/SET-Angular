@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { Action, createReducer, on } from '@ngrx/store';
 import { Card, ICard } from 'src/app/models/card';
 import { CardGridSlot } from 'src/app/models/card-grid-slot';
 import { ISelectedCardSlot } from 'src/app/models/selected-card-slot';
@@ -44,3 +44,7 @@ export const cardsReducer = createReducer(
     };
   })
 );
+
+export function reducer(state: undefined | State, action: Action) {
+  return cardsReducer(state, action);
+}
