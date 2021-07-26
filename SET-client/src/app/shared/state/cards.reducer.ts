@@ -48,3 +48,7 @@ export const cardsReducer = createReducer(
 export function reducer(state: undefined | State, action: Action) {
   return cardsReducer(state, action);
 }
+
+export const selectDeck = (state: State) => state.deck;
+export const selectGridSlots = (state: State) => state.gridSlots;
+export const selectActiveGridSlots = (state: State) => state.selectedGridSlots;
