@@ -37,8 +37,10 @@ export const cardsReducer = createReducer(
   }),
   on(PracticePageActions.addThreeCards, (state, action) => {
     let threeCards = pullThreeCardsFromDeck(state.deck);
+    let threeSlots = newGridSlotsFromCards(threeCards);
     return {
       ...state,
+      gridSlots: [...state.gridSlots, ...threeSlots],
     };
   })
 );
