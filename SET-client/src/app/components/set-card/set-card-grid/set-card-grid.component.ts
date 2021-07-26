@@ -6,12 +6,15 @@ import {
   Input,
   HostListener,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { PracticePageActions } from 'src/app/actions';
 import { ICard } from 'src/app/models/card';
 import { CardGridSlot, ICardGridSlot } from 'src/app/models/card-grid-slot';
 import { ISelectedCardSlot } from 'src/app/models/selected-card-slot';
 import { DeckService } from 'src/app/services/deck.service';
 import { MatchService } from 'src/app/services/match.service';
+import { State } from 'src/app/shared/state';
 import { gameBarHeight } from 'src/app/shared/variables';
 
 @Component({
@@ -34,10 +37,12 @@ export class SetCardGridComponent implements OnInit {
 
   constructor(
     private deckService: DeckService,
-    private matchService: MatchService
+    private matchService: MatchService,
+    private store: Store<State>
   ) {}
 
   ngOnInit(): void {
+    this.store.dispatch(PracticePageActions.enter());
     this.listenToDeck();
     this.listenToAddThreeCards();
     this.startGame();
