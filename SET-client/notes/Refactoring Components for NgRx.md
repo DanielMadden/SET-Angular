@@ -1,0 +1,1 @@
+At the moment, my components are a complete mess. My grid component is managing state and emitting in a million different directions. I'm going to move everything to NgRx, even including the currently active cards in the grid. This is going to seriously compact the component to its minimal purpose: Acting as a link between DOM interaction and triggering appropriate actions.
