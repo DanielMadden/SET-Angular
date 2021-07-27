@@ -92,6 +92,9 @@ export class SetCardGridComponent implements OnInit {
   }
 
   private addCardToSelectedArray(slotIndex: number): void {
+    this.store.dispatch(
+      PracticePageActions.selectCard({ cardGridSlotIndex: slotIndex })
+    );
     this.selectedSlots.push({
       slotIndex: slotIndex,
       card: this.slots[slotIndex].card,

@@ -14,6 +14,10 @@ export const selectDeck = createSelector(
   selectCardsState,
   fromCards.selectDeck
 );
+export const selectDeckLength = createSelector(
+  selectCardsState,
+  fromCards.selectDeckLength
+);
 export const selectGridSlots = createSelector(
   selectCardsState,
   fromCards.selectGridSlots
