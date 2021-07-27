@@ -6,8 +6,8 @@ import { PracticePageActions } from 'src/app/actions';
 import {
   createDeck,
   newGridSlotsFromCards,
-  pullThreeCardsFromDeck,
-  pullTwelveCardsFromDeck,
+  pullThreeRandomCardsFromDeck,
+  pullTwelveRandomCardsFromDeck,
 } from './cards.functions';
 import { state } from '@angular/animations';
 
@@ -25,22 +25,25 @@ export const initialState: State = {
 
 export const cardsReducer = createReducer(
   initialState,
-  on(PracticePageActions.enter, (state, action) => {
+  on(PracticePageActions.enter, (state) => {
     let newDeck = createDeck();
-    let newCards = pullTwelveCardsFromDeck(newDeck);
+    let newCards = pullTwelveRandomCardsFromDeck(newDeck);
     let newSlots = newGridSlotsFromCards(newCards);
+    console.log('PRACTICE PAGE ENTER');
     return {
       ...state,
       deck: newDeck,
       gridSlots: newSlots,
     };
   }),
-  on(PracticePageActions.addThreeCards, (state, action) => {
-    let threeCards = pullThreeCardsFromDeck(state.deck);
-    let threeSlots = newGridSlotsFromCards(threeCards);
+  on(PracticePageActions.addThreeCards, (state) => {
+    let newDeck = [...state.deck];
+    let newCards = pullThreeRandomCardsFromDeck(newDeck);
+    let newSlots = newGridSlotsFromCards(newCards);
     return {
       ...state,
-      gridSlots: [...state.gridSlots, ...threeSlots],
+      gridSlots: [...state.gridSlots, ...newSlots],
+      deck: newDeck,
     };
   })
 );

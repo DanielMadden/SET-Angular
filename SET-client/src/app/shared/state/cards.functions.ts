@@ -16,7 +16,7 @@ export function createDeck(): Card[] {
   return deck;
 }
 
-export function pullThreeCardsFromDeck(deck: Card[]): [Card, Card, Card] {
+export function pullThreeRandomCardsFromDeck(deck: Card[]): [Card, Card, Card] {
   let cards: [Card, Card, Card] = [null!, null!, null!];
   for (let i = 0; i <= 2; i++) {
     cards[i] = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];
@@ -25,10 +25,10 @@ export function pullThreeCardsFromDeck(deck: Card[]): [Card, Card, Card] {
   return cards;
 }
 
-export function pullTwelveCardsFromDeck(deck: Card[]): Card[] {
+export function pullTwelveRandomCardsFromDeck(deck: Card[]): Card[] {
   let cards: Card[] = [];
   for (let i = 0; i < 4; i++) {
-    cards.push(...pullThreeCardsFromDeck(deck));
+    cards.push(...pullThreeRandomCardsFromDeck(deck));
   }
   return cards;
 }
@@ -38,3 +38,31 @@ export function newGridSlotsFromCards(cards: Card[]): CardGridSlot[] {
   cards.forEach((card) => newSlots.push(new CardGridSlot(card)));
   return newSlots;
 }
+
+// export function threeRandomIndexes(deck: Card[]): [number, number, number] {
+//   let indexes: [number, number, number] = [null!, null!, null!];
+//   for (let i = 0; i <= 2; i++) {
+//     indexes[i] = Math.floor(Math.random() * deck.length);
+//   }
+//   return indexes;
+// }
+
+// export function pickThreeCardsFromDeckByIndexes(
+//   deck: Card[],
+//   indexes: [number, number, number]
+// ): [Card, Card, Card] {
+//   let cards: [Card, Card, Card] = [null!, null!, null!];
+//   for (let i = 0; i <= 2; i++) {
+//     cards[i] = deck[indexes[i]];
+//   }
+//   return cards;
+// }
+
+// export function removeThreeCardsFromDeckByIndexes(
+//   deck: Card[],
+//   indexes: [number, number, number]
+// ): void {
+//   for (let i = 0; i <= 2; i++) {
+//     deck.splice(indexes[i], 1);
+//   }
+// }
