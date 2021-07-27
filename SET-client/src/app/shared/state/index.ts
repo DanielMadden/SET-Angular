@@ -18,6 +18,14 @@ export const selectDeckLength = createSelector(
   selectCardsState,
   fromCards.selectDeckLength
 );
+export const selectHand = createSelector(
+  selectCardsState,
+  fromCards.selectHand
+);
+export const selectHandLength = createSelector(
+  selectCardsState,
+  fromCards.selectHandLength
+);
 export const selectGridSlots = createSelector(
   selectCardsState,
   fromCards.selectGridSlots
@@ -25,4 +33,8 @@ export const selectGridSlots = createSelector(
 export const selectActiveGridSlots = createSelector(
   selectCardsState,
   fromCards.selectActiveGridSlots
+);
+export const selectGameLogs = createSelector(
+  selectCardsState,
+  fromCards.selectGameLogs
 );
