@@ -1,6 +1,7 @@
 import { Card } from 'src/app/models/card';
 import { CardGridSlot } from 'src/app/models/card-grid-slot';
 import { cardValues } from 'src/app/models/card-values';
+import { ISelectedCardSlot } from 'src/app/models/selected-card-slot';
 
 export function createDeck(): Card[] {
   let deck: Card[] = [];
@@ -36,6 +37,28 @@ export function newGridSlotsFromCards(cards: Card[]): CardGridSlot[] {
   let newSlots: CardGridSlot[] = [];
   cards.forEach((card) => newSlots.push(new CardGridSlot(card)));
   return newSlots;
+}
+
+export function replaceActiveCards(
+  gridSlots: CardGridSlot[],
+  selectedSlots: ISelectedCardSlot[],
+  cards: [Card, Card, Card]
+): CardGridSlot[] {
+  for (let i = 0; i < 2; i++) {
+    gridSlots[selectedSlots[i].slotIndex].card = cards[i];
+  }
+  return gridSlots;
+}
+
+export function shrinkSlotsArray(
+  gridSlots: CardGridSlot[],
+  selectedSlots: ISelectedCardSlot[]
+): CardGridSlot[] {
+  selectedSlots.sort((a, b) => b.slotIndex - a.slotIndex);
+  for (let i = 0; i < selectedSlots.length; i++) {
+    gridSlots.splice(selectedSlots[i].slotIndex, 1);
+  }
+  return gridSlots;
 }
 
 // export function threeRandomIndexes(deck: Card[]): [number, number, number] {

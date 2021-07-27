@@ -112,6 +112,9 @@ export class SetCardGridComponent implements OnInit {
   }
 
   public deSelectCard(slotIndex: number): void {
+    this.store.dispatch(
+      PracticePageActions.deselectCard({ cardGridSlotIndex: slotIndex })
+    );
     this.slots[slotIndex].selected = false;
     this.removeCardFromSelectedArray(slotIndex);
   }

@@ -47,9 +47,12 @@ export const cardsReducer = createReducer(
     };
   }),
   on(PracticePageActions.selectCard, (state, action) => {
+    let newGridSlots = JSON.parse(JSON.stringify(state.gridSlots));
+    newGridSlots[action.cardGridSlotIndex].selected = true;
     if (state.selectedGridSlots.length < 2) {
       return {
         ...state,
+        gridSlots: newGridSlots,
         selectedGridSlots: [
           ...state.selectedGridSlots,
           {
@@ -66,6 +69,9 @@ export const cardsReducer = createReducer(
           card: state.gridSlots[action.cardGridSlotIndex].card,
         },
       ];
+      selectedGridSlots.forEach(
+        (slot) => (newGridSlots[slot.slotIndex].selected = false)
+      );
       let cards: [Card, Card, Card] = [
         selectedGridSlots[0].card,
         selectedGridSlots[1].card,
@@ -73,19 +79,56 @@ export const cardsReducer = createReducer(
       ];
       let matchCheck = matchFunctions.generateMatchCheck(cards);
       if (matchFunctions.checkIfMatchCheckIsSet(matchCheck)) {
-        return {
-          ...state,
-          gameLogs: [...state.gameLogs, new GameLog(cards, 'match')],
-          selectedGridSlots: [],
-        };
+        if (state.gridSlots.length <= 12) {
+          let newDeck = [...state.deck];
+          let newCards = cardFunctions.pullThreeRandomCardsFromDeck(newDeck);
+          newGridSlots = cardFunctions.replaceActiveCards(
+            newGridSlots,
+            selectedGridSlots,
+            newCards
+          );
+          return {
+            ...state,
+            gameLogs: [...state.gameLogs, new GameLog(cards, 'match')],
+            selectedGridSlots: [],
+            gridSlots: newGridSlots,
+            deck: newDeck,
+          };
+        } else {
+          newGridSlots = cardFunctions.shrinkSlotsArray(
+            newGridSlots,
+            selectedGridSlots
+          );
+          return {
+            ...state,
+            gameLogs: [...state.gameLogs, new GameLog(cards, 'match')],
+            selectedGridSlots: [],
+            gridSlots: newGridSlots,
+          };
+        }
       } else {
         return {
           ...state,
           gameLogs: [...state.gameLogs, new GameLog(cards, 'no match')],
           selectedGridSlots: [],
+          gridSlots: newGridSlots,
         };
       }
     }
+  }),
+  on(PracticePageActions.deselectCard, (state, action) => {
+    let newGridSlots = JSON.parse(JSON.stringify(state.gridSlots));
+    newGridSlots[action.cardGridSlotIndex].selected = false;
+    let newSelectedGridSlots = [...state.selectedGridSlots];
+    let slotIndex = newSelectedGridSlots.findIndex(
+      (slot) => slot.slotIndex === action.cardGridSlotIndex
+    );
+    newSelectedGridSlots.splice(slotIndex, 1);
+    return {
+      ...state,
+      selectedGridSlots: newSelectedGridSlots,
+      gridSlots: newGridSlots,
+    };
   })
 );
 
