@@ -44,7 +44,7 @@ export function replaceActiveCards(
   selectedSlots: ISelectedCardSlot[],
   cards: [Card, Card, Card]
 ): CardGridSlot[] {
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i <= 2; i++) {
     gridSlots[selectedSlots[i].slotIndex].card = cards[i];
   }
   return gridSlots;
