@@ -1,34 +1,35 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { Card, ICard } from 'src/app/models/card';
-import { CardGridSlot } from 'src/app/models/card-grid-slot';
+import { CardGridSlot, ICardGridSlot } from 'src/app/models/card-grid-slot';
 import { ISelectedCardSlot } from 'src/app/models/selected-card-slot';
 import { PracticePageActions } from 'src/app/actions';
-import {
-  createDeck,
-  newGridSlotsFromCards,
-  pullThreeRandomCardsFromDeck,
-  pullTwelveRandomCardsFromDeck,
-} from './cards.functions';
+import * as cardFunctions from './cards.functions';
+import * as matchFunctions from './match.functions';
 import { state } from '@angular/animations';
+import { GameLog, IGameLog } from 'src/app/models/game-log';
 
 export interface State {
-  deck: Card[];
-  gridSlots: CardGridSlot[];
+  deck: ICard[];
+  hand: ICard[];
+  gridSlots: ICardGridSlot[];
   selectedGridSlots: ISelectedCardSlot[];
+  gameLogs: IGameLog[];
 }
 
 export const initialState: State = {
   deck: [],
+  hand: [],
   gridSlots: [],
   selectedGridSlots: [],
+  gameLogs: [],
 };
 
 export const cardsReducer = createReducer(
   initialState,
   on(PracticePageActions.enter, (state) => {
-    let newDeck = createDeck();
-    let newCards = pullTwelveRandomCardsFromDeck(newDeck);
-    let newSlots = newGridSlotsFromCards(newCards);
+    let newDeck = cardFunctions.createDeck();
+    let newCards = cardFunctions.pullTwelveRandomCardsFromDeck(newDeck);
+    let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
     return {
       ...state,
       deck: newDeck,
@@ -37,8 +38,8 @@ export const cardsReducer = createReducer(
   }),
   on(PracticePageActions.addThreeCards, (state) => {
     let newDeck = [...state.deck];
-    let newCards = pullThreeRandomCardsFromDeck(newDeck);
-    let newSlots = newGridSlotsFromCards(newCards);
+    let newCards = cardFunctions.pullThreeRandomCardsFromDeck(newDeck);
+    let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
     return {
       ...state,
       gridSlots: [...state.gridSlots, ...newSlots],
@@ -46,7 +47,7 @@ export const cardsReducer = createReducer(
     };
   }),
   on(PracticePageActions.selectCard, (state, action) => {
-    if (state.selectedGridSlots.length < 3) {
+    if (state.selectedGridSlots.length < 2) {
       return {
         ...state,
         selectedGridSlots: [
@@ -57,10 +58,34 @@ export const cardsReducer = createReducer(
           },
         ],
       };
-    } else
-      return {
-        ...state,
-      };
+    } else {
+      let selectedGridSlots = [
+        ...state.selectedGridSlots,
+        {
+          slotIndex: action.cardGridSlotIndex,
+          card: state.gridSlots[action.cardGridSlotIndex].card,
+        },
+      ];
+      let cards: [Card, Card, Card] = [
+        selectedGridSlots[0].card,
+        selectedGridSlots[1].card,
+        selectedGridSlots[2].card,
+      ];
+      let matchCheck = matchFunctions.generateMatchCheck(cards);
+      if (matchFunctions.checkIfMatchCheckIsSet(matchCheck)) {
+        return {
+          ...state,
+          gameLogs: [...state.gameLogs, new GameLog(cards, 'match')],
+          selectedGridSlots: [],
+        };
+      } else {
+        return {
+          ...state,
+          gameLogs: [...state.gameLogs, new GameLog(cards, 'no match')],
+          selectedGridSlots: [],
+        };
+      }
+    }
   })
 );
 
@@ -70,5 +95,8 @@ export function reducer(state: undefined | State, action: Action) {
 
 export const selectDeck = (state: State) => state.deck;
 export const selectDeckLength = (state: State) => state.deck.length;
+export const selectHand = (state: State) => state.deck;
+export const selectHandLength = (state: State) => state.hand.length;
 export const selectGridSlots = (state: State) => state.gridSlots;
 export const selectActiveGridSlots = (state: State) => state.selectedGridSlots;
+export const selectGameLogs = (state: State) => state.gameLogs;
