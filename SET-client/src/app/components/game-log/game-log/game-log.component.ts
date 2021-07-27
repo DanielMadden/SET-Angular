@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ICard } from 'src/app/models/card';
 import { IGameLog } from 'src/app/models/game-log';
 import { listAnimation } from 'src/app/shared/animations';
+import { selectGameLogs, State } from 'src/app/shared/state';
 
 @Component({
   selector: 'app-game-log',
@@ -10,24 +12,26 @@ import { listAnimation } from 'src/app/shared/animations';
   styleUrls: ['./game-log.component.scss'],
   animations: [listAnimation],
 })
-export class GameLogComponent implements OnInit {
+export class GameLogComponent {
   @Input() gameLogs: IGameLog[] = [];
-  @Input() gameLog$!: Observable<IGameLog>;
+  @Input() gameLogs$: Observable<IGameLog[]>;
   @Input() startListeningForGameLogs$!: Observable<boolean>;
 
-  constructor() {}
-
-  ngOnInit(): void {
-    this.startListeningForGameLogs$.subscribe({
-      complete: () => this.listenForGameLogs(),
-    });
+  constructor(private store: Store<State>) {
+    this.gameLogs$ = store.select(selectGameLogs);
   }
 
-  listenForGameLogs(): void {
-    this.gameLog$.subscribe((gameLog) => this.addGameLog(gameLog));
-  }
+  // ngOnInit(): void {
+  //   this.startListeningForGameLogs$.subscribe({
+  //     complete: () => this.listenForGameLogs(),
+  //   });
+  // }
 
-  addGameLog(gameLog: IGameLog): void {
-    this.gameLogs.unshift(gameLog);
-  }
+  // listenForGameLogs(): void {
+  //   this.gameLog$.subscribe((gameLog) => this.addGameLog(gameLog));
+  // }
+
+  // addGameLog(gameLog: IGameLog): void {
+  //   this.gameLogs.unshift(gameLog);
+  // }
 }

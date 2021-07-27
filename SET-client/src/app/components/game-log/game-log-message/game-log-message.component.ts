@@ -17,6 +17,7 @@ export class GameLogMessageComponent implements OnInit {
     'no match': 'No match',
     'plus three': '+3 Cards',
   };
+  public gameLogMessages: string[] = [];
   private gameLogWidth = parseInt(
     document.getElementById('game-log')!.style.width
   );
@@ -25,6 +26,7 @@ export class GameLogMessageComponent implements OnInit {
   constructor(private matchService: MatchService) {}
 
   ngOnInit(): void {
+    console.log('i got emitted boiiiiiii');
     if (this.gameLog.type == 'no match') {
       this.generateMessages();
     }
@@ -33,13 +35,13 @@ export class GameLogMessageComponent implements OnInit {
     let doesNotMatchString = ' does not match';
     let matchCheck = this.matchService.generateMatchCheck(this.gameLog.cards);
     if (!matchCheck.count)
-      this.gameLog.messages.push('Count' + doesNotMatchString);
+      this.gameLogMessages.push('Count' + doesNotMatchString);
     if (!matchCheck.color)
-      this.gameLog.messages.push('Color' + doesNotMatchString);
+      this.gameLogMessages.push('Color' + doesNotMatchString);
     if (!matchCheck.shape)
-      this.gameLog.messages.push('Shape' + doesNotMatchString);
+      this.gameLogMessages.push('Shape' + doesNotMatchString);
     if (!matchCheck.shade)
-      this.gameLog.messages.push('Shade' + doesNotMatchString);
+      this.gameLogMessages.push('Shade' + doesNotMatchString);
   }
   animateSlideIn() {
     this.leftCSSProperty = 0;

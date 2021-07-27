@@ -101,7 +101,7 @@ export const cardsReducer = createReducer(
           );
           return {
             ...state,
-            gameLogs: [...state.gameLogs, new GameLog(cards, 'match')],
+            gameLogs: [new GameLog(cards, 'match'), ...state.gameLogs],
             selectedGridSlots: [],
             gridSlots: newGridSlots,
           };
@@ -109,7 +109,7 @@ export const cardsReducer = createReducer(
       } else {
         return {
           ...state,
-          gameLogs: [...state.gameLogs, new GameLog(cards, 'no match')],
+          gameLogs: [new GameLog(cards, 'no match'), ...state.gameLogs],
           selectedGridSlots: [],
           gridSlots: newGridSlots,
         };
