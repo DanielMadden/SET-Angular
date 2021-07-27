@@ -10,7 +10,7 @@
   <div class="grid grid-cols-3 gap-4">
     <div
       class="card-container flex flex-row justify-center items-center"
-      *ngFor="let slot of slots; let index = index"
+      *ngFor="let slot of slots$ | async; let index = index"
     >
       <app-set-card
         *ngIf="slot.display"

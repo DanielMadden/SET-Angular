@@ -14,7 +14,7 @@ import { CardGridSlot, ICardGridSlot } from 'src/app/models/card-grid-slot';
 import { ISelectedCardSlot } from 'src/app/models/selected-card-slot';
 import { DeckService } from 'src/app/services/deck.service';
 import { MatchService } from 'src/app/services/match.service';
-import { State } from 'src/app/shared/state';
+import { selectGridSlots, State } from 'src/app/shared/state';
 import { gameBarHeight } from 'src/app/shared/variables';
 
 @Component({
@@ -25,6 +25,7 @@ import { gameBarHeight } from 'src/app/shared/variables';
 export class SetCardGridComponent implements OnInit {
   private deckIsEmpty = false;
   public slots: ICardGridSlot[] = [];
+  public slots$: Observable<ICardGridSlot[]>;
   public selectedSlots: ISelectedCardSlot[] = [];
   @Input() listenToAddThreeCards$!: Observable<boolean>;
   @Output() setOfCardsEvent = new EventEmitter<[ICard, ICard, ICard]>();
@@ -39,7 +40,9 @@ export class SetCardGridComponent implements OnInit {
     private deckService: DeckService,
     private matchService: MatchService,
     private store: Store<State>
-  ) {}
+  ) {
+    this.slots$ = store.select(selectGridSlots);
+  }
 
   ngOnInit(): void {
     this.store.dispatch(PracticePageActions.enter());
