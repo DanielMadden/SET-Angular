@@ -44,6 +44,7 @@ export const cardsReducer = createReducer(
       ...state,
       gridSlots: [...state.gridSlots, ...newSlots],
       deck: newDeck,
+      gameLogs: [new GameLog(newCards, 'plus three'), ...state.gameLogs],
     };
   }),
   on(PracticePageActions.selectCard, (state, action) => {
@@ -89,7 +90,7 @@ export const cardsReducer = createReducer(
           );
           return {
             ...state,
-            gameLogs: [...state.gameLogs, new GameLog(cards, 'match')],
+            gameLogs: [new GameLog(cards, 'match'), ...state.gameLogs],
             selectedGridSlots: [],
             gridSlots: newGridSlots,
             deck: newDeck,
