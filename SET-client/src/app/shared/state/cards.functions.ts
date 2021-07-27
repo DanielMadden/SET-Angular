@@ -21,7 +21,6 @@ export function pullThreeRandomCardsFromDeck(deck: Card[]): [Card, Card, Card] {
   for (let i = 0; i <= 2; i++) {
     cards[i] = deck.splice(Math.floor(Math.random() * deck.length), 1)[0];
   }
-  // if (this.deck.length == 0) this.completeDeckObservable();
   return cards;
 }
 
