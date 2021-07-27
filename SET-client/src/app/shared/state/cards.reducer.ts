@@ -141,7 +141,7 @@ export function reducer(state: undefined | State, action: Action) {
 
 export const selectDeck = (state: State) => state.deck;
 export const selectDeckLength = (state: State) => state.deck.length;
-export const selectHand = (state: State) => state.deck;
+export const selectHand = (state: State) => state.hand;
 export const selectHandLength = (state: State) => state.hand.length;
 export const selectGridSlots = (state: State) => state.gridSlots;
 export const selectActiveGridSlots = (state: State) => state.selectedGridSlots;
