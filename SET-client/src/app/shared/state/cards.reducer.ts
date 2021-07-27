@@ -93,6 +93,7 @@ export const cardsReducer = createReducer(
             selectedGridSlots: [],
             gridSlots: newGridSlots,
             deck: newDeck,
+            hand: [...state.hand, ...cards],
           };
         } else {
           newGridSlots = cardFunctions.shrinkSlotsArray(
@@ -104,6 +105,7 @@ export const cardsReducer = createReducer(
             gameLogs: [new GameLog(cards, 'match'), ...state.gameLogs],
             selectedGridSlots: [],
             gridSlots: newGridSlots,
+            hand: [...state.hand, ...cards],
           };
         }
       } else {
