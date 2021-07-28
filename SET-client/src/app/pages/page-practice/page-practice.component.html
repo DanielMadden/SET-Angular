@@ -31,18 +31,17 @@
         id="set-game-log-container"
         [style.height]="gameLogOnMobileHeight + 'px'"
       >
-        <app-game-log
-          [startListeningForGameLogs$]="startGameLog$"
-        ></app-game-log>
+        <app-game-log></app-game-log>
+        <!-- [startListeningForGameLogs$]="startGameLog$" -->
       </div>
     </div>
     <app-set-card-grid
       (setOfCardsEvent)="setOfCardsEvent($event)"
-      (falseSetOfCardsEvent)="falseSetOfCardsEvent($event)"
-      (plusThreeCardsEvent)="sendThePlusThreeCardsToGameLog($event)"
-      (gameStartEvent)="startGame()"
-      [listenToAddThreeCards$]="tellGridToAddThreeCards$"
     ></app-set-card-grid>
+    <!-- (gameStartEvent)="startGame()" -->
+    <!-- (plusThreeCardsEvent)="sendThePlusThreeCardsToGameLog($event)" -->
+    <!-- [listenToAddThreeCards$]="tellGridToAddThreeCards$" -->
+    <!-- (falseSetOfCardsEvent)="falseSetOfCardsEvent($event)" -->
     <div
       id="set-game-column-right"
       class="set-game-column flex flex-col items-center justify-between"

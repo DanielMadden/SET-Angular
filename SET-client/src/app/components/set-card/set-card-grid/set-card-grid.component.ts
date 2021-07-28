@@ -68,7 +68,7 @@ export class SetCardGridComponent implements OnInit {
   private listenToAddThreeCards() {
     this.listenToAddThreeCards$.subscribe(
       () => {
-        this.store.dispatch(PracticePageActions.addThreeCards());
+        // this.store.dispatch(PracticePageActions.addThreeCards());
         this.addThreeCards();
       },
       (err) => console.error(`[ERROR]: ${err}`)
