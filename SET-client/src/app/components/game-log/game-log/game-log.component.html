@@ -1,5 +1,5 @@
 <div id="game-log" class="component">
-  <ul [@listAnimation]="gameLogs.length">
+  <ul [@listAnimation]="(gameLogs$ | async)?.length">
     <li
       *ngFor="
         let gameLog of gameLogs$ | async;

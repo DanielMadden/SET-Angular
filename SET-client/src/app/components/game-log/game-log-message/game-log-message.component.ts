@@ -18,15 +18,10 @@ export class GameLogMessageComponent implements OnInit {
     'plus three': '+3 Cards',
   };
   public gameLogMessages: string[] = [];
-  private gameLogWidth = parseInt(
-    document.getElementById('game-log')!.style.width
-  );
-  public leftCSSProperty = -1 * this.gameLogWidth;
 
   constructor(private matchService: MatchService) {}
 
   ngOnInit(): void {
-    console.log('i got emitted boiiiiiii');
     if (this.gameLog.type == 'no match') {
       this.generateMessages();
     }
@@ -42,8 +37,5 @@ export class GameLogMessageComponent implements OnInit {
       this.gameLogMessages.push('Shape' + doesNotMatchString);
     if (!matchCheck.shade)
       this.gameLogMessages.push('Shade' + doesNotMatchString);
-  }
-  animateSlideIn() {
-    this.leftCSSProperty = 0;
   }
 }
