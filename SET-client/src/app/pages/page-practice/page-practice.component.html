@@ -32,28 +32,20 @@
         [style.height]="gameLogOnMobileHeight + 'px'"
       >
         <app-game-log></app-game-log>
-        <!-- [startListeningForGameLogs$]="startGameLog$" -->
       </div>
     </div>
-    <app-set-card-grid
-      (setOfCardsEvent)="setOfCardsEvent($event)"
-    ></app-set-card-grid>
-    <!-- (gameStartEvent)="startGame()" -->
-    <!-- (plusThreeCardsEvent)="sendThePlusThreeCardsToGameLog($event)" -->
-    <!-- [listenToAddThreeCards$]="tellGridToAddThreeCards$" -->
-    <!-- (falseSetOfCardsEvent)="falseSetOfCardsEvent($event)" -->
+    <app-set-card-grid></app-set-card-grid>
     <div
       id="set-game-column-right"
       class="set-game-column flex flex-col items-center justify-between"
     >
       <div class="set-card-deck-container flex flex-row justify-end items-end">
         <app-set-card-deck
-          [pointToDeckService]="true"
-          [cardStream$]="deck$"
+          [deckType]="'deck'"
           (addThreeCardsEvent)="addThreeCards()"
         ></app-set-card-deck>
       </div>
-      <app-set-card-deck [cardStream$]="hand$"></app-set-card-deck>
+      <app-set-card-deck [deckType]="'hand'"></app-set-card-deck>
     </div>
   </div>
   <app-bar-bottom-desktop

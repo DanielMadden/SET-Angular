@@ -6,39 +6,43 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import { PracticePageActions } from 'src/app/actions';
 import { ICard } from 'src/app/models/card';
 import { DeckService } from 'src/app/services/deck.service';
+import { selectDeck, selectHand, State } from 'src/app/shared/state';
 
 @Component({
   selector: 'app-set-card-deck',
   templateUrl: './set-card-deck.component.html',
   styleUrls: ['./set-card-deck.component.scss'],
 })
-export class SetCardDeckComponent implements OnInit, OnChanges {
-  @Input() cardStream$!: Observable<ICard[]>;
-  @Input() pointToDeckService: boolean = false;
-  @Output() addThreeCardsEvent = new EventEmitter<boolean>();
-  cards: ICard[] = [];
+export class SetCardDeckComponent implements OnChanges {
+  @Input() deckType!: 'deck' | 'hand';
+  cards$!: Observable<ICard[]>;
   stackCountArray: number[] = [];
   stackPixelHeight: number = 1;
 
-  constructor(private deckService: DeckService) {}
-
-  ngOnInit(): void {
-    if (this.pointToDeckService) this.updateCards(this.deckService.getDeck());
-  }
+  constructor(private store: Store<State>) {}
 
   ngOnChanges(): void {
-    this.cardStream$.subscribe(
-      (cards) => this.updateCards(cards),
+    if (this.deckType === 'deck') this.cards$ = this.store.select(selectDeck);
+    else if (this.deckType === 'hand')
+      this.cards$ = this.store.select(selectHand);
+    console.log(this.cards$);
+    this.cards$.subscribe(
+      (cards) => {
+        console.log(cards);
+        this.updateCards(cards);
+      },
       (err) => console.error(`[ERROR]: ${err}`)
     );
   }
 
   private updateCards(cards: ICard[]): void {
-    this.cards = cards;
-    this.stackCountArray = [...Array(this.cards.length / 3).keys()];
+    this.stackCountArray = [...Array(cards.length / 3).keys()];
   }
 
   public calculateShadow(): string {
@@ -47,10 +51,10 @@ export class SetCardDeckComponent implements OnInit, OnChanges {
   }
 
   public topWasClicked(): void {
-    if (this.pointToDeckService) this.addThreeCardsToGrid();
+    if (this.deckType === 'deck') this.triggerAddThreeCardsAction();
   }
 
-  private addThreeCardsToGrid() {
-    this.addThreeCardsEvent.emit(true);
+  private triggerAddThreeCardsAction() {
+    this.store.dispatch(PracticePageActions.addThreeCards());
   }
 }

@@ -6,7 +6,7 @@
     <div class="top">
       <app-set-card-back
         *ngIf="stackCountArray.length > 0"
-        [slideForButtons]="pointToDeckService"
+        [slideForButtons]="deckType === 'deck'"
         (click)="topWasClicked()"
       ></app-set-card-back>
     </div>
