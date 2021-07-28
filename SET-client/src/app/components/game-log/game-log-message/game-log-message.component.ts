@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ICard } from 'src/app/models/card';
 import { IGameLog } from 'src/app/models/game-log';
 import { MatchService } from 'src/app/services/match.service';
 
