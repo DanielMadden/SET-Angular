@@ -1,3 +1,3 @@
-import * as PracticePageActions from './practice-page.actions';
+import * as CardActions from './card.actions';
 
-export { PracticePageActions };
+export { CardActions };

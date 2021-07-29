@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { PracticePageActions } from 'src/app/actions';
+import { CardActions } from 'src/app/actions';
 import { ICardGridSlot } from 'src/app/models/card-grid-slot';
 import { selectGridSlots, State } from 'src/app/shared/state';
 import { gameBarHeight } from 'src/app/shared/variables';
@@ -22,18 +22,18 @@ export class SetCardGridComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(PracticePageActions.enter());
+    this.store.dispatch(CardActions.start());
     this.setMaxHeightToWindow();
   }
 
   public selectCard(slotIndex: number): void {
     this.store.dispatch(
-      PracticePageActions.selectCard({ cardGridSlotIndex: slotIndex })
+      CardActions.selectCard({ cardGridSlotIndex: slotIndex })
     );
   }
   public deSelectCard(slotIndex: number): void {
     this.store.dispatch(
-      PracticePageActions.deselectCard({ cardGridSlotIndex: slotIndex })
+      CardActions.deselectCard({ cardGridSlotIndex: slotIndex })
     );
   }
 

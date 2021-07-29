@@ -2,7 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { Card, ICard } from 'src/app/models/card';
 import { CardGridSlot, ICardGridSlot } from 'src/app/models/card-grid-slot';
 import { ISelectedCardSlot } from 'src/app/models/selected-card-slot';
-import { PracticePageActions } from 'src/app/actions';
+import { CardActions } from 'src/app/actions';
 import * as cardFunctions from './cards.functions';
 import * as matchFunctions from './match.functions';
 import { state } from '@angular/animations';
@@ -26,7 +26,7 @@ export const initialState: State = {
 
 export const cardsReducer = createReducer(
   initialState,
-  on(PracticePageActions.enter, (state) => {
+  on(CardActions.start, (state) => {
     let newDeck = cardFunctions.createDeck();
     let newCards = cardFunctions.pullTwelveRandomCardsFromDeck(newDeck);
     let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
@@ -36,7 +36,7 @@ export const cardsReducer = createReducer(
       gridSlots: newSlots,
     };
   }),
-  on(PracticePageActions.addThreeCards, (state) => {
+  on(CardActions.addThreeCards, (state) => {
     let newDeck = [...state.deck];
     let newCards = cardFunctions.pullThreeRandomCardsFromDeck(newDeck);
     let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
@@ -47,8 +47,10 @@ export const cardsReducer = createReducer(
       gameLogs: [new GameLog(newCards, 'plus three'), ...state.gameLogs],
     };
   }),
-  on(PracticePageActions.selectCard, (state, action) => {
-    let newGridSlots = JSON.parse(JSON.stringify(state.gridSlots));
+  on(CardActions.selectCard, (state, action) => {
+    let newGridSlots: ICardGridSlot[] = JSON.parse(
+      JSON.stringify(state.gridSlots)
+    );
     newGridSlots[action.cardGridSlotIndex].selected = true;
     if (state.selectedGridSlots.length < 2) {
       return {
@@ -119,8 +121,10 @@ export const cardsReducer = createReducer(
       }
     }
   }),
-  on(PracticePageActions.deselectCard, (state, action) => {
-    let newGridSlots = JSON.parse(JSON.stringify(state.gridSlots));
+  on(CardActions.deselectCard, (state, action) => {
+    let newGridSlots: ICardGridSlot[] = JSON.parse(
+      JSON.stringify(state.gridSlots)
+    );
     newGridSlots[action.cardGridSlotIndex].selected = false;
     let newSelectedGridSlots = [...state.selectedGridSlots];
     let slotIndex = newSelectedGridSlots.findIndex(

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { fromEvent, interval, Observable } from 'rxjs';
-import { PracticePageActions } from 'src/app/actions';
+import { CardActions } from 'src/app/actions';
 import { ICard } from 'src/app/models/card';
 import { SoundService } from 'src/app/services/sound.service';
 import { selectDeck, selectHand, State } from 'src/app/shared/state';
@@ -46,7 +46,7 @@ export class PagePracticeComponent implements OnInit {
 
   public addThreeCards() {
     this.soundService.playCardSound('random-pull');
-    this.store.dispatch(PracticePageActions.addThreeCards());
+    this.store.dispatch(CardActions.addThreeCards());
   }
 
   private startTimer() {

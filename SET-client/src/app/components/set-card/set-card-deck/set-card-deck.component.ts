@@ -9,7 +9,7 @@ import {
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import { PracticePageActions } from 'src/app/actions';
+import { CardActions } from 'src/app/actions';
 import { ICard } from 'src/app/models/card';
 import { DeckService } from 'src/app/services/deck.service';
 import { selectDeck, selectHand, State } from 'src/app/shared/state';
@@ -55,6 +55,6 @@ export class SetCardDeckComponent implements OnChanges {
   }
 
   private triggerAddThreeCardsAction() {
-    this.store.dispatch(PracticePageActions.addThreeCards());
+    this.store.dispatch(CardActions.addThreeCards());
   }
 }
