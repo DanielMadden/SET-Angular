@@ -22,7 +22,7 @@ export class SetCardGridComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(CardActions.start());
+    this.store.dispatch(CardActions.startGame());
     this.setMaxHeightToWindow();
   }
 

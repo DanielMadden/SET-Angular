@@ -26,7 +26,7 @@ export const initialState: State = {
 
 export const cardsReducer = createReducer(
   initialState,
-  on(CardActions.start, (state) => {
+  on(CardActions.startGame, (state) => {
     let newDeck = cardFunctions.createDeck();
     let newCards = cardFunctions.pullTwelveRandomCardsFromDeck(newDeck);
     let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
@@ -135,6 +135,54 @@ export const cardsReducer = createReducer(
       ...state,
       selectedGridSlots: newSelectedGridSlots,
       gridSlots: newGridSlots,
+    };
+  }),
+  on(CardActions.updateDeck, (state, action) => {
+    return {
+      ...state,
+      deck: action.deck,
+    };
+  }),
+  on(CardActions.updateGridSlots, (state, action) => {
+    return {
+      ...state,
+      gridSlots: action.gridSlots,
+    };
+  }),
+  on(CardActions.updateSelectedGridSlots, (state, action) => {
+    return {
+      ...state,
+      selectedGridSlots: action.selectedGridSlots,
+    };
+  }),
+  on(CardActions.addGameLog, (state, action) => {
+    return {
+      ...state,
+      gameLogs: [action.gameLog, ...state.gameLogs],
+    };
+  }),
+  on(CardActions.emptyDeck, (state) => {
+    return {
+      ...state,
+      deck: [],
+    };
+  }),
+  on(CardActions.emptyGridSlots, (state) => {
+    return {
+      ...state,
+      gridSlots: [],
+    };
+  }),
+  on(CardActions.emptySelectedGridSlots, (state) => {
+    return {
+      ...state,
+      selectedGridSlots: [],
+    };
+  }),
+  on(CardActions.emptyGameLogs, (state) => {
+    return {
+      ...state,
+      gameLogs: [],
     };
   })
 );
