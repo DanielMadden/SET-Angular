@@ -16,6 +16,7 @@ import {
   State,
 } from '../shared/state';
 import * as cardFunctions from '../shared/state/cards.functions';
+import * as matchFunctions from '../shared/state/match.functions';
 
 @Injectable({
   providedIn: 'root',
@@ -72,7 +73,7 @@ export class GameService {
   }
 
   // Creates a deck, pulls twelve cards, and places them in the grid
-  startGame() {
+  startGameEvent() {
     let newDeck = cardFunctions.createDeck();
     let newCards = cardFunctions.pullTwelveRandomCardsFromDeck(newDeck);
     let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
@@ -83,19 +84,19 @@ export class GameService {
   }
 
   // Pulls three cards from deck, places them in the grid, then adds a new game log
-  addThreeCards() {
+  addThreeCardsEvent() {
     let newDeck: ICard[] = this.deepCopyArray(this.deck);
     let newCards = cardFunctions.pullThreeRandomCardsFromDeck(newDeck);
     let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
 
     // Update State
     this.store.dispatch(CardActions.updateDeck({ deck: newDeck }));
-    this.store.dispatch(CardActions.updateGridSlots({ gridSlots: newSlots }));
+    this.store.dispatch(CardActions.addGridSlots({ gridSlots: newSlots }));
     this.addGameLog(newCards, 'plus three');
   }
 
   // Adds a game log to the state's gameLogs
-  addGameLog(
+  private addGameLog(
     cards: [ICard, ICard, ICard],
     type: 'match' | 'no match' | 'plus three'
   ) {
@@ -104,7 +105,7 @@ export class GameService {
     );
   }
 
-  selectCard(cardGridSlotIndex: number) {
+  selectCardEvent(cardGridSlotIndex: number) {
     let newGridSlots: ICardGridSlot[] = this.deepCopyArray(this.gridSlots);
     let newSelectedGridSlots: ISelectedCardSlot[] = this.deepCopyArray(
       this.selectedGridSlots
@@ -126,5 +127,70 @@ export class GameService {
         selectedGridSlots: newSelectedGridSlots,
       })
     );
+
+    if (this.selectedGridSlots.length > 2) this.checkForSetEvent();
   }
+
+  checkForSetEvent() {
+    let cardsToCheck: [ICard, ICard, ICard] = [
+      this.selectedGridSlots[0].card,
+      this.selectedGridSlots[1].card,
+      this.selectedGridSlots[2].card,
+    ];
+    console.log(cardsToCheck);
+    let matchCheck = matchFunctions.generateMatchCheck(cardsToCheck);
+    let isSet = matchFunctions.checkIfMatchCheckIsSet(matchCheck);
+    let newGridSlots: ICardGridSlot[] = this.deepCopyArray(this.gridSlots);
+
+    if (isSet) {
+      let newDeck: ICard[] = this.deepCopyArray(this.deck);
+      if (this.gridSlots.length <= 12) {
+        let newCards = cardFunctions.pullThreeRandomCardsFromDeck(newDeck);
+        // this.replaceActiveCardsWithNewCards(newDeck, newCards, newGridSlots);
+        newGridSlots = cardFunctions.replaceActiveCards(
+          newGridSlots,
+          this.selectedGridSlots,
+          newCards
+        );
+
+        this.store.dispatch(CardActions.updateDeck({ deck: newDeck }));
+      } else {
+        newGridSlots = cardFunctions.shrinkSlotsArray(
+          newGridSlots,
+          this.selectedGridSlots
+        );
+      }
+
+      this.store.dispatch(CardActions.addToHand({ newCards: cardsToCheck }));
+      this.addGameLog(cardsToCheck, 'match');
+    } else {
+      this.addGameLog(cardsToCheck, 'no match');
+    }
+
+    this.selectedGridSlots.forEach(
+      (slot) => (newGridSlots[slot.slotIndex].selected = false)
+    );
+    this.store.dispatch(
+      CardActions.updateGridSlots({ gridSlots: newGridSlots })
+    );
+    this.store.dispatch(CardActions.emptySelectedGridSlots());
+  }
+
+  private deSelectGridSlots() {}
+
+  // replaceActiveCardsWithNewCards(
+  //   newDeck: ICard[],
+  //   newCards: [ICard, ICard, ICard],
+  //   newGridSlots: ICardGridSlot[]
+  // ) {
+  //   newGridSlots = cardFunctions.replaceActiveCards(
+  //     newGridSlots,
+  //     this.selectedGridSlots,
+  //     newCards
+  //   );
+
+  //   this.store.dispatch(CardActions.updateDeck({ deck: newDeck }));
+  // }
+
+  // removeActiveCards() {}
 }

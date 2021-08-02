@@ -18,7 +18,7 @@
         [cardSlot]="index"
         [highlighted]="slot.selected"
         [inGrid]="true"
-        (click)="slot.selected ? deSelectCard(index) : selectCard(index)"
+        (click)="clickCardEvent(index)"
       ></app-set-card>
     </div>
   </div>

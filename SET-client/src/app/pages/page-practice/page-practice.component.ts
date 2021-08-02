@@ -45,13 +45,15 @@ export class PagePracticeComponent implements OnInit {
     this.hand$.subscribe((hand) => {
       this.sets = hand.length / 3;
     });
+    this.gameService.startGameEvent();
     this.subscribeToPageResize();
     this.startTimer();
   }
 
   public addThreeCards() {
     this.soundService.playCardSound('random-pull');
-    this.store.dispatch(CardActions.addThreeCards());
+    // this.store.dispatch(CardActions.addThreeCards());
+    this.gameService.addThreeCardsEvent();
   }
 
   private startTimer() {

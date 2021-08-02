@@ -155,6 +155,12 @@ export const cardsReducer = createReducer(
       selectedGridSlots: action.selectedGridSlots,
     };
   }),
+  on(CardActions.addGridSlots, (state, action) => {
+    return {
+      ...state,
+      gridSlots: [...state.gridSlots, ...action.gridSlots],
+    };
+  }),
   on(CardActions.addGameLog, (state, action) => {
     return {
       ...state,

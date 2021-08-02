@@ -33,6 +33,11 @@ export const updateSelectedGridSlots = createAction(
   props<{ selectedGridSlots: ISelectedCardSlot[] }>()
 );
 
+export const addGridSlots = createAction(
+  '[Cards] Add Grid Slots',
+  props<{ gridSlots: CardGridSlot[] }>()
+);
+
 export const addGameLog = createAction(
   '[GameLog] Add Gamelog',
   props<{ gameLog: GameLog }>()
