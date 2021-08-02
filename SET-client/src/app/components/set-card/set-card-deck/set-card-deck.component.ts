@@ -12,6 +12,7 @@ import { tap } from 'rxjs/operators';
 import { CardActions } from 'src/app/actions';
 import { ICard } from 'src/app/models/card';
 import { DeckService } from 'src/app/services/deck.service';
+import { GameService } from 'src/app/services/game.service';
 import { selectDeck, selectHand, State } from 'src/app/shared/state';
 
 @Component({
@@ -25,7 +26,7 @@ export class SetCardDeckComponent implements OnChanges {
   stackCountArray: number[] = [];
   stackPixelHeight: number = 1;
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>, private gameService: GameService) {}
 
   ngOnChanges(): void {
     if (this.deckType === 'deck') this.cards$ = this.store.select(selectDeck);
@@ -55,6 +56,7 @@ export class SetCardDeckComponent implements OnChanges {
   }
 
   private triggerAddThreeCardsAction() {
-    this.store.dispatch(CardActions.addThreeCards());
+    // this.store.dispatch(CardActions.addThreeCards());
+    this.gameService.addThreeCardsEvent();
   }
 }

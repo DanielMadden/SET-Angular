@@ -4,56 +4,40 @@ import { CardGridSlot } from '../models/card-grid-slot';
 import { GameLog } from '../models/game-log';
 import { ISelectedCardSlot } from '../models/selected-card-slot';
 
-export const startGame = createAction('[Cards] Start Game');
-
-export const addThreeCards = createAction('[Cards] Add Three Cards');
-
-export const selectCard = createAction(
-  '[Cards] Select Card',
-  props<{ cardGridSlotIndex: number }>()
-);
-
-export const deselectCard = createAction(
-  '[Cards] Deselect Card',
-  props<{ cardGridSlotIndex: number }>()
-);
-
 export const updateDeck = createAction(
-  '[Cards] Update Deck',
+  '[Deck] Update',
   props<{ deck: ICard[] }>()
 );
 
 export const updateGridSlots = createAction(
-  '[Cards] Update Grid Slots',
+  '[Grid Slots] Update',
   props<{ gridSlots: CardGridSlot[] }>()
 );
 
 export const updateSelectedGridSlots = createAction(
-  '[Cards] Update Selected Grid Slots',
+  '[Selected Slots] Update',
   props<{ selectedGridSlots: ISelectedCardSlot[] }>()
 );
 
 export const addGridSlots = createAction(
-  '[Cards] Add Grid Slots',
+  '[Grid Slots] Add',
   props<{ gridSlots: CardGridSlot[] }>()
 );
 
 export const addGameLog = createAction(
-  '[GameLog] Add Gamelog',
+  '[GameLog] Add',
   props<{ gameLog: GameLog }>()
 );
 
-export const emptyDeck = createAction('[Cards] Empty Selected Gridslots');
+export const emptyDeck = createAction('[Deck] Reset');
 
-export const emptyGridSlots = createAction('[Cards] Empty Selected Gridslots');
+export const emptyGridSlots = createAction('[Grid Slots] Reset');
 
-export const emptySelectedGridSlots = createAction(
-  '[Cards] Empty Selected Gridslots'
-);
+export const emptySelectedGridSlots = createAction('[Selected Slots] Reset');
 
-export const emptyGameLogs = createAction('[Cards] Empty Gamelogs');
+export const emptyGameLogs = createAction('[GameLog] Reset');
 
 export const addToHand = createAction(
-  '[Cards] Add To Hand',
+  '[Hand] Add',
   props<{ newCards: ICard[] }>()
 );

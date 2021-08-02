@@ -51,7 +51,7 @@ export class PagePracticeComponent implements OnInit {
   }
 
   public addThreeCards() {
-    this.soundService.playCardSound('random-pull');
+    // this.soundService.playCardSound('random-pull');
     // this.store.dispatch(CardActions.addThreeCards());
     this.gameService.addThreeCardsEvent();
   }

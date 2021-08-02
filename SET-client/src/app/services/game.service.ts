@@ -17,6 +17,7 @@ import {
 } from '../shared/state';
 import * as cardFunctions from '../shared/state/cards.functions';
 import * as matchFunctions from '../shared/state/match.functions';
+import { SoundService } from './sound.service';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class GameService {
   selectedGridSlots$: Observable<ISelectedCardSlot[]>;
   gameLogs$: Observable<IGameLog[]>;
 
-  constructor(private store: Store<State>) {
+  constructor(private store: Store<State>, private soundService: SoundService) {
     this.deck$ = store.select(selectDeck);
     this.hand$ = store.select(selectHand);
     this.gridSlots$ = store.select(selectGridSlots);
@@ -43,27 +44,27 @@ export class GameService {
 
     this.deck$.subscribe(
       pipe((deck: ICard[]) => {
-        this.deck = deck;
+        this.deck = this.deepCopyArray(deck);
       })
     );
     this.hand$.subscribe(
       pipe((hand: ICard[]) => {
-        this.hand = hand;
+        this.hand = this.deepCopyArray(hand);
       })
     );
     this.gridSlots$.subscribe(
       pipe((gridSlots: ICardGridSlot[]) => {
-        this.gridSlots = gridSlots;
+        this.gridSlots = this.deepCopyArray(gridSlots);
       })
     );
     this.selectedGridSlots$.subscribe(
       pipe((selectedGridSlots: ISelectedCardSlot[]) => {
-        this.selectedGridSlots = selectedGridSlots;
+        this.selectedGridSlots = this.deepCopyArray(selectedGridSlots);
       })
     );
     this.gameLogs$.subscribe(
       pipe((gameLogs: IGameLog[]) => {
-        this.gameLogs = gameLogs;
+        this.gameLogs = this.deepCopyArray(gameLogs);
       })
     );
   }
@@ -85,6 +86,7 @@ export class GameService {
 
   // Pulls three cards from deck, places them in the grid, then adds a new game log
   addThreeCardsEvent() {
+    this.soundService.playCardSound('random-pull');
     let newDeck: ICard[] = this.deepCopyArray(this.deck);
     let newCards = cardFunctions.pullThreeRandomCardsFromDeck(newDeck);
     let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
@@ -164,6 +166,7 @@ export class GameService {
     let newGridSlots: ICardGridSlot[] = this.deepCopyArray(this.gridSlots);
 
     if (isSet) {
+      this.soundService.playFxSound('ding');
       let newDeck: ICard[] = this.deepCopyArray(this.deck);
       if (this.gridSlots.length <= 12) {
         let newCards = cardFunctions.pullThreeRandomCardsFromDeck(newDeck);
@@ -185,12 +188,16 @@ export class GameService {
       this.store.dispatch(CardActions.addToHand({ newCards: cardsToCheck }));
       this.addGameLog(cardsToCheck, 'match');
     } else {
+      this.soundService.playFxSound('error');
       this.addGameLog(cardsToCheck, 'no match');
     }
 
-    this.selectedGridSlots.forEach(
-      (slot) => (newGridSlots[slot.slotIndex].selected = false)
-    );
+    console.log(this.selectedGridSlots);
+    console.log(newGridSlots);
+    this.selectedGridSlots.forEach((slot) => {
+      console.log(slot.slotIndex);
+      newGridSlots[slot.slotIndex].selected = false;
+    });
     this.store.dispatch(
       CardActions.updateGridSlots({ gridSlots: newGridSlots })
     );
