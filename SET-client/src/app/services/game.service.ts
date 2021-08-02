@@ -172,7 +172,9 @@ export class GameService {
     this.store.dispatch(
       CardActions.updateGridSlots({ gridSlots: newGridSlots })
     );
-    this.store.dispatch(CardActions.emptySelectedGridSlots());
+    this.store.dispatch(
+      CardActions.updateSelectedGridSlots({ selectedGridSlots: [] })
+    );
   }
 
   private deSelectGridSlots() {}
