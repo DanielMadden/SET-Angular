@@ -101,7 +101,7 @@ export class GameService {
     type: 'match' | 'no match' | 'plus three'
   ) {
     this.store.dispatch(
-      CardActions.addGameLog({ gameLog: new GameLog(cards, 'plus three') })
+      CardActions.addGameLog({ gameLog: new GameLog(cards, type) })
     );
   }
 
@@ -137,7 +137,6 @@ export class GameService {
       this.selectedGridSlots[1].card,
       this.selectedGridSlots[2].card,
     ];
-    console.log(cardsToCheck);
     let matchCheck = matchFunctions.generateMatchCheck(cardsToCheck);
     let isSet = matchFunctions.checkIfMatchCheckIsSet(matchCheck);
     let newGridSlots: ICardGridSlot[] = this.deepCopyArray(this.gridSlots);
