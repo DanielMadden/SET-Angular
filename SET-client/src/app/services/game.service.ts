@@ -131,6 +131,28 @@ export class GameService {
     if (this.selectedGridSlots.length > 2) this.checkForSetEvent();
   }
 
+  deSelectCardEvent(cardGridSlotIndex: number) {
+    let newGridSlots: ICardGridSlot[] = this.deepCopyArray(this.gridSlots);
+    let newSelectedGridSlots: ISelectedCardSlot[] = this.deepCopyArray(
+      this.selectedGridSlots
+    );
+
+    newGridSlots[cardGridSlotIndex].selected = false;
+    let slotIndex = newSelectedGridSlots.findIndex(
+      (slot) => slot.slotIndex === cardGridSlotIndex
+    );
+    newSelectedGridSlots.splice(slotIndex, 1);
+
+    this.store.dispatch(
+      CardActions.updateGridSlots({ gridSlots: newGridSlots })
+    );
+    this.store.dispatch(
+      CardActions.updateSelectedGridSlots({
+        selectedGridSlots: newSelectedGridSlots,
+      })
+    );
+  }
+
   checkForSetEvent() {
     let cardsToCheck: [ICard, ICard, ICard] = [
       this.selectedGridSlots[0].card,

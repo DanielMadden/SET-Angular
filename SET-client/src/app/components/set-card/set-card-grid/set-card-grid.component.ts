@@ -43,9 +43,10 @@ export class SetCardGridComponent implements OnInit {
     this.gameService.selectCardEvent(slotIndex);
   }
   public deSelectCard(slotIndex: number): void {
-    this.store.dispatch(
-      CardActions.deselectCard({ cardGridSlotIndex: slotIndex })
-    );
+    // this.store.dispatch(
+    //   CardActions.deselectCard({ cardGridSlotIndex: slotIndex })
+    // );
+    this.gameService.deSelectCardEvent(slotIndex);
   }
 
   @HostListener('window:resize')
