@@ -37,10 +37,10 @@ export class SetCardGridComponent implements OnInit {
   }
 
   public selectCard(slotIndex: number): void {
-    this.store.dispatch(
-      CardActions.selectCard({ cardGridSlotIndex: slotIndex })
-    );
-    // this.gameService.selectCardEvent(slotIndex);
+    // this.store.dispatch(
+    //   CardActions.selectCard({ cardGridSlotIndex: slotIndex })
+    // );
+    this.gameService.selectCardEvent(slotIndex);
   }
   public deSelectCard(slotIndex: number): void {
     this.store.dispatch(
