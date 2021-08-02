@@ -5,7 +5,7 @@ import { map, tap } from 'rxjs/operators';
 import { CardActions } from '../actions';
 import { ICard } from '../models/card';
 import { ICardGridSlot } from '../models/card-grid-slot';
-import { IGameLog } from '../models/game-log';
+import { GameLog, IGameLog } from '../models/game-log';
 import { ISelectedCardSlot } from '../models/selected-card-slot';
 import {
   selectActiveGridSlots,
@@ -15,6 +15,7 @@ import {
   selectHand,
   State,
 } from '../shared/state';
+import * as cardFunctions from '../shared/state/cards.functions';
 
 @Injectable({
   providedIn: 'root',
@@ -62,6 +63,67 @@ export class GameService {
     this.gameLogs$.subscribe(
       pipe((gameLogs: IGameLog[]) => {
         this.gameLogs = gameLogs;
+      })
+    );
+  }
+
+  private deepCopyArray(array: any[]) {
+    return JSON.parse(JSON.stringify(array));
+  }
+
+  // Creates a deck, pulls twelve cards, and places them in the grid
+  startGame() {
+    let newDeck = cardFunctions.createDeck();
+    let newCards = cardFunctions.pullTwelveRandomCardsFromDeck(newDeck);
+    let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
+
+    // Update State
+    this.store.dispatch(CardActions.updateDeck({ deck: newDeck }));
+    this.store.dispatch(CardActions.updateGridSlots({ gridSlots: newSlots }));
+  }
+
+  // Pulls three cards from deck, places them in the grid, then adds a new game log
+  addThreeCards() {
+    let newDeck: ICard[] = this.deepCopyArray(this.deck);
+    let newCards = cardFunctions.pullThreeRandomCardsFromDeck(newDeck);
+    let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
+
+    // Update State
+    this.store.dispatch(CardActions.updateDeck({ deck: newDeck }));
+    this.store.dispatch(CardActions.updateGridSlots({ gridSlots: newSlots }));
+    this.addGameLog(newCards, 'plus three');
+  }
+
+  // Adds a game log to the state's gameLogs
+  addGameLog(
+    cards: [ICard, ICard, ICard],
+    type: 'match' | 'no match' | 'plus three'
+  ) {
+    this.store.dispatch(
+      CardActions.addGameLog({ gameLog: new GameLog(cards, 'plus three') })
+    );
+  }
+
+  selectCard(cardGridSlotIndex: number) {
+    let newGridSlots: ICardGridSlot[] = this.deepCopyArray(this.gridSlots);
+    let newSelectedGridSlots: ISelectedCardSlot[] = this.deepCopyArray(
+      this.selectedGridSlots
+    );
+
+    // Modify Arrays
+    newGridSlots[cardGridSlotIndex].selected = true;
+    newSelectedGridSlots.push({
+      slotIndex: cardGridSlotIndex,
+      card: newGridSlots[cardGridSlotIndex].card,
+    });
+
+    // Update State
+    this.store.dispatch(
+      CardActions.updateGridSlots({ gridSlots: newGridSlots })
+    );
+    this.store.dispatch(
+      CardActions.updateSelectedGridSlots({
+        selectedGridSlots: newSelectedGridSlots,
       })
     );
   }
