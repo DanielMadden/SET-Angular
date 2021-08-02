@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { fromEvent, interval, Observable } from 'rxjs';
 import { CardActions } from 'src/app/actions';
 import { ICard } from 'src/app/models/card';
+import { GameService } from 'src/app/services/game.service';
 import { SoundService } from 'src/app/services/sound.service';
 import { selectDeck, selectHand, State } from 'src/app/shared/state';
 
@@ -28,7 +29,11 @@ export class PagePracticeComponent implements OnInit {
   public gameLogOnMobileHeight =
     window.innerHeight - this.gameLogOnMobileStatsHeight;
 
-  constructor(private soundService: SoundService, private store: Store<State>) {
+  constructor(
+    private soundService: SoundService,
+    private gameService: GameService,
+    private store: Store<State>
+  ) {
     this.deck$ = store.select(selectDeck);
     this.hand$ = store.select(selectHand);
   }
