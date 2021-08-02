@@ -164,6 +164,9 @@ export class GameService {
     let matchCheck = matchFunctions.generateMatchCheck(cardsToCheck);
     let isSet = matchFunctions.checkIfMatchCheckIsSet(matchCheck);
     let newGridSlots: ICardGridSlot[] = this.deepCopyArray(this.gridSlots);
+    this.selectedGridSlots.forEach((slot) => {
+      newGridSlots[slot.slotIndex].selected = false;
+    });
 
     if (isSet) {
       this.soundService.playFxSound('ding');
@@ -191,13 +194,6 @@ export class GameService {
       this.soundService.playFxSound('error');
       this.addGameLog(cardsToCheck, 'no match');
     }
-
-    console.log(this.selectedGridSlots);
-    console.log(newGridSlots);
-    this.selectedGridSlots.forEach((slot) => {
-      console.log(slot.slotIndex);
-      newGridSlots[slot.slotIndex].selected = false;
-    });
     this.store.dispatch(
       CardActions.updateGridSlots({ gridSlots: newGridSlots })
     );
