@@ -4,6 +4,8 @@ import { CardGridSlot } from '../models/card-grid-slot';
 import { GameLog } from '../models/game-log';
 import { ISelectedCardSlot } from '../models/selected-card-slot';
 
+export const startGame = createAction('[Game] Start');
+
 export const updateDeck = createAction(
   '[Deck] Update',
   props<{ deck: ICard[] }>()

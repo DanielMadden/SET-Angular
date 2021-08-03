@@ -1,0 +1,28 @@
+@import "../../shared/variables.scss";
+
+.button-home {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 10px;
+}
+
+.card-position-container {
+  position: relative;
+  $properties-card-position-container: (
+    width: $card-width / 4,
+    height: $card-height / 4,
+  );
+  @include responsive-properties($properties-card-position-container);
+}
+
+.floating-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transition: all 1s ease;
+  $properties-floating-card: (
+    "margin-left": -$card-width / 2,
+    "margin-top": -$card-height / 2,
+  );
+  @include responsive-properties($properties-floating-card);
+}

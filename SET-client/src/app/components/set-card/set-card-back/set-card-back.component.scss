@@ -50,11 +50,11 @@
           // font-size: 4.5rem;
           $properties-text: (
             font-size: 4.5rem,
+            margin-left: -15px * $card-multiplier,
+            margin-bottom: -5px * $card-multiplier,
           );
           @include responsive-properties($properties-text);
           width: 100%;
-          margin-left: -15px * $card-multiplier;
-          margin-bottom: -5px * $card-multiplier;
           text-align: center;
           background-image: url("../../../../assets/images/card/gold-gradient.jpg");
           background-position-x: 50%;

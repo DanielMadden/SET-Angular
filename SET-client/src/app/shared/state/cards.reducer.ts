@@ -9,6 +9,7 @@ import { state } from '@angular/animations';
 import { GameLog, IGameLog } from 'src/app/models/game-log';
 
 export interface State {
+  started: boolean;
   deck: ICard[];
   hand: ICard[];
   gridSlots: ICardGridSlot[];
@@ -17,6 +18,7 @@ export interface State {
 }
 
 export const initialState: State = {
+  started: false,
   deck: [],
   hand: [],
   gridSlots: [],
@@ -26,6 +28,12 @@ export const initialState: State = {
 
 export const cardsReducer = createReducer(
   initialState,
+  on(CardActions.startGame, (state, action) => {
+    return {
+      ...state,
+      started: true,
+    };
+  }),
   on(CardActions.updateDeck, (state, action) => {
     return {
       ...state,

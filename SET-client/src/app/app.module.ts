@@ -25,6 +25,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './shared/state';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { PageHomeComponent } from './pages/page-home/page-home.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { environment } from '../environments/environment';
     SetCardComponent,
     SetCardGridComponent,
     SetCardBackComponent,
+    PageHomeComponent,
   ],
   imports: [
     BrowserModule,

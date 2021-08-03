@@ -80,6 +80,7 @@ export class GameService {
     let newSlots = cardFunctions.newGridSlotsFromCards(newCards);
 
     // Update State
+    this.store.dispatch(CardActions.startGame());
     this.store.dispatch(CardActions.updateDeck({ deck: newDeck }));
     this.store.dispatch(CardActions.updateGridSlots({ gridSlots: newSlots }));
   }
@@ -139,12 +140,14 @@ export class GameService {
       this.selectedGridSlots
     );
 
+    // Modify Arrays
     newGridSlots[cardGridSlotIndex].selected = false;
     let slotIndex = newSelectedGridSlots.findIndex(
       (slot) => slot.slotIndex === cardGridSlotIndex
     );
     newSelectedGridSlots.splice(slotIndex, 1);
 
+    // Update State
     this.store.dispatch(
       CardActions.updateGridSlots({ gridSlots: newGridSlots })
     );
@@ -164,6 +167,8 @@ export class GameService {
     let matchCheck = matchFunctions.generateMatchCheck(cardsToCheck);
     let isSet = matchFunctions.checkIfMatchCheckIsSet(matchCheck);
     let newGridSlots: ICardGridSlot[] = this.deepCopyArray(this.gridSlots);
+
+    // Deselect all cards
     this.selectedGridSlots.forEach((slot) => {
       newGridSlots[slot.slotIndex].selected = false;
     });
@@ -171,9 +176,11 @@ export class GameService {
     if (isSet) {
       this.soundService.playFxSound('ding');
       let newDeck: ICard[] = this.deepCopyArray(this.deck);
+
+      // Check the length of the grid and act accordingly
       if (this.gridSlots.length <= 12) {
+        // If gridslot length is less than 12, replace cards
         let newCards = cardFunctions.pullThreeRandomCardsFromDeck(newDeck);
-        // this.replaceActiveCardsWithNewCards(newDeck, newCards, newGridSlots);
         newGridSlots = cardFunctions.replaceActiveCards(
           newGridSlots,
           this.selectedGridSlots,
@@ -182,6 +189,7 @@ export class GameService {
 
         this.store.dispatch(CardActions.updateDeck({ deck: newDeck }));
       } else {
+        // Otherwise just pull the slots out of the array
         newGridSlots = cardFunctions.shrinkSlotsArray(
           newGridSlots,
           this.selectedGridSlots
@@ -194,6 +202,8 @@ export class GameService {
       this.soundService.playFxSound('error');
       this.addGameLog(cardsToCheck, 'no match');
     }
+
+    // Update slots and selected slots
     this.store.dispatch(
       CardActions.updateGridSlots({ gridSlots: newGridSlots })
     );
