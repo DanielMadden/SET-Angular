@@ -1,5 +1,5 @@
 @import "../../shared/variables.scss";
-
+@import "../../shared/animations.scss";
 .button-home {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -9,17 +9,18 @@
 .card-position-container {
   position: relative;
   $properties-card-position-container: (
-    width: $card-width / 4,
-    height: $card-height / 4,
+    width: $card-width / 10,
+    height: $card-height / 10,
   );
   @include responsive-properties($properties-card-position-container);
 }
 
-.floating-card {
+.floating-card-container {
   position: absolute;
   top: 50%;
   left: 50%;
-  transition: all 1s ease;
+  // transition: all 1s ease;
+  // animation: float 6s ease-in-out infinite;
   $properties-floating-card: (
     "margin-left": -$card-width / 2,
     "margin-top": -$card-height / 2,

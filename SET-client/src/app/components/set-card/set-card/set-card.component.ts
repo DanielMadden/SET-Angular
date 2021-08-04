@@ -27,6 +27,7 @@ export class SetCardComponent implements AfterViewChecked {
   @Input() gameLogId: number = 0;
   @Input() cardSlot: number = 0;
   @Input() highlighted: boolean = false;
+  @Input() xtraClasses: string[] = [];
 
   iconCountArray: any[] = [];
   cardPaths = cardPaths;

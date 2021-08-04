@@ -12,7 +12,7 @@ export class PageHomeComponent implements OnInit {
 
   constructor(private router: Router) {
     interval(1000).subscribe(() => {
-      this.floatCards();
+      // this.floatCards();
     });
   }
 
@@ -24,7 +24,7 @@ export class PageHomeComponent implements OnInit {
 
   floatCards() {
     var elements = document.getElementsByClassName(
-      'floating-card'
+      'floating-card-container'
     ) as HTMLCollectionOf<HTMLElement>;
     for (let i = 0; i < elements.length; i++) {
       let elementStyle = elements[i].style;

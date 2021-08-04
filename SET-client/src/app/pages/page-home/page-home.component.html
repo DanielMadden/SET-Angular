@@ -1,6 +1,11 @@
 <div class="page w-full h-full flex flex-col items-center justify-center">
   <div class="card-position-container">
-    <app-set-card-back class="floating-card"></app-set-card-back>
+    <div class="floating-card-container">
+      <app-set-card-back
+        [xtraClasses]="['float']"
+        class="floating-card"
+      ></app-set-card-back>
+    </div>
   </div>
 
   <!-- <button

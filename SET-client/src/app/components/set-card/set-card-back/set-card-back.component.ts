@@ -9,4 +9,5 @@ export class SetCardBackComponent {
   constructor() {}
 
   @Input() slideForButtons: boolean = false;
+  @Input() xtraClasses: string[] = [];
 }
